@@ -17,12 +17,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body class="mdc-typography demo-body">
+<body class="mdc-typography">
 <div id="app-main">
   <div class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <button class="demo-menu material-icons">menu</button>
+        <button class="menu-button material-icons">menu</button>
         <span class="mdc-toolbar__title catalog-title">Koncert</span>
       </section>
     </div>
@@ -32,8 +32,6 @@
     <navbar :inverted="false"></navbar>
   </aside>
   <main class="demo-main mdc-toolbar-fixed-adjust">
-    <!-- <h1 class="mdc-typography--display1">Temporary Drawer</h1>
-    <p class="mdc-typography--body1">Click the menu icon above to open.</p> -->
     <router-view>loading...</router-view>
   </main>
 </div>

@@ -32,7 +32,7 @@ mdc.autoInit();
 let drawerEl = document.querySelector('.mdc-temporary-drawer');
 let MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
 let drawer = new MDCTemporaryDrawer(drawerEl);
-document.querySelector('.demo-menu').addEventListener('click', function() {
+document.querySelector('.menu-button').addEventListener('click', function() {
   drawer.open = true;
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {

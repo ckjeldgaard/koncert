@@ -4,14 +4,13 @@ html, body, #app-main {
 
 @import '../components/home/home';
 
-.demo-body {
+body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-/* A simple menu button. */
-.demo-menu {
+.menu-button {
   background: none;
   border: none;
   width: 24px;
@@ -25,5 +24,11 @@ html, body, #app-main {
 
 .demo-main {
   padding-left: 16px;
+  padding-right: 16px;
   overflow: auto;
+}
+
+.mdc-card {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }

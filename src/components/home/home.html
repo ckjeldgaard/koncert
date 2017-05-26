@@ -1,7 +1,64 @@
 <div class="container">
-  <h1 class="mdc-typography--display1">Temporary Drawer</h1>
+  <h1 class="mdc-typography--display1">Home</h1>
   <p class="mdc-typography--body1">Click the menu icon above to open.</p>
-  <p class="mdc-typography--body1"><strong>Thank you for using <span class="text-primary package">{{package}}</span></strong></p>
-  <p class="mdc-typography--body1">This project is running in <strong class="mode">{{mode}} mode</strong></p>
-  <p class="mdc-typography--body1">Make sure to follow the project on <a v-bind:href="repo">GitHub</a> to stay up to date with the latest releases, or contribute to the broject by opening an issue or making a pull-request!</p>
+
+  <div class="mdc-select" role="listbox" tabindex="0">
+    <span class="mdc-select__selected-text">Pick a food group</span>
+    <div class="mdc-simple-menu mdc-select__menu">
+      <ul class="mdc-list mdc-simple-menu__items">
+        <li class="mdc-list-item" role="option" id="grains" aria-disabled="true">
+          Pick a food group
+        </li>
+        <li class="mdc-list-item" role="option" id="grains" tabindex="0">
+          Bread, Cereal, Rice, and Pasta
+        </li>
+        <li class="mdc-list-item" role="option" id="vegetables" tabindex="0">
+          Vegetables
+        </li>
+        <li class="mdc-list-item" role="option" id="fruit" tabindex="0">
+          Fruit
+        </li>
+        <li class="mdc-list-item" role="option" id="dairy" tabindex="0">
+          Milk, Yogurt, and Cheese
+        </li>
+        <li class="mdc-list-item" role="option" id="meat" tabindex="0">
+          Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
+        </li>
+        <li class="mdc-list-item" role="option" id="fats" tabindex="0">
+          Fats, Oils, and Sweets
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdc-card">
+    <section class="mdc-card__primary">
+      <h1 class="mdc-card__title mdc-card__title--large">Theory, Impalers, Stone Cadaver</h1>
+      <h2 class="mdc-card__subtitle">May 26, 2017</h2>
+    </section>
+    <section class="mdc-card__supporting-text">
+      Atlas, Aarhus C
+    </section>
+    <section class="mdc-card__actions">
+      <button class="mdc-button mdc-button--compact mdc-card__action">Action 1</button>
+    </section>
+  </div>
+
+  <div class="mdc-card">
+    <section class="mdc-card__primary">
+      <h1 class="mdc-card__title mdc-card__title--large">Copenhell 2017</h1>
+      <h2 class="mdc-card__subtitle">Jun 22, 2017 - Jun 24, 2017</h2>
+    </section>
+    <section class="mdc-card__supporting-text">
+      Refshaleøen, København K
+    </section>
+    <section class="mdc-card__supporting-text">
+      Slayer, System of a Down, Alter Bridge, Five Finger Death Punch, Prophets Of Rage, m.fl.
+    </section>
+    <section class="mdc-card__actions">
+      <button class="mdc-button mdc-button--compact mdc-card__action">Action 1</button>
+      <button class="mdc-button mdc-button--compact mdc-card__action">Action 2</button>
+    </section>
+  </div>
+
 </div>
