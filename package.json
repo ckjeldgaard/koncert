@@ -16,7 +16,7 @@
     "clean": "rimraf dist && rimraf coverage",
     "clean:css": "cleancss -o dist/css/main.min.css src/css/bootstrap.css src/css/main.css",
     "compile": "webpack --config config/webpack.config.prod.js",
-    "copy:bs": "ncp node_modules/bootstrap/dist/css/bootstrap.css src/css/bootstrap.css",
+    "copy:bs": "ncp node_modules/material-components-web/dist/material-components-web.css src/css/material-components-web.css",
     "coverage": "npm run coverage:run && npm run coverage:remap && npm run coverage:open",
     "coverage:open": "opn coverage/html-ts/index.html",
     "coverage:remap": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html-ts -t html",
@@ -31,8 +31,10 @@
     "test:watch": "cross-env NODE_ENV=development karma start karma.unit.js --singleRun=false --auto-watch"
   },
   "dependencies": {
+    "@material/drawer": "^0.4.2",
+    "@material/list": "^0.2.8",
     "axios": "~0.15.3",
-    "bootstrap": "~3.3.7",
+    "material-components-web": "^0.11.1",
     "vue": "~2.2.4",
     "vue-class-component": "~5.0.0",
     "vue-property-decorator": "~4.0.0",

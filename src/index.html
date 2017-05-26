@@ -5,21 +5,37 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>vue-upgrade4</title>
+  <title>Koncert</title>
 
   <!-- build:remove -->
-  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/material-components-web.css">
   <!-- /build -->
   <!-- build:css css/main.min.css -->
   <link rel="stylesheet" href="css/main.css">
   <!-- /build -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
-
+<body class="mdc-typography demo-body">
 <div id="app-main">
-  <navbar :inverted="false"></navbar>
-  <router-view>loading...</router-view>
+  <div class="mdc-toolbar mdc-toolbar--fixed">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <button class="demo-menu material-icons">menu</button>
+        <span class="mdc-toolbar__title catalog-title">Koncert</span>
+      </section>
+    </div>
+  </div>
+
+  <aside class="mdc-temporary-drawer">
+    <navbar :inverted="false"></navbar>
+  </aside>
+  <main class="demo-main mdc-toolbar-fixed-adjust">
+    <!-- <h1 class="mdc-typography--display1">Temporary Drawer</h1>
+    <p class="mdc-typography--body1">Click the menu icon above to open.</p> -->
+    <router-view>loading...</router-view>
+  </main>
 </div>
 
 <!-- build:js js/main.min.js -->

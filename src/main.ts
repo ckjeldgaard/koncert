@@ -1,3 +1,5 @@
+import * as mdc from 'material-components-web';
+import {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation, util} from '@material/drawer';
 import * as Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -23,4 +25,19 @@ new Vue({
   components: {
     'navbar': NavbarComponent
   }
+});
+
+mdc.autoInit();
+
+let drawerEl = document.querySelector('.mdc-temporary-drawer');
+let MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
+let drawer = new MDCTemporaryDrawer(drawerEl);
+document.querySelector('.demo-menu').addEventListener('click', function() {
+  drawer.open = true;
+});
+drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
+  console.log('Received MDCTemporaryDrawer:open');
+});
+drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
+  console.log('Received MDCTemporaryDrawer:close');
 });
