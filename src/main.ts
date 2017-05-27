@@ -6,7 +6,7 @@ import VueRouter from 'vue-router';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { ListComponent } from './components/list';
-import { NavbarComponent } from './components/navbar';
+import {DrawerComponent} from './components/drawer';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -23,7 +23,7 @@ new Vue({
   el: '#app-main',
   router: router,
   components: {
-    'navbar': NavbarComponent
+    'drawer': DrawerComponent
   }
 });
 

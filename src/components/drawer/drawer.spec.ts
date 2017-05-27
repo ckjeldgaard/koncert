@@ -4,27 +4,27 @@ import Component from 'vue-class-component';
 import { spy, assert } from 'sinon';
 import { expect } from 'chai';
 import { ComponentTest, MockLogger } from '../../util/component-test';
-import { NavbarComponent } from './navbar';
+import { DrawerComponent } from './drawer';
 
 let loggerSpy = spy();
 
 @Component({
-  template: require('./navbar.html')
+  template: require('./drawer.html')
 })
-class MockNavbarComponent extends NavbarComponent {
+class MockDrawerComponent extends DrawerComponent {
   constructor() {
     super();
     this.logger = new MockLogger(loggerSpy);
   }
 }
 
-describe('Navbar component', () => {
+describe('Drawer component', () => {
   let directiveTest: ComponentTest;
   let router: VueRouter;
 
   before(() => {
     Vue.use(VueRouter);
-    directiveTest = new ComponentTest('<div><navbar></navbar><router-view>loading...</router-view></div>', { 'navbar': MockNavbarComponent });
+    directiveTest = new ComponentTest('<div><drawer></drawer><router-view>loading...</router-view></div>', { 'drawer': MockDrawerComponent });
 
     let homeComponent = { template: '<div class="home">Home</div>' };
     let aboutComponent = { template: '<div class="about">About</div>' };
@@ -45,7 +45,7 @@ describe('Navbar component', () => {
     await directiveTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
       debugger;
       assert.calledWith(loggerSpy, 'Default object property!');
-      expect(vm.$el.querySelectorAll('ul.nav li').length).to.equal(3);
+      expect(vm.$el.querySelectorAll('.mdc-list div').length).to.equal(3);
     });
   });
 
@@ -54,7 +54,7 @@ describe('Navbar component', () => {
       directiveTest.createComponent({ router: router });
 
       await directiveTest.execute((vm) => {
-        let anchor = <HTMLAnchorElement>vm.$el.querySelector('ul.nav li a[href="#/about"]');
+        let anchor = <HTMLAnchorElement>vm.$el.querySelector('.mdc-list div a[href="#/about"]');
         anchor.click();
       });
     });
@@ -71,7 +71,7 @@ describe('Navbar component', () => {
       directiveTest.createComponent({ router: router });
 
       await directiveTest.execute((vm) => {
-        let anchor = <HTMLAnchorElement>vm.$el.querySelector('ul.nav li a[href="#/list"]');
+        let anchor = <HTMLAnchorElement>vm.$el.querySelector('.mdc-list div a[href="#/list"]');
         anchor.click();
       });
     });

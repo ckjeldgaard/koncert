@@ -1,0 +1,19 @@
+<aside class="mdc-temporary-drawer">
+  <nav class="mdc-temporary-drawer__drawer">
+    <header class="mdc-temporary-drawer__header">
+      <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
+        Header here
+      </div>
+    </header>
+    <nav class="mdc-temporary-drawer__content mdc-list-group">
+      <div class="mdc-list">
+        <div v-for="link in links" v-bind:class="{'active' : $route.path == link.path}">
+          <router-link v-bind:to="link.path" class="mdc-list-item ">
+            <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>
+            {{link.name}}
+          </router-link>
+        </div>
+      </div>
+    </nav>
+  </nav>
+</aside>
