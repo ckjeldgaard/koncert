@@ -6,15 +6,13 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 script: npm run build
-after_success:
-  - bash ./tool/deploy.sh
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: dist
   on:
-    branch: gh-pages
+    branch: master
 env:
   global:
     secure: WDq9S2LzQaZ/swLHk+WOvlrWSBqjBtTFHR9zPIkx2BjDPcWJtz4wbXl/9KqZkvkVNJi9RsmkyJM1H8WQO+bkn6njUs+FLuSM7JDH5TfF5SdlOY1pGPiaG/VXifAKV1j57mQ7+2pROUBPHxe58nWHFZo8KrCL8qr546nEh65TcKUSdE/IoTvHsezNx4Qr3KC7/K+ChXTHm9yES6cEMn2SXBQkFTDExeXYED6cV0nSVZb0H+HSG8S0b002WOMX27FYvK9oi1s1KK/hV3PDY1Q40ButtttNIWxR1hUfZrXCEr7tOXGGvif9pTGc1iNMXhK2PWQVKqOjEYBjr3nkXPiKu/q6RtEf4SFdTISt36snGCR7JpvKZqwYXYrvuVWIxTlc/OryU7BRA6OVE6y9qLFAfdJsUN/JSGV/1XZ/bG1gkG7OZUQAqo2fk9vuPH3nECt0rfaWZ/r/XL4DUWxRl1ulsumhAF20n53hVOh/haR/5dFe+JdvOGHE5krlcF7sKeB+sUut8mLE3L/uOLEEWquOYopKVlqcUIMFZ+f3ZhHeFFYMzNRdIBjOI6JDTzkg0hJE/VP+ULCR0u5GcFesMvrtAcylY2W1V6sBeXKVtGcvGQfbb0lC8gx8ePr1TEtcMajb97K1is1Ds2d9WIvlsCJ4Ja5wH917lBCsaOQE6AgficA=
