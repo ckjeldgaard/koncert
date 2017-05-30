@@ -2,7 +2,7 @@
   "name": "koncert",
   "description": "A progressive web app displaying Danish concerts.",
   "version": "1.0.0",
-  "author": "Christoffer Kjeldgaard Petersen <christoffer@sappy.dk>",
+  "author": "Christoffer Kjeldgaard Petersen",
   "private": true,
   "engines": {
     "node": ">=6",
