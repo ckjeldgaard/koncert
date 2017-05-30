@@ -14,7 +14,7 @@
     "ci:teamcity": "karma --env=tc start karma.coverage.js && npm run coverage:remap",
     "ci:jenkins": "karma --env=jk start karma.coverage.js && npm run coverage:remap",
     "clean": "rimraf dist && rimraf coverage",
-    "clean:css": "cleancss -o dist/css/main.min.css src/css/bootstrap.css src/css/main.css",
+    "clean:css": "cleancss -o dist/css/main.min.css src/css/material-components-web.css src/css/main.css",
     "compile": "webpack --config config/webpack.config.prod.js",
     "copy:bs": "ncp node_modules/material-components-web/dist/material-components-web.css src/css/material-components-web.css",
     "coverage": "npm run coverage:run && npm run coverage:remap && npm run coverage:open",
