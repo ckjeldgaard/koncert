@@ -17,7 +17,7 @@ class MockListComponent extends ListComponent {
   }
 }
 
-describe('List component', () => {
+describe.skip('List component', () => {
   let directiveTest: ComponentTest;
 
   beforeEach(() => {
