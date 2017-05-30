@@ -6,8 +6,6 @@ import Component from 'vue-class-component';
 })
 export class HomeComponent extends Vue {
 
-    package: string = 'vue-webpack-typescript';
-    repo: string = 'https://github.com/ducksoupdev/vue-webpack-typescript';
-    mode: string = process.env.ENV;
+    homeName: string = 'Koncert';
 
 }
