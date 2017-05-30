@@ -11,8 +11,6 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production npm run clean && npm run test && npm run sass && npm run copy:bs && npm run build:parts && npm run clean:css && npm run process:html",
     "build:parts": "npm run sass && npm run compile",
-    "ci:teamcity": "karma --env=tc start karma.coverage.js && npm run coverage:remap",
-    "ci:jenkins": "karma --env=jk start karma.coverage.js && npm run coverage:remap",
     "clean": "rimraf dist && rimraf coverage",
     "clean:css": "cleancss -o dist/css/main.min.css src/css/material-components-web.css src/css/main.css",
     "compile": "webpack --config config/webpack.config.prod.js",
