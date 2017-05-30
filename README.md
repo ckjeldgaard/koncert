@@ -1,4 +1,6 @@
-# koncert
+# Koncert
+
+[![Build Status](https://travis-ci.org/ckjeldgaard/koncert.svg?branch=master)](https://travis-ci.org/ckjeldgaard/koncert)
 
 > A progressive web app displaying Danish concerts.
 
