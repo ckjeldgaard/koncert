@@ -13,8 +13,7 @@ export class DrawerComponent extends Vue {
 
   links: Link[] = [
     new Link('Home', '/'),
-    new Link('About', '/about'),
-    new Link('List', '/list')
+    new Link('About', '/about')
   ];
 
   @watch('$route.path')
