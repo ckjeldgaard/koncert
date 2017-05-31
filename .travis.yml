@@ -7,7 +7,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 script:
   - npm run build
-  - npm run coverage
+  - npm run coverage:run
   - npm run posttest
 deploy:
   provider: pages
