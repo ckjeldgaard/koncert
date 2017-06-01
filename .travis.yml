@@ -8,7 +8,7 @@ before_install:
 script:
   - npm run build
   - npm run coverage:run
-  - npm run posttest
+  - npm run codecov
 deploy:
   provider: pages
   skip_cleanup: true
