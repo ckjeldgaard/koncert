@@ -1,5 +1,4 @@
 import * as mdc from 'material-components-web';
-import {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation, util} from '@material/drawer';
 import * as Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -9,6 +8,8 @@ import {DrawerComponent} from './components/drawer';
 
 // register the plugin
 Vue.use(VueRouter);
+console.log('mdc.autoInit()');
+mdc.autoInit();
 
 let router = new VueRouter({
   routes: [
@@ -25,8 +26,7 @@ new Vue({
   }
 });
 
-mdc.autoInit();
-
+/*
 let drawerEl = document.querySelector('.mdc-temporary-drawer');
 let MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
 let drawer = new MDCTemporaryDrawer(drawerEl);
@@ -39,3 +39,4 @@ drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
 drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
   console.log('Received MDCTemporaryDrawer:close');
 });
+*/
