@@ -2,15 +2,16 @@ import Vue from 'vue';
 import {Component, watch} from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
-import * as mdc from 'material-components-web';
-import {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation, util} from '@material/drawer';
+import {DrawerProvider} from './drawer-provider';
+import {DrawerProviderImpl} from './drawer-provider-impl';
+
 
 @Component({
   template: require('./drawer.html')
 })
 export class DrawerComponent extends Vue {
   protected logger: Logger;
-  protected drawer: MDCTemporaryDrawer;
+  protected drawer: DrawerProvider;
 
   object: { default: string } = { default: 'Default object property!' }; // objects as default values don't need to be wrapped into functions
 
@@ -25,21 +26,21 @@ export class DrawerComponent extends Vue {
   }
 
   drawerLinkClickListener(event) {
-    let foundation: MDCTemporaryDrawerFoundation = this.drawer.getDefaultFoundation();
-    foundation.close();
+    this.drawer.close();
   }
 
   mounted() {
-    if (!this.logger) this.logger = new Logger();
+    if (!this.logger)
+      this.logger = new Logger();
+
+    if (!this.drawer) {
+      let tempDrawer = new DrawerProviderImpl(this.$refs.dre);
+      this.drawer = tempDrawer;
+      document.querySelector('.menu-button').addEventListener('click', function () {
+        tempDrawer.open();
+      });
+    }
+
     this.$nextTick(() => this.logger.info(this.object.default));
-
-    let drawerEl = this.$refs.dre;
-    let MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
-    let tempDrawer = new MDCTemporaryDrawer(drawerEl);
-    this.drawer = tempDrawer;
-    document.querySelector('.menu-button').addEventListener('click', function() {
-      tempDrawer.open = true;
-    });
-
   }
 }
