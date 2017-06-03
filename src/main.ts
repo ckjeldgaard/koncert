@@ -1,5 +1,6 @@
 import * as mdc from 'material-components-web';
 import * as Vue from 'vue';
+import * as VueFire from 'vuefire';
 import VueRouter from 'vue-router';
 
 import { HomeComponent } from './components/home';
@@ -8,6 +9,7 @@ import {DrawerComponent} from './components/drawer';
 
 // register the plugin
 Vue.use(VueRouter);
+Vue.use(VueFire);
 console.log('mdc.autoInit()');
 mdc.autoInit();
 
@@ -25,18 +27,3 @@ new Vue({
     'drawer': DrawerComponent
   }
 });
-
-/*
-let drawerEl = document.querySelector('.mdc-temporary-drawer');
-let MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
-let drawer = new MDCTemporaryDrawer(drawerEl);
-document.querySelector('.menu-button').addEventListener('click', function() {
-  drawer.open = true;
-});
-drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-  console.log('Received MDCTemporaryDrawer:open');
-});
-drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-  console.log('Received MDCTemporaryDrawer:close');
-});
-*/
