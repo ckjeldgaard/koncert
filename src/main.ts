@@ -1,6 +1,5 @@
 import * as mdc from 'material-components-web';
 import * as Vue from 'vue';
-import * as VueFire from 'vuefire';
 import VueRouter from 'vue-router';
 
 import { HomeComponent } from './components/home';
@@ -9,7 +8,6 @@ import {DrawerComponent} from './components/drawer';
 
 // register the plugin
 Vue.use(VueRouter);
-Vue.use(VueFire);
 console.log('mdc.autoInit()');
 mdc.autoInit();
 

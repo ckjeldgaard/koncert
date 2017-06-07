@@ -38,8 +38,7 @@
     "vue": "^2.2.6",
     "vue-class-component": "~5.0.0",
     "vue-property-decorator": "~4.0.0",
-    "vue-router": "~2.3.0",
-    "vuefire": "^1.4.3"
+    "vue-router": "~2.3.0"
   },
   "devDependencies": {
     "@types/mocha": "~2.2.40",
