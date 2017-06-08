@@ -1,0 +1,20 @@
+<div>
+  <div class="mdc-card" v-for="event in events">
+    <section class="mdc-card__primary">
+      <h1 class="mdc-card__title mdc-card__title--large">{{event.name}}</h1>
+      <h2 class="mdc-card__subtitle">
+        {{event.dateStart | formatDate}}
+        <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span>
+      </h2>
+    </section>
+    <section class="mdc-card__supporting-text">
+      {{event.venue}}
+    </section>
+    <section class="mdc-card__supporting-text" v-if="event.festival">
+      {{event.artists}}
+    </section>
+    <section class="mdc-card__actions">
+      <button class="mdc-button mdc-button--compact mdc-card__action">Action 1</button>
+    </section>
+  </div>
+</div>
