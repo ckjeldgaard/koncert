@@ -23,10 +23,10 @@ export class ConcertsComponent extends Vue {
       console.log(eventData[key]);
       this.events.push(eventData[key]);
     }
-    this.events.sort(this.compareEventByData);
+    this.events.sort(this.compareEventByDate);
   }
 
-  private compareEventByData(a: Event, b: Event) {
+  private compareEventByDate(a: Event, b: Event) {
     if (a.dateStart < b.dateStart) {
       return -1;
     } else if (a.dateStart > b.dateStart) {
