@@ -1,5 +1,5 @@
 $mdc-theme-primary: #607d8b;
-$mdc-theme-accent: #4caf50;
+$mdc-theme-accent: #ff9800;
 $mdc-theme-background: #efefef;
 
 @import "../../node_modules/@material/theme/mdc-theme";
@@ -9,6 +9,7 @@ html, body, #app-main {
 }
 
 @import '../components/home/home';
+@import '../components/concerts/concerts';
 
 body {
   padding: 0;

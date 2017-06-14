@@ -1,0 +1,13 @@
+.concerts .mdc-list-item__end-detail {
+  color: $mdc-theme-accent;
+  text-decoration: none;
+}
+
+.concerts .mdc-list-item__text {
+  font-weight: bold;
+}
+
+.concerts .mdc-list--two-line .mdc-list-item {
+  height: auto;
+  margin: .5em 0;
+}

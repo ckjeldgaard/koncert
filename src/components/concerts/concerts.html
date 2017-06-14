@@ -1,20 +1,20 @@
-<div>
-  <div class="mdc-card" v-for="event in events">
-    <section class="mdc-card__primary">
-      <h1 class="mdc-card__title mdc-card__title--large">{{event.name}}</h1>
-      <h2 class="mdc-card__subtitle">
-        {{event.dateStart | formatDate}}
-        <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span>
-      </h2>
-    </section>
-    <section class="mdc-card__supporting-text">
-      {{event.venue}}
-    </section>
-    <section class="mdc-card__supporting-text" v-if="event.festival">
-      {{event.artists}}
-    </section>
-    <section class="mdc-card__actions">
-      <button class="mdc-button mdc-button--compact mdc-card__action">Action 1</button>
-    </section>
+<div class="concerts">
+  <div class="mdc-list-group">
+    <div v-for="month in months">
+      <h3 class="mdc-list-group__subheader">{{month.name}}</h3>
+      <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo">
+        <li class="mdc-list-item" v-for="event in month.events">
+          <span class="mdc-list-item__text">
+            {{event.name}}
+            <span class="mdc-list-item__text__secondary">
+              {{event.dateStart | formatDate}} <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span><br />
+              {{event.venue}}
+            </span>
+          </span>
+          <a href="#" class="mdc-list-item__end-detail material-icons">info</a>
+        </li>
+      </ul>
+      <hr class="mdc-list-divider">
+    </div>
   </div>
 </div>
