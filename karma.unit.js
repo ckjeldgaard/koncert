@@ -16,7 +16,7 @@ var configuration = {
   port: 9876,
   colors: true,
   autoWatch: false,
-  browsers: ['Chrome'],
+  browsers: ['ChromeHeadless'],
   mime: {
     'text/x-typescript': ['ts']
   },
