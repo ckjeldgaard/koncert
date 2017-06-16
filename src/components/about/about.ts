@@ -12,6 +12,8 @@ export class AboutComponent extends Vue {
 
     mounted() {
         if (!this.logger) this.logger = new Logger();
-        this.$nextTick(() => this.logger.info('about is ready!'));
+        this.$nextTick(() => {
+          this.logger.info('about is ready!');
+        });
     }
 }

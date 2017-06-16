@@ -3,6 +3,8 @@ import { SinonSpy } from 'sinon';
 import merge from 'lodash.merge';
 import { ILogger } from './log';
 import {DrawerProvider} from '../components/drawer/drawer-provider';
+import {ServiceApi} from '../data/service-api';
+import {ServiceCallback} from '../data/servic-callback';
 
 export interface IComponents {
   [key: string]: Vue.Component;
@@ -54,5 +56,38 @@ export class MockDrawerProvider implements DrawerProvider {
   }
 
   close() {
+  }
+}
+
+export class MockServiceApi implements ServiceApi {
+
+  public static JANUARY_2017: number = 1484438400;
+  public static FEBRUARY_2017: number = 1487116800;
+
+  public static testEvents = {
+    event1: {
+      cancelled: false,
+      dateEnd: MockServiceApi.JANUARY_2017,
+      dateStart: MockServiceApi.JANUARY_2017,
+      festival: true,
+      name: 'Event 1',
+      venue: 'Venue 1'
+    },
+    event2: {
+      cancelled: false,
+      dateEnd: MockServiceApi.FEBRUARY_2017,
+      dateStart: MockServiceApi.FEBRUARY_2017,
+      festival: true,
+      name: 'Event 2',
+      venue: 'Venue 2'
+    }
+  };
+
+  constructor(private serviceSpy: SinonSpy) {
+  }
+
+  getConcerts(callback: ServiceCallback, startAt: number) {
+    callback.onLoaded(MockServiceApi.testEvents);
+    this.serviceSpy(MockServiceApi.testEvents);
   }
 }

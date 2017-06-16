@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {db} from '../../data/firebase';
 import {Month} from '../../model/month';
 import {EventSplit} from '../../util/event-split';
+import {FirebaseServiceApi} from '../../data/firebase-service-api';
+import {ServiceApi} from '../../data/service-api';
 
 @Component({
   template: require('./concerts.html')
@@ -10,12 +11,20 @@ import {EventSplit} from '../../util/event-split';
 export class ConcertsComponent extends Vue {
 
   private readonly currentTime = new Date().getTime() / 1000;
-  months: Month[] = [];
+
+  protected serviceApi: ServiceApi = new FirebaseServiceApi();
+  public months: Month[] = [];
 
   mounted() {
-    let ref = db.ref('data/events').orderByChild('dateStart').startAt(this.currentTime);
-    ref.on('value', (response) => {
-      this.updateEvents(response.val());
+    this.$nextTick(() => {
+      this.serviceApi.getConcerts({
+        onLoaded: (data) => {
+          this.updateEvents(data);
+        },
+        onError: (exception) => {
+          console.log('An error occurred.', exception);
+        },
+      }, this.currentTime);
     });
   }
 

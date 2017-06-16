@@ -24,7 +24,6 @@ describe('About component', () => {
   });
 
   it('should render correct contents', async () => {
-    debugger;
     directiveTest.createComponent();
 
     await directiveTest.execute((vm) => {
