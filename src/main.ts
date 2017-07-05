@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import {DrawerComponent} from './components/drawer';
 import {ConcertsComponent} from './components/concerts/concerts';
+import {ProvinceFilterComponent} from './components/province_filter/province_filter';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -27,6 +28,7 @@ Vue.filter('formatDate', (value) => {
 });
 
 Vue.component('concerts', ConcertsComponent);
+Vue.component('province_filter', ProvinceFilterComponent);
 
 new Vue({
   el: '#app-main',
