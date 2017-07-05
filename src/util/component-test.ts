@@ -90,4 +90,7 @@ export class MockServiceApi implements ServiceApi {
     callback.onLoaded(MockServiceApi.testEvents);
     this.serviceSpy(MockServiceApi.testEvents);
   }
+
+  getProvinces(callback: ServiceCallback) {
+  }
 }

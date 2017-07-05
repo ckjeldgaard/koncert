@@ -15,8 +15,8 @@ export class FirebaseServiceApi implements ServiceApi {
   };
   private readonly database: Database;
 
-  constructor() {
-    let firebaseApp = Firebase.initializeApp(this.config);
+  constructor(name: string) {
+    let firebaseApp = Firebase.initializeApp(this.config, name);
     this.database = firebaseApp.database();
   }
 
@@ -25,7 +25,13 @@ export class FirebaseServiceApi implements ServiceApi {
     ref.on('value', (response) => {
       callback.onLoaded(response.val());
     });
+  }
 
+  getProvinces(callback: ServiceCallback) {
+    let ref = this.database.ref('data/provinces');
+    ref.on('value', (response) => {
+      callback.onLoaded(response.val());
+    });
   }
 
 }

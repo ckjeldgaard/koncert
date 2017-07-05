@@ -12,7 +12,7 @@ export class ConcertsComponent extends Vue {
 
   private readonly currentTime = new Date().getTime() / 1000;
 
-  protected serviceApi: ServiceApi = new FirebaseServiceApi();
+  protected serviceApi: ServiceApi = new FirebaseServiceApi('concerts');
   public months: Month[] = [];
 
   mounted() {
