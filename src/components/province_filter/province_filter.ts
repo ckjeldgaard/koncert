@@ -1,14 +1,16 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {ServiceApi} from '../../data/service-api';
-import {FirebaseServiceApi} from '../../data/firebase-service-api';
+import {Inject} from 'vue-property-decorator';
 import {MDCSelect, MDCSelectFoundation} from '@material/select';
+import {ServiceApi} from '../../data/service-api';
+import {serviceApi} from '../../util/constants';
 
 @Component({
   template: require('./province_filter.html')
 })
 export class ProvinceFilterComponent extends Vue {
-  protected serviceApi: ServiceApi = new FirebaseServiceApi('province_filter');
+
+  @Inject(serviceApi) serviceApi: ServiceApi;
   public provinces = [];
 
   mounted() {

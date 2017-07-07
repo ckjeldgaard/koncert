@@ -1,18 +1,19 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import {Inject} from 'vue-property-decorator';
 import {Month} from '../../model/month';
 import {EventSplit} from '../../util/event-split';
-import {FirebaseServiceApi} from '../../data/firebase-service-api';
 import {ServiceApi} from '../../data/service-api';
+import {serviceApi} from '../../util/constants';
 
 @Component({
   template: require('./concerts.html')
 })
 export class ConcertsComponent extends Vue {
 
+  @Inject(serviceApi) serviceApi: ServiceApi;
   private readonly currentTime = new Date().getTime() / 1000;
 
-  protected serviceApi: ServiceApi = new FirebaseServiceApi('concerts');
   public months: Month[] = [];
 
   mounted() {
