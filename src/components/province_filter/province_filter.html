@@ -5,8 +5,8 @@
       <li class="mdc-list-item" role="option"  tabindex="0">
         All provinces
       </li>
-      <li class="mdc-list-item" role="option" v-for="province in provinces" tabindex="0">
-        {{province}}
+      <li class="mdc-list-item" role="option" v-for="province in provinces" :id="province.key" tabindex="0">
+        {{province.name}}
       </li>
     </ul>
   </div>

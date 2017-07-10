@@ -8,7 +8,7 @@ import { AboutComponent } from './components/about';
 import {DrawerComponent} from './components/drawer';
 import {ConcertsComponent} from './components/concerts/concerts';
 import {ProvinceFilterComponent} from './components/province_filter/province_filter';
-import {serviceApi} from './util/constants';
+import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 
 // register the plugin
@@ -40,7 +40,8 @@ new Vue({
   },
   provide() {
     return {
-      [serviceApi]: new FirebaseServiceApi('koncert')
-    }
+      [serviceApi]: new FirebaseServiceApi('koncert'),
+      [bus]: new Vue(),
+    };
   }
 });
