@@ -8,7 +8,7 @@ export class EventSplit {
     this.events = events;
   }
 
-  public splitByMonths(): Month[] {
+  public splitByMonths(province?: string): Month[] {
     let tmpEvents: Event[] = [];
     for (let key in this.events) {
       tmpEvents.push(this.events[key]);
@@ -18,6 +18,9 @@ export class EventSplit {
     // Months:
     let months: Month[] = [];
     for (let e of tmpEvents) {
+      if (province != null && e.province !== province) {
+        continue;
+      }
       let monthName: string = moment.unix(e.dateStart).format('MMMM YYYY');
       if (this.monthExists(monthName, months)) {
         this.getMonth(monthName, months).events.push(e);

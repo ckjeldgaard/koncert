@@ -25,7 +25,7 @@ export class ConcertsComponent extends Vue {
       this.serviceApi.getConcerts({
         onLoaded: (data) => {
           this.events = data;
-          this.updateEvents(data);
+          this.updateEvents();
         },
         onError: (exception) => {
           console.log('An error occurred.', exception);
@@ -35,21 +35,12 @@ export class ConcertsComponent extends Vue {
   }
 
   created() {
-    this.bus.$on('province-key', (id) => this.filterByProvince(id));
+    this.bus.$on('province-key', (id) => this.updateEvents(id));
   }
 
-  private filterByProvince(province: string) {
-    let tmpEvents: Event[] = [];
-      for (const i in this.events) {
-        if (this.events[i].province === province) {
-          tmpEvents.push(this.events[i]);
-        }
-      }
-    this.updateEvents(tmpEvents);
-  }
-
-  private updateEvents(eventData: any) {
-    this.months = new EventSplit(eventData).splitByMonths();
+  private updateEvents(province?: string) {
+    const eventSplit: EventSplit = new EventSplit(this.events);
+    this.months = (province != null) ? eventSplit.splitByMonths(province) : eventSplit.splitByMonths();
     this.loaded = true;
   }
 }
