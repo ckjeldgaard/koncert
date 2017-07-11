@@ -5,4 +5,5 @@ interface Event {
   festival: boolean;
   name: string;
   venue: string;
+  province: string;
 }

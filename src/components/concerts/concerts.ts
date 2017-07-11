@@ -16,6 +16,7 @@ export class ConcertsComponent extends Vue {
 
   private readonly currentTime = new Date().getTime() / 1000;
 
+  private events: any;
   public months: Month[] = [];
   public loaded: boolean = false;
 
@@ -23,6 +24,7 @@ export class ConcertsComponent extends Vue {
     this.$nextTick(() => {
       this.serviceApi.getConcerts({
         onLoaded: (data) => {
+          this.events = data;
           this.updateEvents(data);
         },
         onError: (exception) => {
@@ -33,9 +35,17 @@ export class ConcertsComponent extends Vue {
   }
 
   created() {
-    this.bus.$on('province-key', function (id) {
-      console.log('concerts.ts. Received id =', id);
-    });
+    this.bus.$on('province-key', (id) => this.filterByProvince(id));
+  }
+
+  private filterByProvince(province: string) {
+    let tmpEvents: Event[] = [];
+      for (const i in this.events) {
+        if (this.events[i].province === province) {
+          tmpEvents.push(this.events[i]);
+        }
+      }
+    this.updateEvents(tmpEvents);
   }
 
   private updateEvents(eventData: any) {
