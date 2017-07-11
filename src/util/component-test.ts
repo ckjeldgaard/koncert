@@ -83,6 +83,12 @@ export class MockServiceApi implements ServiceApi {
     }
   };
 
+  public static testProvinces = {
+    bornholm: 'Bornholm',
+    koebenhavn: 'København',
+    sydsoenderjylland: 'Syd- og Sønderjylland'
+  };
+
   constructor(private serviceSpy: SinonSpy) {
   }
 
@@ -92,5 +98,7 @@ export class MockServiceApi implements ServiceApi {
   }
 
   getProvinces(callback: ServiceCallback) {
+    callback.onLoaded(MockServiceApi.testProvinces);
+    this.serviceSpy(MockServiceApi.testProvinces);
   }
 }

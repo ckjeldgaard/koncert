@@ -3,7 +3,7 @@ var webpackConfig = require('./config/webpack.config.test');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['source-map-support', 'mocha', 'chai', 'sinon'],
+    frameworks: ['source-map-support', 'mocha', 'chai-dom', 'chai', 'sinon'],
     files: [
       'node_modules/es6-promise/dist/es6-promise.auto.js',
       {

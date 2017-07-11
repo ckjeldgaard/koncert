@@ -20,7 +20,7 @@ if (args.env === 'jk') {
 
 var configuration = {
   basePath: '',
-  frameworks: ['mocha', 'chai', 'sinon'],
+  frameworks: ['mocha', 'chai-dom', 'chai', 'sinon'],
   files: [
     'node_modules/es6-promise/dist/es6-promise.auto.js',
     'src/test.ts'

@@ -16,7 +16,7 @@ export class ProvinceFilterComponent extends Vue {
 
   public provinces: Province[] = [];
 
-  mounted() {
+  public mounted() {
     this.$nextTick(() => {
 
       const select = new MDCSelect(this.$refs.provincefilter);

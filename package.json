@@ -44,11 +44,13 @@
     "vue-router": "~2.3.0"
   },
   "devDependencies": {
+    "@types/chai-dom": "0.0.5",
     "@types/mocha": "~2.2.40",
     "@types/node": "~7.0.8",
     "@types/sinon": "~1.16.36",
     "awesome-typescript-loader": "~3.1.2",
     "chai": "~3.5.0",
+    "chai-dom": "^1.5.0",
     "clean-css-cli": "~4.0.9",
     "codecov": "^2.2.0",
     "compression-webpack-plugin": "~0.3.2",
@@ -65,6 +67,7 @@
     "json-loader": "~0.5.4",
     "karma": "~1.5.0",
     "karma-chai": "~0.1.0",
+    "karma-chai-dom": "^1.1.0",
     "karma-chrome-launcher": "2.1.1",
     "karma-coverage": "~1.1.1",
     "karma-junit-reporter": "~1.2.0",
