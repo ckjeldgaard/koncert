@@ -17,6 +17,7 @@ export class ConcertsComponent extends Vue {
   private readonly currentTime = new Date().getTime() / 1000;
 
   public months: Month[] = [];
+  public loaded: boolean = false;
 
   mounted() {
     this.$nextTick(() => {
@@ -39,5 +40,6 @@ export class ConcertsComponent extends Vue {
 
   private updateEvents(eventData: any) {
     this.months = new EventSplit(eventData).splitByMonths();
+    this.loaded = true;
   }
 }
