@@ -40,7 +40,7 @@ export class ConcertsComponent extends Vue {
 
   private updateEvents(province?: string) {
     const eventSplit: EventSplit = new EventSplit(this.events);
-    this.months = (province != null) ? eventSplit.splitByMonths(province) : eventSplit.splitByMonths();
+    this.months = (province != null && province !== 'all') ? eventSplit.splitByMonths(province) : eventSplit.splitByMonths();
     this.loaded = true;
   }
 }

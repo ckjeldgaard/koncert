@@ -2,7 +2,7 @@
   <span class="mdc-select__selected-text">Filter by province</span>
   <div class="mdc-simple-menu mdc-select__menu">
     <ul class="mdc-list mdc-simple-menu__items">
-      <li class="mdc-list-item" role="option"  tabindex="0">
+      <li class="mdc-list-item" role="option" id="all" tabindex="0">
         All provinces
       </li>
       <li class="mdc-list-item" role="option" v-for="province in provinces" :id="province.key" tabindex="0">
