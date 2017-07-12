@@ -7,16 +7,19 @@
           <span class="mdc-list-item__text">
             {{event.name}}
             <span class="mdc-list-item__text__secondary">
-              {{event.dateStart | formatDate}} <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span><br />
+              {{event.dateStart | formatDate}} <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span><br/>
               {{event.venue}}
             </span>
           </span>
-          <a href="#" class="mdc-list-item__end-detail material-icons">info</a>
+          <a href="#" v-on:click="info($event, event)" class="mdc-list-item__end-detail material-icons">info</a>
         </li>
       </ul>
       <hr class="mdc-list-divider">
     </div>
   </div>
+
+  <concert_details :concert="selectedEvent"></concert_details>
+
   <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" v-if="!loaded">
     <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
   </svg>
