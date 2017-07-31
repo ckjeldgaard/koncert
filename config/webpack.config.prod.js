@@ -1,4 +1,4 @@
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
   CompressionPlugin = require('compression-webpack-plugin'),
   webpackConfig = require("./webpack.config.base"),
   helpers = require("./helpers"),
@@ -8,6 +8,9 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
 webpackConfig.entry["main.min"] = helpers.root("/src/main.ts");
 
 webpackConfig.plugins = [...webpackConfig.plugins,
+  new UglifyJsPlugin({
+    include: /\.min\.js$/
+  }),
   new CompressionPlugin({
     asset: "[path].gz[query]",
     test: /\.min\.js$/
