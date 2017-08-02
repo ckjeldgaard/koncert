@@ -1,0 +1,13 @@
+<div class="mdc-select" role="listbox" tabindex="0" id="genrefilter" ref="genrefilter">
+  <span class="mdc-select__selected-text">Filter by genre</span>
+  <div class="mdc-simple-menu mdc-select__menu">
+    <ul class="mdc-list mdc-simple-menu__items">
+      <li class="mdc-list-item" role="option" id="all" tabindex="0">
+        All genres
+      </li>
+      <li class="mdc-list-item" role="option" v-for="genre in genres" :id="genre.key" tabindex="0">
+        {{genre.name}}
+      </li>
+    </ul>
+  </div>
+</div>

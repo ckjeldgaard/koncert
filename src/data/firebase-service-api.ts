@@ -34,4 +34,11 @@ export class FirebaseServiceApi implements ServiceApi {
     });
   }
 
+  getGenres(callback: ServiceCallback) {
+    let ref = this.database.ref('data/genres');
+    ref.on('value', (response) => {
+      callback.onLoaded(response.val());
+    });
+  }
+
 }

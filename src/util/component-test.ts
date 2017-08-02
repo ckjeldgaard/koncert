@@ -89,6 +89,12 @@ export class MockServiceApi implements ServiceApi {
     sydsoenderjylland: 'Syd- og Sønderjylland'
   };
 
+  public static testGenres = {
+    heavymetal: 'Heavy metal',
+    black: 'Black metal',
+    death: 'Death metal'
+  };
+
   constructor(private serviceSpy: SinonSpy) {
   }
 
@@ -101,4 +107,10 @@ export class MockServiceApi implements ServiceApi {
     callback.onLoaded(MockServiceApi.testProvinces);
     this.serviceSpy(MockServiceApi.testProvinces);
   }
+
+  getGenres(callback: ServiceCallback) {
+    callback.onLoaded(MockServiceApi.testGenres);
+    this.serviceSpy(MockServiceApi.testGenres);
+  }
+
 }
