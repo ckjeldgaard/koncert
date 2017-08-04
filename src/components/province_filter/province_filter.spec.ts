@@ -36,10 +36,10 @@ describe('ProvinceFilter component', () => {
   it('should create a list of provinces', async () => {
     directiveTest.createComponent();
     await directiveTest.execute((vm) => {
-      expect(vm.$el.querySelectorAll('.mdc-list li')).to.contain.text('All provinces');
-      expect(vm.$el.querySelectorAll('.mdc-list li')).to.contain.text('Bornholm');
-      expect(vm.$el.querySelectorAll('.mdc-list li')).to.contain.text('København');
-      expect(vm.$el.querySelectorAll('.mdc-list li')).to.contain.text('Syd- og Sønderjylland');
+      expect(vm.$el.querySelectorAll('.mdc-select option')).to.contain.text('All provinces');
+      expect(vm.$el.querySelectorAll('.mdc-select option')).to.contain.text('Bornholm');
+      expect(vm.$el.querySelectorAll('.mdc-select option')).to.contain.text('København');
+      expect(vm.$el.querySelectorAll('.mdc-select option')).to.contain.text('Syd- og Sønderjylland');
     });
   });
 
