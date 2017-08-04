@@ -18,13 +18,6 @@ export class ProvinceFilterComponent extends Vue {
 
   public mounted() {
     this.$nextTick(() => {
-
-      const select = new MDCSelect(this.$refs.provincefilter);
-      select.listen('MDCSelect:change', () => {
-        this.bus.$emit('province-key', select.value);
-        console.log('Selected "${select.selectedOptions[0].textContent}" at index ${select.selectedIndex} ' + 'with value "${select.value}"');
-      });
-
       this.serviceApi.getProvinces({
         onLoaded: (data) => {
           this.updateProvinces(data);
@@ -34,6 +27,10 @@ export class ProvinceFilterComponent extends Vue {
         },
       });
     });
+  }
+
+  public onChangeProvince(e) {
+    this.bus.$emit('province-key', e.target.value);
   }
 
   private updateProvinces(provinceData: any) {

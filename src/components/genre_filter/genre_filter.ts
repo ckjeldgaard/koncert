@@ -17,13 +17,6 @@ export class GenreFilterComponent extends Vue {
 
   public mounted() {
     this.$nextTick(() => {
-
-      const select = new MDCSelect(this.$refs.genrefilter);
-      select.listen('MDCSelect:change', () => {
-        // this.bus.$emit('province-key', select.value);
-        console.log('Selected "${select.selectedOptions[0].textContent}" at index ${select.selectedIndex} ' + 'with value "${select.value}"');
-      });
-
       this.serviceApi.getGenres({
         onLoaded: (data) => {
           this.updateGenres(data);
@@ -33,6 +26,11 @@ export class GenreFilterComponent extends Vue {
         },
       });
     });
+  }
+
+  public onChangeGenre(e) {
+    console.log('genre value', e.target.value);
+    // this.bus.$emit('genre-key', e.target.value);
   }
 
   private updateGenres(genreData: any) {

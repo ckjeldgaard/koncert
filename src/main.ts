@@ -15,7 +15,6 @@ import {FirebaseServiceApi} from './data/firebase-service-api';
 
 // register the plugin
 Vue.use(VueRouter);
-console.log('mdc.autoInit()');
 mdc.autoInit();
 
 let router = new VueRouter({

@@ -1,13 +1,8 @@
-<div class="mdc-select" role="listbox" tabindex="0" id="provincefilter" ref="provincefilter">
-  <span class="mdc-select__selected-text">Filter by province</span>
-  <div class="mdc-simple-menu mdc-select__menu">
-    <ul class="mdc-list mdc-simple-menu__items">
-      <li class="mdc-list-item" role="option" id="all" tabindex="0">
-        All provinces
-      </li>
-      <li class="mdc-list-item" role="option" v-for="province in provinces" :id="province.key" tabindex="0">
-        {{province.name}}
-      </li>
-    </ul>
-  </div>
+<div class="provinces">
+  <select class="mdc-select" v-on:change="onChangeProvince">
+    <option value="" default selected>All provinces</option>
+    <option :value="province.key" v-for="province in provinces">
+      {{province.name}}
+    </option>
+  </select>
 </div>
