@@ -64,21 +64,21 @@ export class MockServiceApi implements ServiceApi {
   public static JANUARY_2017: number = 1484438400;
   public static FEBRUARY_2017: number = 1487116800;
 
-  public static testEvents = {
-    event1: {
+  public static testConcerts = {
+    concert1: {
       cancelled: false,
       dateEnd: MockServiceApi.JANUARY_2017,
       dateStart: MockServiceApi.JANUARY_2017,
       festival: true,
-      name: 'Event 1',
+      name: 'Concert 1',
       venue: 'Venue 1'
     },
-    event2: {
+    concert2: {
       cancelled: false,
       dateEnd: MockServiceApi.FEBRUARY_2017,
       dateStart: MockServiceApi.FEBRUARY_2017,
       festival: true,
-      name: 'Event 2',
+      name: 'Concert 2',
       venue: 'Venue 2'
     }
   };
@@ -99,8 +99,8 @@ export class MockServiceApi implements ServiceApi {
   }
 
   getConcerts(callback: ServiceCallback, startAt: number) {
-    callback.onLoaded(MockServiceApi.testEvents);
-    this.serviceSpy(MockServiceApi.testEvents);
+    callback.onLoaded(MockServiceApi.testConcerts);
+    this.serviceSpy(MockServiceApi.testConcerts);
   }
 
   getProvinces(callback: ServiceCallback) {

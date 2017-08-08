@@ -26,7 +26,7 @@ describe('Concerts component', () => {
   it('should verify the database mock', async () => {
     directiveTest.createComponent();
     await directiveTest.execute((vm) => {
-      assert.calledWith(serviceSpy, MockServiceApi.testEvents);
+      assert.calledWith(serviceSpy, MockServiceApi.testConcerts);
     });
   });
 

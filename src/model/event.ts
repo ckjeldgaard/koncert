@@ -1,4 +1,4 @@
-interface Event {
+interface Concert {
   cancelled: boolean;
   dateStart: number;
   dateEnd: number;

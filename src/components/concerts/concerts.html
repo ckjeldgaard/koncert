@@ -3,22 +3,22 @@
     <div v-for="month in months">
       <h3 class="mdc-list-group__subheader">{{month.name}}</h3>
       <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo">
-        <li class="mdc-list-item" v-for="event in month.events">
+        <li class="mdc-list-item" v-for="concert in month.concerts">
           <span class="mdc-list-item__text">
-            {{event.name}}
+            {{concert.name}}
             <span class="mdc-list-item__text__secondary">
-              {{event.dateStart | formatDate}} <span v-if="event.dateStart != event.dateEnd"> - {{event.dateEnd | formatDate}}</span><br/>
-              {{event.venue}}
+              {{concert.dateStart | formatDate}} <span v-if="concert.dateStart != concert.dateEnd"> - {{concert.dateEnd | formatDate}}</span><br/>
+              {{concert.venue}}
             </span>
           </span>
-          <a href="#" v-on:click="info($event, event)" class="mdc-list-item__end-detail material-icons">info</a>
+          <a href="#" v-on:click="info($concert, concert)" class="mdc-list-item__end-detail material-icons">info</a>
         </li>
       </ul>
       <hr class="mdc-list-divider">
     </div>
   </div>
 
-  <concert_details :concert="selectedEvent"></concert_details>
+  <concert_details :concert="selectedConcert"></concert_details>
 
   <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" v-if="!loaded">
     <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>

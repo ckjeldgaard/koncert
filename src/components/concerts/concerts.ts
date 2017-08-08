@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Inject} from 'vue-property-decorator';
 import {Month} from '../../model/month';
-import {EventSplit} from '../../util/event-split';
+import {ConcertSplit} from '../../util/concert-split';
 import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
 import * as mdc from 'material-components-web';
@@ -17,17 +17,17 @@ export class ConcertsComponent extends Vue {
 
   private readonly currentTime = new Date().getTime() / 1000;
 
-  private events: any;
+  private concerts: any;
   public months: Month[] = [];
   public loaded: boolean = false;
-  public selectedEvent: Event = null;
+  public selectedConcert: Concert = null;
 
   mounted() {
     this.$nextTick(() => {
       this.serviceApi.getConcerts({
         onLoaded: (data) => {
-          this.events = data;
-          this.updateEvents();
+          this.concerts = data;
+          this.updateConcerts();
         },
         onError: (exception) => {
           console.log('An error occurred.', exception);
@@ -37,17 +37,17 @@ export class ConcertsComponent extends Vue {
   }
 
   created() {
-    this.bus.$on('province-key', (id) => this.updateEvents(id));
+    this.bus.$on('province-key', (id) => this.updateConcerts(id));
   }
 
-  private updateEvents(province?: string) {
-    const eventSplit: EventSplit = new EventSplit(this.events);
-    this.months = (province != null && province !== 'all') ? eventSplit.splitByMonths(province) : eventSplit.splitByMonths();
+  private updateConcerts(province?: string) {
+    const concertSplit: ConcertSplit = new ConcertSplit(this.concerts);
+    this.months = (province != null && province !== 'all') ? concertSplit.splitByMonths(province) : concertSplit.splitByMonths();
     this.loaded = true;
   }
 
   public info(event, concert) {
-    this.selectedEvent = concert;
+    this.selectedConcert = concert;
 
     let dialogScrollable = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
 

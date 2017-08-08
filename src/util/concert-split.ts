@@ -1,23 +1,23 @@
 import {Month} from '../model/month';
 import moment from 'moment';
 
-export class EventSplit {
-  private readonly events: any;
+export class ConcertSplit {
+  private readonly concerts: any;
 
-  constructor(events: any) {
-    this.events = events;
+  constructor(concerts: any) {
+    this.concerts = concerts;
   }
 
   public splitByMonths(province?: string): Month[] {
-    let tmpEvents: Event[] = [];
-    for (let key in this.events) {
-      tmpEvents.push(this.events[key]);
+    let tmpConcerts: Concert[] = [];
+    for (let key in this.concerts) {
+      tmpConcerts.push(this.concerts[key]);
     }
-    tmpEvents.sort(this.compareEventByDate);
+    tmpConcerts.sort(this.compareConcertByDate);
 
     // Months:
     let months: Month[] = [];
-    for (let e of tmpEvents) {
+    for (let e of tmpConcerts) {
       if (province != null && e.province !== province) {
         continue;
       }
@@ -26,7 +26,7 @@ export class EventSplit {
 
       let monthName: string = moment.unix(e.dateStart).format('MMMM YYYY');
       if (this.monthExists(monthName, months)) {
-        this.getMonth(monthName, months).events.push(e);
+        this.getMonth(monthName, months).concerts.push(e);
       } else {
         months.push(new Month(monthName, [e]));
       }
@@ -53,7 +53,7 @@ export class EventSplit {
     return false;
   }
 
-  private compareEventByDate(a: Event, b: Event) {
+  private compareConcertByDate(a: Concert, b: Concert) {
     if (a.dateStart < b.dateStart) {
       return -1;
     } else if (a.dateStart > b.dateStart) {

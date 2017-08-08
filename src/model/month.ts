@@ -1,9 +1,9 @@
 export class Month {
   name: string;
-  events: Event[];
+  concerts: Concert[];
 
-  constructor(name: string, events: Event[]) {
+  constructor(name: string, concerts: Concert[]) {
     this.name = name;
-    this.events = events;
+    this.concerts = concerts;
   }
 }
