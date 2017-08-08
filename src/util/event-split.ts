@@ -21,6 +21,9 @@ export class EventSplit {
       if (province != null && e.province !== province) {
         continue;
       }
+
+      // e.genres.find(x => x === 'three');
+
       let monthName: string = moment.unix(e.dateStart).format('MMMM YYYY');
       if (this.monthExists(monthName, months)) {
         this.getMonth(monthName, months).events.push(e);

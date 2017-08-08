@@ -6,4 +6,5 @@ interface Event {
   name: string;
   venue: string;
   province: string;
+  genres: string[];
 }

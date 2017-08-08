@@ -12,6 +12,7 @@ import {Genre} from '../../model/genre';
 export class GenreFilterComponent extends Vue {
 
   @Inject(serviceApi) serviceApi: ServiceApi;
+  @Inject(bus) bus: Vue;
 
   public genres: Genre[] = [];
 
@@ -29,8 +30,7 @@ export class GenreFilterComponent extends Vue {
   }
 
   public onChangeGenre(e) {
-    console.log('genre value', e.target.value);
-    // this.bus.$emit('genre-key', e.target.value);
+    this.bus.$emit('genre-key', e.target.value);
   }
 
   private updateGenres(genreData: any) {
