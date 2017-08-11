@@ -12,7 +12,6 @@ describe('Home component', () => {
   it('should render correct contents', async () => {
     directiveTest.createComponent();
     await directiveTest.execute((vm) => {
-      debugger;
       expect(vm.$el.querySelector('.name').textContent).to.equal('Koncert');
     });
   });

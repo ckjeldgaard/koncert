@@ -7,4 +7,8 @@ interface Concert {
   venue: string;
   province: string;
   genres: string[];
+  startTime: string;
+  ticketPrice: string;
+  buyLink: string;
+  facebookLink: string;
 }

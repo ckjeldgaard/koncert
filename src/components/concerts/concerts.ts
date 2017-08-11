@@ -49,9 +49,9 @@ export class ConcertsComponent extends Vue {
   public info(event, concert) {
     this.selectedConcert = concert;
 
-    let dialogScrollable = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+    // let dialogScrollable = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
 
-    dialogScrollable.lastFocusedTarget = event.target;
-    dialogScrollable.show();
+    // dialogScrollable.lastFocusedTarget = event.target;
+    // dialogScrollable.show();
   }
 }
