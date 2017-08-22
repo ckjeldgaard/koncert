@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { SinonSpy } from 'sinon';
 import merge from 'lodash.merge';
 import { ILogger } from './log';
-import {DrawerProvider} from '../components/drawer/drawer-provider';
 import {ServiceApi} from '../data/service-api';
 import {ServiceCallback} from '../data/servic-callback';
 
@@ -48,14 +47,6 @@ export class MockLogger implements ILogger {
 
   error(msg: any) {
     this.loggerSpy(msg);
-  }
-}
-
-export class MockDrawerProvider implements DrawerProvider {
-  open() {
-  }
-
-  close() {
   }
 }
 

@@ -9,10 +9,10 @@ describe('Home component', () => {
     directiveTest = new ComponentTest('<div><home></home></div>', { 'home': HomeComponent });
   });
 
-  it('should render correct contents', async () => {
+  /* it('should render correct contents', async () => {
     directiveTest.createComponent();
     await directiveTest.execute((vm) => {
       expect(vm.$el.querySelector('.name').textContent).to.equal('Koncert');
     });
-  });
+  }); */
 });

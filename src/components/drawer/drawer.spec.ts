@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Component from 'vue-class-component';
 import { spy, assert } from 'sinon';
 import { expect } from 'chai';
-import {ComponentTest, MockDrawerProvider, MockLogger} from '../../util/component-test';
+import {ComponentTest, MockLogger} from '../../util/component-test';
 import { DrawerComponent } from './drawer';
 
 let loggerSpy = spy();
@@ -15,7 +15,6 @@ class MockDrawerComponent extends DrawerComponent {
   constructor() {
     super();
     this.logger = new MockLogger(loggerSpy);
-    this.drawer = new MockDrawerProvider();
   }
 }
 
@@ -44,7 +43,7 @@ describe('Drawer component', () => {
     await directiveTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
       debugger;
       assert.calledWith(loggerSpy, 'Default object property!');
-      expect(vm.$el.querySelectorAll('.mdc-list div').length).to.equal(2);
+      expect(vm.$el.querySelectorAll('nav a').length).to.equal(2);
     });
   });
 
@@ -53,7 +52,7 @@ describe('Drawer component', () => {
       directiveTest.createComponent({ router: router });
 
       await directiveTest.execute((vm) => {
-        let anchor = <HTMLAnchorElement>vm.$el.querySelector('.mdc-list div a[href="#/about"]');
+        let anchor = <HTMLAnchorElement>vm.$el.querySelector('nav a[href="#/about"]');
         anchor.click();
       });
     });
