@@ -30,10 +30,6 @@
     "codecov": "codecov -f coverage/json/*.json"
   },
   "dependencies": {
-    "@material/drawer": "^0.4.2",
-    "@material/list": "^0.2.8",
-    "@material/select": "^0.3.9",
-    "@material/theme": "^0.1.5",
     "axios": "~0.15.3",
     "firebase": "^4.1.1",
     "material-components-web": "^0.11.1",
