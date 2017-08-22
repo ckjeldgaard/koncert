@@ -2,16 +2,14 @@ import Vue from 'vue';
 import {Component, watch} from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
-import {DrawerProvider} from './drawer-provider';
-import {DrawerProviderImpl} from './drawer-provider-impl';
-
 
 @Component({
   template: require('./drawer.html')
 })
 export class DrawerComponent extends Vue {
   protected logger: Logger;
-  protected drawer: DrawerProvider;
+
+  public open: Boolean = false;
 
   object: { default: string } = { default: 'Default object property!' }; // objects as default values don't need to be wrapped into functions
 
@@ -26,20 +24,12 @@ export class DrawerComponent extends Vue {
   }
 
   drawerLinkClickListener(event) {
-    this.drawer.close();
+    this.open = false;
   }
 
   mounted() {
     if (!this.logger)
       this.logger = new Logger();
-
-    if (!this.drawer) {
-      let tempDrawer = new DrawerProviderImpl(this.$refs.dre);
-      this.drawer = tempDrawer;
-      document.querySelector('.menu-button').addEventListener('click', function () {
-        tempDrawer.open();
-      });
-    }
 
     this.$nextTick(() => this.logger.info(this.object.default));
   }

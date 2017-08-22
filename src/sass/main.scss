@@ -1,49 +1,62 @@
-$mdc-theme-primary: #001f3f;
-$mdc-theme-accent: #ff851b;
-$mdc-theme-background: #efefef;
+@import '../../node_modules/surface/src/scss/_imports/colors.scss';
 
-@import "../../node_modules/@material/theme/mdc-theme";
+$primary: #001f3f;
+$accent: #ff851b;
 
-html, body, #app-main {
-    height: 100%;
+@import '../../node_modules/surface/src/scss/surface_styles.scss';
+
+.drawer label {
+  font-weight: bold;
+  color: $primary;
 }
 
-@import '../components/home/home';
-@import '../components/concerts/concerts';
-@import '../components/genre_filter/genre_filter';
-@import '../components/province_filter/province_filter';
-
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+aside nav a.active {
+  background: lighten($grey, 26%);
 }
 
-.menu-button {
-  background: none;
-  border: none;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0;
-  margin-right: 24px;
-  color: #FFF;
-  box-sizing: border-box;
+.concert-title {
+  color: $primary;
+  font-weight: bold;
 }
 
-.demo-main {
-  padding-left: 16px;
-  padding-right: 16px;
-  overflow: auto;
+.concert-date {
+
 }
 
-.mdc-card {
-  margin-top: 8px;
-  margin-bottom: 8px;
+.concert-venue {
+  color: $accent;
+  font-style: italic;
+}
+
+.subtitle {
+  margin-top: 1em;
+}
+
+label[for*="collapsible-"] {
+  flex-direction: column;
+  &:before, &:after {
+    top: 15px;
+  }
+}
+
+.collapsible-area {
+  ul {
+    li {
+      margin-top: 0;
+      &:before {
+        content: "•";
+        color: $accent;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+    }
+  }
 }
 
 /* Spinner: */
 
+/*
 $offset: 187;
 $duration: 1.4s;
 
@@ -90,3 +103,5 @@ $duration: 1.4s;
     transform:rotate(450deg);
   }
 }
+
+*/

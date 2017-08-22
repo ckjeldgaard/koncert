@@ -1,4 +1,5 @@
 interface Concert {
+  id: string;
   cancelled: boolean;
   dateStart: number;
   dateEnd: number;

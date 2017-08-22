@@ -1,5 +1,5 @@
-<div class="provinces">
-  <select class="mdc-select" v-on:change="onChangeProvince">
+<div class="provinces g--12">
+  <select v-on:change="onChangeProvince">
     <option value="" default selected>All provinces</option>
     <option :value="province.key" v-for="province in provinces">
       {{province.name}}

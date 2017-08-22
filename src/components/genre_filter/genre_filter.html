@@ -1,5 +1,5 @@
-<div class="genres">
-  <select class="mdc-select" v-on:change="onChangeGenre">
+<div class="genres g--12">
+  <select v-on:change="onChangeGenre">
     <option value="" default selected>All genres</option>
     <option :value="genre.key" v-for="genre in genres">
       {{genre.name}}

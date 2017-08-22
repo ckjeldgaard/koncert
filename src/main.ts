@@ -26,7 +26,7 @@ let router = new VueRouter({
 
 Vue.filter('formatDate', (value) => {
   if (value) {
-    return moment.unix(value).format('Do MMMM YYYY');
+    return moment.unix(value).format('dddd, MMM Do YYYY');
   }
 });
 

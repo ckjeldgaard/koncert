@@ -11,6 +11,7 @@ export class ConcertSplit {
   public splitByMonths(province?: string): Month[] {
     let tmpConcerts: Concert[] = [];
     for (let key in this.concerts) {
+      this.concerts[key].id = key;
       tmpConcerts.push(this.concerts[key]);
     }
     tmpConcerts.sort(this.compareConcertByDate);
