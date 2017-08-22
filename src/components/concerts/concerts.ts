@@ -5,7 +5,6 @@ import {Month} from '../../model/month';
 import {ConcertSplit} from '../../util/concert-split';
 import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
-import * as mdc from 'material-components-web';
 
 @Component({
   template: require('./concerts.html')

@@ -9,7 +9,6 @@ import {DrawerComponent} from './components/drawer';
 import {ConcertsComponent} from './components/concerts/concerts';
 import {ProvinceFilterComponent} from './components/province_filter/province_filter';
 import {GenreFilterComponent} from './components/genre_filter/genre_filter';
-import {ConcertDetailsComponent} from './components/concert_details/concert_details';
 import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 
@@ -33,7 +32,6 @@ Vue.filter('formatDate', (value) => {
 Vue.component('concerts', ConcertsComponent);
 Vue.component('province_filter', ProvinceFilterComponent);
 Vue.component('genre_filter', GenreFilterComponent);
-Vue.component('concert_details', ConcertDetailsComponent);
 
 new Vue({
   el: '#app-main',
