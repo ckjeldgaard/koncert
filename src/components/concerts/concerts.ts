@@ -19,7 +19,6 @@ export class ConcertsComponent extends Vue {
   private concerts: any;
   public months: Month[] = [];
   public loaded: boolean = false;
-  public selectedConcert: Concert = null;
 
   mounted() {
     this.$nextTick(() => {
@@ -37,20 +36,56 @@ export class ConcertsComponent extends Vue {
 
   created() {
     this.bus.$on('province-key', (id) => this.updateConcerts(id));
+
+    window.addEventListener('scroll', this.updateFixedHeaders);
+  }
+
+  destroyed() {
+    window.removeEventListener('scroll', this.updateFixedHeaders);
+  }
+
+  private updateFixedHeaders(): void {
+    const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
+    for (let i = 0, len = fixedAreas.length; i < len; i++) {
+
+      const el: Element = fixedAreas[i];
+      const offsetTop: number = el.getBoundingClientRect().top + document.body.scrollTop;
+      const scrollTop: number = document.body.scrollTop;
+      const floatingHeader: HTMLElement = <HTMLElement>fixedAreas[i].querySelector('.floating-header');
+
+      if ((scrollTop > offsetTop) && (scrollTop < offsetTop + el.getBoundingClientRect().height)) {
+        floatingHeader.style.visibility = 'visible';
+      } else {
+        floatingHeader.style.visibility = 'hidden';
+      }
+    }
   }
 
   private updateConcerts(province?: string) {
     const concertSplit: ConcertSplit = new ConcertSplit(this.concerts);
     this.months = (province != null && province !== 'all') ? concertSplit.splitByMonths(province) : concertSplit.splitByMonths();
     this.loaded = true;
+
+    this.$nextTick(() => {
+      const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
+      let clonedHeaderRow;
+
+      for (let i = 0, len = fixedAreas.length; i < len; i++) {
+        clonedHeaderRow = fixedAreas[i].querySelector('.subtitle');
+        clonedHeaderRow.parentNode.insertBefore(
+          clonedHeaderRow.cloneNode(true),
+          clonedHeaderRow
+        );
+        this.addClass(clonedHeaderRow, 'floating-header');
+      }
+    });
   }
 
-  public info(event, concert) {
-    this.selectedConcert = concert;
-
-    // let dialogScrollable = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
-
-    // dialogScrollable.lastFocusedTarget = event.target;
-    // dialogScrollable.show();
+  private addClass(el: HTMLElement, className: string) {
+    if (el.classList) {
+      el.classList.add(className);
+    } else {
+      el.className += ' ' + className;
+    }
   }
 }

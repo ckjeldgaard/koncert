@@ -1,0 +1,8 @@
+.drawer label {
+  font-weight: bold;
+  color: $primary;
+}
+
+aside nav a.active {
+  background: lighten($grey, 26%);
+}

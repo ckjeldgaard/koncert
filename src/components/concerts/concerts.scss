@@ -1,13 +1,53 @@
-.concerts .mdc-list-item__end-detail {
-  color: $mdc-theme-accent;
-  text-decoration: none;
+.concerts {
+  margin-bottom: 1em;
 }
 
-.concerts .mdc-list-item__text {
+.concert-title {
+  color: $primary;
   font-weight: bold;
 }
 
-.concerts .mdc-list--two-line .mdc-list-item {
-  height: auto;
-  margin: .5em 0;
+.concert-date {
+
+}
+
+.concert-venue {
+  color: $accent;
+  font-style: italic;
+}
+
+label[for*="collapsible-"] {
+  flex-direction: column;
+  &:before, &:after {
+    top: 15px;
+  }
+}
+
+.collapsible-area {
+  ul {
+    li {
+      margin-top: 0;
+      &:before {
+        content: "•";
+        color: $accent;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+    }
+  }
+}
+
+.subtitle {
+  width: 100%;
+  background-color: $off-white;
+  margin-bottom: .4em;
+  padding-bottom: .4em;
+}
+
+.floating-header {
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+  z-index: 2;
 }
