@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Inject} from 'vue-property-decorator';
-import {MDCSelect, MDCSelectFoundation} from '@material/select';
 import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
 import {Province} from '../../model/Province';
