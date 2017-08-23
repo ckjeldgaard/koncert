@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Component, watch} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
 
@@ -18,7 +18,6 @@ export class DrawerComponent extends Vue {
     new Link('About', '/about')
   ];
 
-  @watch('$route.path')
   pathChanged() {
     this.logger.info('Changed current path to: ' + this.$route.path);
   }
