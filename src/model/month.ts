@@ -1,3 +1,5 @@
+import {Concert} from './concert';
+
 export class Month {
   name: string;
   concerts: Concert[];

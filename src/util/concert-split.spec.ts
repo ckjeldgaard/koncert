@@ -44,10 +44,4 @@ describe('Concert split', () => {
     expect(concertSplit.splitByMonths()[1].name).to.equal('February 2017');
   });
 
-  it('should filter out provinces', async () => {
-    let concertSplit: ConcertSplit = new ConcertSplit(testConcerts);
-    expect(concertSplit.splitByMonths('province1').length).to.equal(1);
-    expect(concertSplit.splitByMonths('province1')[0].concerts.length).to.equal(2);
-  });
-
 });

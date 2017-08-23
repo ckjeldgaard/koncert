@@ -1,5 +1,6 @@
 import {Month} from '../model/month';
 import moment from 'moment';
+import {Concert} from '../model/concert';
 
 export class ConcertSplit {
   private readonly concerts: any;
@@ -8,7 +9,7 @@ export class ConcertSplit {
     this.concerts = concerts;
   }
 
-  public splitByMonths(province?: string): Month[] {
+  public splitByMonths(): Month[] {
     let tmpConcerts: Concert[] = [];
     for (let key in this.concerts) {
       this.concerts[key].id = key;
@@ -19,11 +20,6 @@ export class ConcertSplit {
     // Months:
     let months: Month[] = [];
     for (let e of tmpConcerts) {
-      if (province != null && e.province !== province) {
-        continue;
-      }
-
-      // e.genres.find(x => x === 'three');
 
       let monthName: string = moment.unix(e.dateStart).format('MMMM YYYY');
       if (this.monthExists(monthName, months)) {

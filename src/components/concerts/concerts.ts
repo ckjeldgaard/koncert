@@ -5,6 +5,10 @@ import {Month} from '../../model/month';
 import {ConcertSplit} from '../../util/concert-split';
 import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
+import {CriteriaProvince} from '../../util/criteria/criteria-province';
+import {Concert} from '../../model/concert';
+import {CriteriaGenre} from '../../util/criteria/criteria-genre';
+import {AndCriteria} from '../../util/criteria/and-criteria';
 
 @Component({
   template: require('./concerts.html')
@@ -16,15 +20,21 @@ export class ConcertsComponent extends Vue {
 
   private readonly currentTime = new Date().getTime() / 1000;
 
-  private concerts: any;
+  private concerts: Concert[] = [];
   public months: Month[] = [];
   public loaded: boolean = false;
+
+  private selectedProvince: string;
+  private selectedGenre: string;
 
   mounted() {
     this.$nextTick(() => {
       this.serviceApi.getConcerts({
         onLoaded: (data) => {
-          this.concerts = data;
+          for (let key in data) {
+            data[key].id = key;
+            this.concerts.push(data[key]);
+          }
           this.updateConcerts();
         },
         onError: (exception) => {
@@ -35,7 +45,14 @@ export class ConcertsComponent extends Vue {
   }
 
   created() {
-    this.bus.$on('province-key', (id) => this.updateConcerts(id));
+    this.bus.$on('province-key', (id) => {
+      this.selectedProvince = id;
+      this.updateConcerts();
+    });
+    this.bus.$on('genre-key', (id) => {
+      this.selectedGenre = id;
+      this.updateConcerts();
+    });
 
     window.addEventListener('scroll', this.updateFixedHeaders);
   }
@@ -61,11 +78,32 @@ export class ConcertsComponent extends Vue {
     }
   }
 
-  private updateConcerts(province?: string) {
-    const concertSplit: ConcertSplit = new ConcertSplit(this.concerts);
-    this.months = (province != null && province !== 'all') ? concertSplit.splitByMonths(province) : concertSplit.splitByMonths();
+  private updateConcerts() {
+
+    let filteredConcerts: Concert[] = [];
+    if (this.selectedProvince != null && this.selectedProvince !== 'all' && (this.selectedGenre == null || this.selectedGenre === 'all')) {
+      // Only province
+      filteredConcerts = new CriteriaProvince(this.selectedProvince).meetCriteria(this.concerts);
+    } else if (this.selectedGenre != null && this.selectedGenre !== 'all' && (this.selectedProvince == null || this.selectedProvince === 'all')) {
+      // Only genre
+      filteredConcerts = new CriteriaGenre(this.selectedGenre).meetCriteria(this.concerts);
+    } else if (this.selectedProvince != null && this.selectedProvince !== 'all' && this.selectedGenre != null && this.selectedGenre !== 'all') {
+      // Both province and genre
+      filteredConcerts = new AndCriteria(
+        new CriteriaProvince(this.selectedProvince),
+        new CriteriaGenre(this.selectedGenre)
+      ).meetCriteria(this.concerts);
+    } else {
+      // No filter
+      filteredConcerts = this.concerts;
+    }
+
+    const concertSplit: ConcertSplit = new ConcertSplit(filteredConcerts);
+
+    this.months = concertSplit.splitByMonths();
     this.loaded = true;
 
+    // Fixed month headers:
     this.$nextTick(() => {
       const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
       let clonedHeaderRow;
