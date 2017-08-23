@@ -12,7 +12,7 @@
     "build": "cross-env NODE_ENV=production npm run clean && npm run test && npm run sass && npm run build:parts && npm run clean:css && npm run process:html",
     "build:parts": "npm run sass && npm run compile",
     "clean": "rimraf dist && rimraf coverage",
-    "clean:css": "cleancss src/css/main.css",
+    "clean:css": "cleancss -o dist/css/main.min.css src/css/main.css",
     "compile": "webpack --config config/webpack.config.prod.js",
     "coverage": "npm run coverage:run && npm run coverage:remap && npm run coverage:open",
     "coverage:open": "opn coverage/html-ts/index.html",
