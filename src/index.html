@@ -4,34 +4,25 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>Koncert</title>
-
   <!-- build:css css/main.min.css -->
   <link rel="stylesheet" href="css/main.css">
   <!-- /build -->
 </head>
 <body>
-
 <div id="app-main">
   <drawer></drawer>
   <main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
     <header class="container--baseline">
       <h1 class="m--1 g--4 g-s--12 docsHeader">Koncert</h1>
     </header>
-
     <router-view>
-      <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-      </svg>
+      <spinner :visible="true" />
     </router-view>
-
   </main>
 </div>
-
 <!-- build:js js/main.min.js -->
 <script src="main.js"></script>
 <!-- /build -->
-
 </body>
 </html>

@@ -5,6 +5,7 @@ import moment from 'moment';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import {DrawerComponent} from './components/drawer';
+import {SpinnerComponent} from './components/spinner';
 import {ConcertsComponent} from './components/concerts/concerts';
 import {ProvinceFilterComponent} from './components/province_filter/province_filter';
 import {GenreFilterComponent} from './components/genre_filter/genre_filter';
@@ -28,6 +29,7 @@ Vue.filter('formatDate', (value) => {
 });
 
 Vue.component('concerts', ConcertsComponent);
+Vue.component('spinner', SpinnerComponent);
 Vue.component('province_filter', ProvinceFilterComponent);
 Vue.component('genre_filter', GenreFilterComponent);
 
