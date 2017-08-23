@@ -1,4 +1,3 @@
-import * as mdc from 'material-components-web';
 import * as Vue from 'vue';
 import VueRouter from 'vue-router';
 import moment from 'moment';
@@ -14,7 +13,6 @@ import {FirebaseServiceApi} from './data/firebase-service-api';
 
 // register the plugin
 Vue.use(VueRouter);
-mdc.autoInit();
 
 let router = new VueRouter({
   routes: [
