@@ -5,6 +5,10 @@ $accent: #ff851b;
 
 @import '../../node_modules/surface/src/scss/surface_styles.scss';
 
+#app-main {
+  width:100%;
+}
+
 .drawer label {
   font-weight: bold;
   color: $primary;
