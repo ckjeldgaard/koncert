@@ -10,6 +10,9 @@ export class CriteriaProvince implements Criteria {
   }
 
   meetCriteria(concerts: Concert[]): Concert[] {
+    if (this.province == null || this.province === 'all') {
+      return concerts;
+    }
     let provinceConcerts: Concert[] = [];
     for (let concert of concerts) {
       if (this.province === concert.province) {

@@ -10,6 +10,9 @@ export class CriteriaGenre implements Criteria {
   }
 
   meetCriteria(concerts: Concert[]): Concert[] {
+    if (this.genre == null || this.genre === 'all') {
+      return concerts;
+    }
     let genreConcerts: Concert[] = [];
     for (let concert of concerts) {
       if (concert.genres !== undefined && concert.genres.some(x => x === this.genre)) {

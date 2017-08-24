@@ -79,28 +79,14 @@ export class ConcertsComponent extends Vue {
   }
 
   private updateConcerts() {
-
-    let filteredConcerts: Concert[] = [];
-    if (this.selectedProvince != null && this.selectedProvince !== 'all' && (this.selectedGenre == null || this.selectedGenre === 'all')) {
-      // Only province
-      filteredConcerts = new CriteriaProvince(this.selectedProvince).meetCriteria(this.concerts);
-    } else if (this.selectedGenre != null && this.selectedGenre !== 'all' && (this.selectedProvince == null || this.selectedProvince === 'all')) {
-      // Only genre
-      filteredConcerts = new CriteriaGenre(this.selectedGenre).meetCriteria(this.concerts);
-    } else if (this.selectedProvince != null && this.selectedProvince !== 'all' && this.selectedGenre != null && this.selectedGenre !== 'all') {
-      // Both province and genre
-      filteredConcerts = new AndCriteria(
+    this.months = new ConcertSplit(
+      new AndCriteria(
         new CriteriaProvince(this.selectedProvince),
         new CriteriaGenre(this.selectedGenre)
-      ).meetCriteria(this.concerts);
-    } else {
-      // No filter
-      filteredConcerts = this.concerts;
-    }
-
-    const concertSplit: ConcertSplit = new ConcertSplit(filteredConcerts);
-
-    this.months = concertSplit.splitByMonths();
+      ).meetCriteria(
+        this.concerts
+      )
+    ).splitByMonths();
     this.loaded = true;
 
     // Fixed month headers:
