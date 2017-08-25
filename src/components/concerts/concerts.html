@@ -1,19 +1,29 @@
 <div class="concerts">
   <div v-for="month in months" class="fixed-area">
     <h3 class="subtitle">{{month.name}}</h3>
-    <div v-for="concert in month.concerts" class="collapsible-wrap card no-pad">
-      <input type="checkbox" v-bind:id="'collapsible-' + concert.id">
-      <label v-bind:for="'collapsible-' + concert.id">
-        <span class="concert-title">{{concert.name}}</span>
-        <span class="concert-date">{{concert.dateStart | formatDate}} <span v-if="concert.dateStart != concert.dateEnd"> - {{concert.dateEnd | formatDate}}</span></span>
-        <span class="concert-venue">{{concert.venue}}</span>
-      </label>
-      <div class="collapsible-area">
-        <ul v-if="concert">
-          <li v-for="artist in concert.artists">
-            {{artist}}
-          </li>
-        </ul>
+    <div class="month">
+      <div v-for="concert in month.concerts" class="collapsible-wrap card no-pad">
+        <input type="checkbox" v-bind:id="'collapsible-' + concert.id">
+        <label v-bind:for="'collapsible-' + concert.id">
+          <span class="concert-title">{{concert.name}}</span>
+          <span class="concert-date">{{concert.dateStart | formatDate}} <span v-if="concert.dateStart != concert.dateEnd"> - {{concert.dateEnd | formatDate}}</span></span>
+          <span class="concert-venue">{{concert.venue}}</span>
+        </label>
+        <div class="collapsible-area">
+          <p>Line-up</p>
+          <ul v-if="concert">
+            <li v-for="artist in concert.artists">
+              {{artist}}
+            </li>
+          </ul>
+          <p>Info</p>
+          <ul>
+            <li v-if="concert.startTime">Start time: {{concert.startTime}}</li>
+            <li v-if="concert.ticketPrice">Ticket price: {{concert.ticketPrice}}</li>
+            <li v-if="concert.buyLink"><a v-bind:href="concert.buyLink" target="_blank">Buy ticket</a></li>
+            <li v-if="concert.facebookLink"><a v-bind:href="concert.facebookLink" target="_blank">Facebook event</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 @import '../../node_modules/surface/src/scss/_imports/colors.scss';
 
 $primary: #001f3f;
+$secondary: lighten($primary, 10%) !default;
 $accent: #ff851b;
 
 @import '../../node_modules/surface/src/scss/surface_styles.scss';

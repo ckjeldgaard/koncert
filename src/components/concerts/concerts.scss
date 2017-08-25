@@ -1,5 +1,12 @@
 .concerts {
-  margin-bottom: 1em;
+  .month {
+    margin-bottom: 1em;
+    .collapsible-area {
+      p {
+        font-weight:bold;
+      }
+    }
+  }
 }
 
 .concert-title {
