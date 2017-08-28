@@ -1,0 +1,14 @@
+.error {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  h3 {
+    color: $pomegranate;
+    font-size: 3em;
+    margin-bottom: 0;
+  }
+  button {
+    color: $off-white;
+  }
+}

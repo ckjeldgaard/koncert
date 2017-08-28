@@ -11,6 +11,7 @@ import {ProvinceFilterComponent} from './components/province_filter/province_fil
 import {GenreFilterComponent} from './components/genre_filter/genre_filter';
 import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
+import {ErrorComponent} from './components/error/error';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -32,17 +33,34 @@ Vue.component('concerts', ConcertsComponent);
 Vue.component('spinner', SpinnerComponent);
 Vue.component('province_filter', ProvinceFilterComponent);
 Vue.component('genre_filter', GenreFilterComponent);
+Vue.component('error', ErrorComponent);
 
-new Vue({
+const eventBus = new Vue();
+
+let app = new Vue({
   el: '#app-main',
   router: router,
   components: {
-    'drawer': DrawerComponent
+    'drawer': DrawerComponent,
+    'error': ErrorComponent
+  },
+  data: {
+    displayContent: true,
+    displayError: false,
+    errorMessage: String,
   },
   provide() {
     return {
       [serviceApi]: new FirebaseServiceApi('koncert'),
-      [bus]: new Vue(),
+      [bus]: eventBus,
     };
+  },
+  mounted() {
+    eventBus.$on('error', (error) => {
+      console.error(error);
+      app.$data['displayContent'] = false;
+      app.$data['displayError'] = true;
+      app.$data['errorMessage'] = <String>((<Error>error).message);
+    });
   }
 });

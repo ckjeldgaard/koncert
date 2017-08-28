@@ -2,6 +2,7 @@ import {ServiceApi} from './service-api';
 import {ServiceCallback} from './servic-callback';
 import * as Firebase from 'firebase';
 import Database = firebase.database.Database;
+import {Concert} from '../model/concert';
 
 export class FirebaseServiceApi implements ServiceApi {
 
@@ -21,10 +22,21 @@ export class FirebaseServiceApi implements ServiceApi {
   }
 
   getConcerts(callback: ServiceCallback, startAt: number) {
-    let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
-    ref.on('value', (response) => {
-      callback.onLoaded(response.val());
-    });
+    try {
+      let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
+      ref.on('value', (response) => {
+        let data = response.val();
+        let concerts: Concert[] = [];
+        for (let key in data) {
+          data[key].id = key;
+          concerts.push(data[key]);
+        }
+        callback.onLoaded(concerts);
+      });
+    }
+    catch (e) {
+      callback.onError(e);
+    }
   }
 
   getProvinces(callback: ServiceCallback) {

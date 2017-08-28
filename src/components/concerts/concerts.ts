@@ -31,14 +31,11 @@ export class ConcertsComponent extends Vue {
     this.$nextTick(() => {
       this.serviceApi.getConcerts({
         onLoaded: (data) => {
-          for (let key in data) {
-            data[key].id = key;
-            this.concerts.push(data[key]);
-          }
+          this.concerts = data;
           this.updateConcerts();
         },
         onError: (exception) => {
-          console.log('An error occurred.', exception);
+          this.bus.$emit('error', exception);
         },
       }, this.currentTime);
     });

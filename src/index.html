@@ -16,9 +16,10 @@
     <header class="container--baseline">
       <h1 class="m--1 g--4 g-s--12 docsHeader">Koncert</h1>
     </header>
-    <router-view>
+    <router-view v-if="displayContent">
       <spinner :visible="true" />
     </router-view>
+    <error :visible="displayError" :errormsg="errorMessage" />
   </main>
 </div>
 <!-- build:js js/main.min.js -->
