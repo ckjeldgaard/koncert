@@ -1,6 +1,6 @@
 <div class="select">
-  <div class="collapsible-wrap card no-pad">
-    <input type="checkbox" id="collapsible-select">
+  <div class="collapsible-wrap card no-pad" v-on-click-outside="close">
+    <input type="checkbox" id="collapsible-select" v-model="open">
     <label for="collapsible-select">Select genres</label>
     <div class="collapsible-select-area">
       <ul>

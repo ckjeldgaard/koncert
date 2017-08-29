@@ -30,7 +30,6 @@
           &:checked {
             + label {
               background-color: lighten($grey, 30%);
-              //transition:0.5s ease;
               animation: fadeinout 0.5s linear forwards;
             }
           }
