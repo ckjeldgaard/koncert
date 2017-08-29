@@ -12,6 +12,7 @@ import {GenreFilterComponent} from './components/genre_filter/genre_filter';
 import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 import {ErrorComponent} from './components/error/error';
+import {SelectComponent} from './components/select/select';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -34,6 +35,7 @@ Vue.component('spinner', SpinnerComponent);
 Vue.component('province_filter', ProvinceFilterComponent);
 Vue.component('genre_filter', GenreFilterComponent);
 Vue.component('error', ErrorComponent);
+Vue.component('multiselect', SelectComponent);
 
 const eventBus = new Vue();
 

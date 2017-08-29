@@ -1,0 +1,71 @@
+.select {
+  margin-bottom:1em;
+  @keyframes fadeinout {
+    0% { background-color: $grey; }
+    100% { background-color: white; }
+  }
+
+  .collapsible-select-area {
+    padding: 0;
+    ul {
+      padding: 0;
+      margin: 0;
+      overflow-y:scroll;
+      max-height: 275px;
+      li {
+        margin-top: 0;
+        color: lighten($black, 15%);
+        border-bottom: solid 1px lighten($grey, 30%);
+        position: relative;
+        label {
+          cursor: pointer;
+          display: block;
+          width:100%;
+          padding: $space-med;
+        }
+        input[type="checkbox"] {
+          position: absolute !important;
+          right:$space-med;
+          top:$space-small * 1.5;
+          &:checked {
+            + label {
+              background-color: lighten($grey, 30%);
+              //transition:0.5s ease;
+              animation: fadeinout 0.5s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    button {
+      margin: $space-med;
+    }
+  }
+  [id*="collapsible-"] {
+    &:checked {
+      ~ [class*="collapsible-"][class$="area"] {
+        padding: 0;
+      }
+    }
+  }
+
+  label[for*="collapsible-"] { // Label
+    &:after {
+      content: '▼';
+      position: absolute;
+      right: $space-med * 1.25;
+      width: 2px;
+      height: 8px;
+      background: none;
+      color: $grey;
+      transition: none;
+      margin-top: 0;
+      transform: none;
+    }
+    &:before {
+      content: none;
+    }
+
+  }
+
+}
