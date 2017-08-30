@@ -16,12 +16,6 @@ export class SelectComponent extends Vue {
   public selected: SelectOption[] = [];
   public selectedOptionsText: string = '';
 
-  mounted() {
-    this.$nextTick(() => {
-      // this.selected.push(new SelectOption('firefox', 'Firefox'));
-    });
-  }
-
   public close() {
     this.open = false;
   }
@@ -40,7 +34,9 @@ export class SelectComponent extends Vue {
       }
 
       this.selectedOptionsText = this.selected.map(o => o.value).join(', ');
-      console.log('selectedOptionsText', this.selectedOptionsText);
+      if (this.selectedOptionsText.length > 25) {
+        this.selectedOptionsText = this.selected.length + ' selected';
+      }
     }
   }
 }

@@ -4,9 +4,17 @@
     0% { background-color: $grey; }
     100% { background-color: white; }
   }
-
+  .collapsible-wrap {
+    position: relative;
+  }
   .collapsible-select-area {
     padding: 0;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+    box-shadow: $box-shadow-card;
+    border-radius: $border-radius-small;
     ul {
       padding: 0;
       margin: 0;
