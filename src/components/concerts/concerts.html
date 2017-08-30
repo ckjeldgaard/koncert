@@ -1,4 +1,9 @@
 <div class="concerts">
+  <form class="g--4 g-m--6 g-s--10 g-t--12" v-if="loaded">
+    <province_filter />
+    <genre_filter />
+  </form>
+
   <div v-for="month in months" class="fixed-area">
     <h3 class="subtitle">{{month.name}}</h3>
     <div class="month">

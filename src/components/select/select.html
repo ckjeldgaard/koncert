@@ -2,7 +2,7 @@
   <div class="collapsible-wrap card no-pad" v-on-click-outside="close">
     <input type="checkbox" id="collapsible-select" v-model="open">
     <label for="collapsible-select">
-      <span v-bind:class="{ placeholder: selectedOptionsText.length > 0 }">Select genres</span>
+      <span v-bind:class="{ placeholder: selectedOptionsText.length > 0 }">{{ placeholder }}</span>
       <span v-if="selectedOptionsText.length > 0">{{selectedOptionsText}}</span>
     </label>
     <div class="collapsible-select-area">

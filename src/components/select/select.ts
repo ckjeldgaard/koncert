@@ -7,7 +7,8 @@ import {SelectOption} from '../../model/select-option';
   template: require('./select.html'),
   mixins: [onClickOutside],
   props: {
-    options: Array
+    options: Array,
+    placeholder: String
   }
 })
 export class SelectComponent extends Vue {
