@@ -19,6 +19,7 @@ export class SelectComponent extends Vue {
 
   public close() {
     this.open = false;
+    return false;
   }
 
   public selectToggle(event) {
