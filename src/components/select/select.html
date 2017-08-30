@@ -1,8 +1,10 @@
 <div class="select">
   <div class="collapsible-wrap card no-pad" v-on-click-outside="close">
     <input type="checkbox" id="collapsible-select" v-model="open">
-    <label for="collapsible-select" v-if="selectedOptionsText.length > 0">{{selectedOptionsText}}</label>
-    <label for="collapsible-select" v-else>Select genres</label>
+    <label for="collapsible-select">
+      <span v-bind:class="{ placeholder: selectedOptionsText.length > 0 }">Select genres</span>
+      <span v-if="selectedOptionsText.length > 0">{{selectedOptionsText}}</span>
+    </label>
     <div class="collapsible-select-area">
       <ul>
         <li v-for="option in options">
@@ -10,7 +12,7 @@
           <label :for="option.key">{{option.value}}</label>
         </li>
       </ul>
-      <button class="btn--raised btn--accent">OK</button>
+      <button class="btn--raised btn--accent" v-on:click="close">OK</button>
     </div>
   </div>
 

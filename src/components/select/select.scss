@@ -6,6 +6,15 @@
   }
   .collapsible-wrap {
     position: relative;
+    .placeholder {
+      position: absolute;
+      color: $primary;
+      font-size: 11px;
+      transform: translateY(-$space-big);
+
+      // transition: all .2s scale(0.8);
+      transition: all .5s linear;
+    }
   }
   .collapsible-select-area {
     padding: 0;
