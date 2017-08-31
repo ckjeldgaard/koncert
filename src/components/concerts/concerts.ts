@@ -60,7 +60,7 @@ export class ConcertsComponent extends Vue {
 
   private updateFixedHeaders(): void {
     const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
-    const mobileHeaderHeight: number = (window.screen.width <= 900) ? 100 : 0;
+    const mobileHeaderHeight: number = (window.screen.width <= 520) ? 100 : 0;
     for (let i = 0, len = fixedAreas.length; i < len; i++) {
 
       const el: Element = fixedAreas[i];

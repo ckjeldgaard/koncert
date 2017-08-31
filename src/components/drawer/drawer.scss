@@ -6,3 +6,10 @@
 aside nav a.active {
   background: lighten($grey, 26%);
 }
+
+@media screen and (max-width: $media-tiny) {
+  .drawer #nav--super-vertical-responsive + label {
+    background-color: $primary;
+    color: $off-white;
+  }
+}
