@@ -29,10 +29,6 @@ export class GenreFilterComponent extends Vue {
     });
   }
 
-  public onChangeGenre(e) {
-    this.bus.$emit('genre-key', e.target.value);
-  }
-
   private updateGenres(genreData: any) {
     for (let key in genreData) {
       this.genres.push(new Genre(key, genreData[key]));

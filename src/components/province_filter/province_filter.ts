@@ -28,11 +28,9 @@ export class ProvinceFilterComponent extends Vue {
     });
   }
 
-  public onChangeProvince(e) {
-    this.bus.$emit('province-key', e.target.value);
-  }
-
   private updateProvinces(provinceData: any) {
+    this.provinces = [];
+    this.provinces.push(new Province('all', 'All provinces'));
     for (let key in provinceData) {
       this.provinces.push(new Province(key, provinceData[key]));
     }
