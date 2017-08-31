@@ -9,6 +9,9 @@ import {CriteriaProvince} from '../../util/criteria/criteria-province';
 import {Concert} from '../../model/concert';
 import {CriteriaGenre} from '../../util/criteria/criteria-genre';
 import {AndCriteria} from '../../util/criteria/and-criteria';
+import {Genre} from '../../model/genre';
+import {Criteria} from '../../util/criteria/criteria';
+import {OrCriteria} from '../../util/criteria/or-criteria';
 
 @Component({
   template: require('./concerts.html')
@@ -25,7 +28,7 @@ export class ConcertsComponent extends Vue {
   public loaded: boolean = false;
 
   private selectedProvince: string;
-  private selectedGenre: string;
+  public selectedGenres: Genre[] = [];
 
   mounted() {
     this.$nextTick(() => {
@@ -42,12 +45,13 @@ export class ConcertsComponent extends Vue {
   }
 
   created() {
-    this.bus.$on('province-key', (id) => {
-      this.selectedProvince = id;
+    this.bus.$on('province', (id) => {
+      console.log('RECEIVED PROVINCE', id[0].key);
+      this.selectedProvince = id[0].key;
       this.updateConcerts();
     });
-    this.bus.$on('genre-key', (id) => {
-      this.selectedGenre = id;
+    this.bus.$on('genres', (genres) => {
+      this.selectedGenres = genres;
       this.updateConcerts();
     });
 
@@ -80,7 +84,7 @@ export class ConcertsComponent extends Vue {
     this.months = new ConcertSplit(
       new AndCriteria(
         new CriteriaProvince(this.selectedProvince),
-        new CriteriaGenre(this.selectedGenre)
+        this.buildGenreCriteria()
       ).meetCriteria(
         this.concerts
       )
@@ -101,6 +105,27 @@ export class ConcertsComponent extends Vue {
         this.addClass(clonedHeaderRow, 'floating-header');
       }
     });
+  }
+
+  private buildGenreCriteria(): Criteria {
+    let genreCriteria: Criteria;
+    if (this.selectedGenres.length > 1) {
+      genreCriteria = new OrCriteria(
+        new CriteriaGenre(this.selectedGenres[0].key),
+        new CriteriaGenre(this.selectedGenres[1].key)
+      );
+
+      let i: number;
+      for (i = 2; i < this.selectedGenres.length; i++) {
+        genreCriteria = new OrCriteria(
+          new CriteriaGenre(this.selectedGenres[i].key),
+          genreCriteria
+        );
+      }
+    } else {
+      genreCriteria = (this.selectedGenres.length === 1) ? new CriteriaGenre(this.selectedGenres[0].key) : new CriteriaGenre(null);
+    }
+    return genreCriteria;
   }
 
   private addClass(el: HTMLElement, className: string) {

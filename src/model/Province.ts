@@ -1,9 +1,9 @@
 export class Province {
   public readonly key: string;
-  public readonly name: string;
+  public readonly value: string;
 
-  constructor(key: string, name: string) {
+  constructor(key: string, value: string) {
     this.key = key;
-    this.name = name;
+    this.value = value;
   }
 }

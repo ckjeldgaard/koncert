@@ -1,13 +1,3 @@
 <div class="genres g--12">
-
-  <multiselect :id="'province'" :options="ops" :placeholder="'Provinces'" :multiple="false" />
-
   <multiselect :id="'genres'" :options="genres" :placeholder="'Genres'" :multiple="true" />
-
-  <select v-on:change="onChangeGenre">
-    <option value="all" selected>All genres</option>
-    <option :value="genre.key" v-for="genre in genres">
-      {{genre.value}}
-    </option>
-  </select>
 </div>

@@ -19,7 +19,6 @@ export class OrCriteria implements Criteria {
     for (i = 0; i < otherCriteriaItems.length; i++) {
       if (!firstCriteriaItems.find(item => item.id === otherCriteriaItems[i].id)) {
         firstCriteriaItems.push(otherCriteriaItems[i]);
-        console.log('couldnt find' + otherCriteriaItems[i].id + ' in ' + firstCriteriaItems);
       }
     }
     return firstCriteriaItems;

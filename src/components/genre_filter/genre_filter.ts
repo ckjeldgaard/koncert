@@ -4,7 +4,6 @@ import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 import {Genre} from '../../model/genre';
-import {SelectOption} from '../../model/select-option';
 
 @Component({
   template: require('./genre_filter.html')
@@ -15,23 +14,6 @@ export class GenreFilterComponent extends Vue {
   @Inject(bus) bus: Vue;
 
   public genres: Genre[] = [];
-  public ops: SelectOption[] = [];
-
-  public created() {
-
-    this.bus.$on('genres', (id) => {
-      console.log('RECEIVED GENRES', id);
-    });
-
-    this.ops.push(new SelectOption('safari', 'Safari'));
-    this.ops.push(new SelectOption('firefox', 'Firefox'));
-    this.ops.push(new SelectOption('chrome', 'Chrome'));
-    this.ops.push(new SelectOption('internet-explorer', 'Internet Explorer'));
-    this.ops.push(new SelectOption('opera', 'Opera'));
-    this.ops.push(new SelectOption('konqueror', 'Konqueror'));
-    this.ops.push(new SelectOption('mosaic', 'Mosaic'));
-    this.ops.push(new SelectOption('seamonkey', 'Seamonkey'));
-  }
 
   public mounted() {
 

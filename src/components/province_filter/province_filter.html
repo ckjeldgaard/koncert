@@ -1,8 +1,3 @@
 <div class="provinces g--12">
-  <select v-on:change="onChangeProvince">
-    <option value="all" selected>All provinces</option>
-    <option :value="province.key" v-for="province in provinces">
-      {{province.name}}
-    </option>
-  </select>
+  <multiselect :id="'province'" :options="provinces" :placeholder="'Provinces'" :multiple="false" />
 </div>
