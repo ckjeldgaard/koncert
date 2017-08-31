@@ -33,14 +33,4 @@ describe('ProvinceFilter component', () => {
     });
   });
 
-  it('should create a list of provinces', async () => {
-    directiveTest.createComponent();
-    await directiveTest.execute((vm) => {
-      expect(vm.$el.querySelectorAll('option')).to.contain.text('All provinces');
-      expect(vm.$el.querySelectorAll('option')).to.contain.text('Bornholm');
-      expect(vm.$el.querySelectorAll('option')).to.contain.text('København');
-      expect(vm.$el.querySelectorAll('option')).to.contain.text('Syd- og Sønderjylland');
-    });
-  });
-
 });
