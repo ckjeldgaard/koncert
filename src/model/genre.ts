@@ -1,9 +1,11 @@
-export class Genre {
-  public readonly key: string;
-  public readonly name: string;
+import {Option} from './option';
 
-  constructor(key: string, name: string) {
+export class Genre implements Option {
+  public readonly key: string;
+  public readonly value: string;
+
+  constructor(key: string, value: string) {
     this.key = key;
-    this.name = name;
+    this.value = value;
   }
 }

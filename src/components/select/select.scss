@@ -1,5 +1,5 @@
 .select {
-  margin-top:1em;
+  margin-top:2.5em;
   margin-bottom:1em;
   @keyframes fadeinout {
     0% { background-color: $grey; }
@@ -40,6 +40,7 @@
           padding: $space-med;
         }
         input[type="checkbox"] {
+          visibility: hidden;
           position: absolute !important;
           right:$space-med;
           top:$space-small * 1.5;
@@ -77,4 +78,7 @@
       content: none;
     }
   }
+}
+.multiple input[type="checkbox"] {
+  visibility: visible !important;
 }

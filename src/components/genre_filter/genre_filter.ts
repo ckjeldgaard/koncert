@@ -18,6 +18,11 @@ export class GenreFilterComponent extends Vue {
   public ops: SelectOption[] = [];
 
   public created() {
+
+    this.bus.$on('genres', (id) => {
+      console.log('RECEIVED GENRES', id);
+    });
+
     this.ops.push(new SelectOption('safari', 'Safari'));
     this.ops.push(new SelectOption('firefox', 'Firefox'));
     this.ops.push(new SelectOption('chrome', 'Chrome'));
