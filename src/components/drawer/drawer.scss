@@ -1,6 +1,7 @@
 .drawer label {
   font-weight: bold;
   color: $primary;
+  font-size: $font-big;
 }
 
 aside nav a.active {
@@ -11,5 +12,6 @@ aside nav a.active {
   .drawer #nav--super-vertical-responsive + label {
     background-color: $primary;
     color: $off-white;
+    padding: $space-small*1.2 $space-small;
   }
 }

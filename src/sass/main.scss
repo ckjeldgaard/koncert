@@ -3,7 +3,7 @@
 $primary: #001f3f;
 $secondary: lighten($primary, 10%) !default;
 $accent: #ff851b;
-$mobile-header-height: 40px;
+$mobile-header-height: 44px;
 
 @import '../../node_modules/surface/src/scss/surface_styles.scss';
 @import '../components/concerts/concerts.scss';
