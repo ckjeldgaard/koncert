@@ -3,6 +3,7 @@
 $primary: #001f3f;
 $secondary: lighten($primary, 10%) !default;
 $accent: #ff851b;
+$mobile-header-height: 40px;
 
 @import '../../node_modules/surface/src/scss/surface_styles.scss';
 @import '../components/concerts/concerts.scss';
@@ -13,4 +14,25 @@ $accent: #ff851b;
 
 #app-main {
   width:100%;
+}
+
+@media screen and (max-width: $media-small) {
+  header {
+    padding-top:5px;
+    padding-bottom:5px;
+    height: $mobile-header-height;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    box-shadow: $box-shadow-card;
+    h1.g-s--12 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: $space-small;
+      font-size: $font-huge*0.65;
+    }
+  }
+  main {
+    padding-top: $mobile-header-height;
+  }
 }

@@ -12,15 +12,17 @@
 <body>
 <div id="app-main">
   <drawer></drawer>
-  <main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+  <div class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
     <header class="container--baseline">
       <h1 class="m--1 g--4 g-s--12 docsHeader">Koncert</h1>
     </header>
-    <router-view v-if="displayContent">
-      <spinner :visible="true" />
-    </router-view>
-    <error :visible="displayError" :errormsg="errorMessage" />
-  </main>
+    <main>
+      <router-view v-if="displayContent">
+        <spinner :visible="true" />
+      </router-view>
+      <error :visible="displayError" :errormsg="errorMessage" />
+    </main>
+  </div>
 </div>
 <!-- build:js js/main.min.js -->
 <script src="main.js"></script>

@@ -60,11 +60,12 @@ export class ConcertsComponent extends Vue {
 
   private updateFixedHeaders(): void {
     const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
+    const mobileHeaderHeight: number = (window.screen.width <= 900) ? 100 : 0;
     for (let i = 0, len = fixedAreas.length; i < len; i++) {
 
       const el: Element = fixedAreas[i];
       const offsetTop: number = el.getBoundingClientRect().top + document.body.scrollTop;
-      const scrollTop: number = document.body.scrollTop;
+      const scrollTop: number = document.body.scrollTop + mobileHeaderHeight;
       const floatingHeader: HTMLElement = <HTMLElement>fixedAreas[i].querySelector('.floating-header');
 
       if ((scrollTop > offsetTop) && (scrollTop < offsetTop + el.getBoundingClientRect().height)) {

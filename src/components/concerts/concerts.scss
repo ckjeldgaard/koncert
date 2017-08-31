@@ -54,7 +54,7 @@ label[for*="collapsible-"] {
 
 .floating-header {
   position: fixed;
-  top: 0;
+  top: $mobile-header-height;
   visibility: hidden;
   z-index: 2;
 }
