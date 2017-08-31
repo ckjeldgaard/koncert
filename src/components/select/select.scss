@@ -1,4 +1,5 @@
 .select {
+  margin-top:1em;
   margin-bottom:1em;
   @keyframes fadeinout {
     0% { background-color: $grey; }
@@ -50,9 +51,6 @@
           }
         }
       }
-    }
-    button {
-      margin: $space-med;
     }
   }
   [id*="collapsible-"] {

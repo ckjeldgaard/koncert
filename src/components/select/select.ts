@@ -7,6 +7,7 @@ import {SelectOption} from '../../model/select-option';
   template: require('./select.html'),
   mixins: [onClickOutside],
   props: {
+    id: String,
     options: Array,
     placeholder: String
   }

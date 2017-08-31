@@ -1,6 +1,8 @@
 <div class="genres g--12">
 
-  <multiselect :options="ops" :placeholder="'Genres'" />
+  <multiselect :id="'province'" :options="ops" :placeholder="'Provinces'" />
+
+  <multiselect :id="'genres'" :options="ops" :placeholder="'Genres'" />
 
   <select v-on:change="onChangeGenre">
     <option value="all" selected>All genres</option>
