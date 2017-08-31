@@ -11,8 +11,6 @@
       color: $primary;
       font-size: 11px;
       transform: translateY(-$space-big);
-
-      // transition: all .2s scale(0.8);
       transition: all .5s linear;
     }
   }
@@ -64,8 +62,7 @@
       }
     }
   }
-
-  label[for*="collapsible-"] { // Label
+  label[for*="collapsible-"] {
     &:after {
       content: '▼';
       position: absolute;
@@ -81,7 +78,5 @@
     &:before {
       content: none;
     }
-
   }
-
 }
