@@ -46,7 +46,6 @@ export class ConcertsComponent extends Vue {
 
   created() {
     this.bus.$on('province', (id) => {
-      console.log('RECEIVED PROVINCE', id[0].key);
       this.selectedProvince = id[0].key;
       this.updateConcerts();
     });

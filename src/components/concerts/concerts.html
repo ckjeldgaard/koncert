@@ -21,13 +21,15 @@
               {{artist}}
             </li>
           </ul>
-          <p>Info</p>
-          <ul>
-            <li v-if="concert.startTime">Start time: {{concert.startTime}}</li>
-            <li v-if="concert.ticketPrice">Ticket price: {{concert.ticketPrice}}</li>
-            <li v-if="concert.buyLink"><a v-bind:href="concert.buyLink" target="_blank">Buy ticket</a></li>
-            <li v-if="concert.facebookLink"><a v-bind:href="concert.facebookLink" target="_blank">Facebook event</a></li>
-          </ul>
+          <div v-if="concert.startTime || concert.ticketPrice || concert.buyLink || concert.facebookLink">
+            <p>Info</p>
+            <ul>
+              <li v-if="concert.startTime">Start time: {{concert.startTime}}</li>
+              <li v-if="concert.ticketPrice">Ticket price: {{concert.ticketPrice}}</li>
+              <li v-if="concert.buyLink"><a v-bind:href="concert.buyLink" target="_blank">Buy ticket</a></li>
+              <li v-if="concert.facebookLink"><a v-bind:href="concert.facebookLink" target="_blank">Facebook event</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
