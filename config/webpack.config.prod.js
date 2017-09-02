@@ -99,7 +99,17 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     maximumFileSizeToCacheInBytes: 3000000,
     staticFileGlobs: ['dist/**/*.{js,html,css}'],
     minify: true,
-    stripPrefix: 'dist/'
+    stripPrefix: 'dist/',
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+        handler: 'cacheFirst'
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+        handler: 'cacheFirst'
+      },
+    ]
   })
 ];
 
