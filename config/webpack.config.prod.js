@@ -2,7 +2,6 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   CompressionPlugin = require('compression-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
-  FaviconsWebpackPlugin = require('favicons-webpack-plugin'),
   autoprefixer = require('autoprefixer'),
   webpackConfig = require('./webpack.config.base'),
   helpers = require('./helpers'),
@@ -92,7 +91,6 @@ webpackConfig.plugins = [...webpackConfig.plugins,
   new DefinePlugin({
     'process.env': env
   }),
-  new FaviconsWebpackPlugin(helpers.root('/src/icon.png')),
   new SWPrecacheWebpackPlugin({
     cacheId: 'koncert-app',
     filename: 'service-worker.js',
