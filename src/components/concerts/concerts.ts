@@ -18,7 +18,7 @@ export class ConcertsComponent extends Vue {
   @Inject(serviceApi) serviceApi: ServiceApi;
   @Inject(bus) bus: Vue;
 
-  private readonly currentTime = new Date().getTime() / 1000;
+  private readonly currentTime = new Date().getTime() / 1000 - 86400;
 
   private concerts: Concert[] = [];
   public months: Month[] = [];
