@@ -1,5 +1,4 @@
-const glob = require('glob'),
-  UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   CompressionPlugin = require('compression-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
