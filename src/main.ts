@@ -13,6 +13,8 @@ import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 import {ErrorComponent} from './components/error/error';
 import {SelectComponent} from './components/select/select';
+import {ServiceApi} from './data/service-api';
+import {MockServiceApi} from './util/component-test';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -39,6 +41,13 @@ Vue.component('multiselect', SelectComponent);
 
 const eventBus = new Vue();
 
+let api: ServiceApi;
+if (process.env.ENV === 'development') {
+  api = new FirebaseServiceApi('koncert');
+} else {
+  api = new FirebaseServiceApi('koncert');
+}
+
 let app = new Vue({
   el: '#app-main',
   router: router,
@@ -53,9 +62,12 @@ let app = new Vue({
   },
   provide() {
     return {
-      [serviceApi]: new FirebaseServiceApi('koncert'),
+      [serviceApi]: api,
       [bus]: eventBus,
     };
+  },
+  created() {
+    this.$data['errorMessage'] = '';
   },
   mounted() {
     eventBus.$on('error', (error) => {
