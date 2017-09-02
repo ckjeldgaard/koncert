@@ -1,6 +1,8 @@
-import * as Vue from 'vue';
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import moment from 'moment';
+
+import './sass/main.scss';
 
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
@@ -46,6 +48,12 @@ if (process.env.ENV === 'development') {
   api = new FirebaseServiceApi('koncert');
 } else {
   api = new FirebaseServiceApi('koncert');
+}
+
+if (process.env.ENV === 'production') {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
 }
 
 let app = new Vue({

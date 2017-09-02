@@ -10,9 +10,7 @@ export class FixedHeaders {
   }
 
   public cloneHeaderRow(): void {
-    console.log('fixedAreas', this.headers);
     let clonedHeaderRow;
-
     for (let i = 0, len = this.headers.length; i < len; i++) {
       clonedHeaderRow = this.headers[i].querySelector('.subtitle');
       clonedHeaderRow.parentNode.insertBefore(
