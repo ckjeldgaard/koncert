@@ -1,10 +1,8 @@
 const glob = require('glob'),
-  path = require('path'),
   UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   CompressionPlugin = require('compression-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
-  PurifyCSSPlugin = require('purifycss-webpack'),
   FaviconsWebpackPlugin = require('favicons-webpack-plugin'),
   autoprefixer = require('autoprefixer'),
   webpackConfig = require('./webpack.config.base'),
@@ -16,14 +14,6 @@ const glob = require('glob'),
 const extractSass = new ExtractTextPlugin({
   filename: 'css/[name].[contenthash].css',
   disable: process.env.NODE_ENV === 'development'
-});
-
-const purifyCss = new PurifyCSSPlugin({
-  paths: glob.sync(path.join(__dirname, '../src/**/*.html')),
-  purifyOptions: {
-    info: true,
-    whitelist: []
-  }
 });
 
 webpackConfig.module.rules = [...webpackConfig.module.rules,
@@ -107,9 +97,20 @@ webpackConfig.plugins = [...webpackConfig.plugins,
   new SWPrecacheWebpackPlugin({
     cacheId: 'koncert-app',
     filename: 'service-worker.js',
+    maximumFileSizeToCacheInBytes: 3000000,
     staticFileGlobs: ['dist/**/*.{js,html,css}'],
-    minify: false,
-    stripPrefix: 'dist/'
+    minify: true,
+    stripPrefix: 'dist/',
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+        handler: 'cacheFirst'
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+        handler: 'cacheFirst'
+      },
+      ]
   })
 ];
 

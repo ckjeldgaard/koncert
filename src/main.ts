@@ -16,7 +16,6 @@ import {FirebaseServiceApi} from './data/firebase-service-api';
 import {ErrorComponent} from './components/error/error';
 import {SelectComponent} from './components/select/select';
 import {ServiceApi} from './data/service-api';
-import {MockServiceApi} from './util/component-test';
 
 // register the plugin
 Vue.use(VueRouter);
