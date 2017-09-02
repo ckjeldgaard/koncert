@@ -8,6 +8,7 @@ import {serviceApi, bus} from '../../util/constants';
 import {Concert} from '../../model/concert';
 import {Genre} from '../../model/genre';
 import {CriteriaBuilder} from './helpers/criteria_builder';
+import {FixedHeaders} from './helpers/fixed_headers';
 
 @Component({
   template: require('./concerts.html')
@@ -50,29 +51,15 @@ export class ConcertsComponent extends Vue {
       this.updateConcerts();
     });
 
-    window.addEventListener('scroll', this.updateFixedHeaders);
+    window.addEventListener('scroll', () => {
+      new FixedHeaders(this.$el.querySelectorAll('.concerts .fixed-area')).updateFixedHeaders();
+    });
   }
 
   destroyed() {
-    window.removeEventListener('scroll', this.updateFixedHeaders);
-  }
-
-  private updateFixedHeaders(): void {
-    const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
-    const mobileHeaderHeight: number = (window.screen.width <= 520) ? 48 : 0;
-    for (let i = 0, len = fixedAreas.length; i < len; i++) {
-
-      const el: Element = fixedAreas[i];
-      const offsetTop: number = el.getBoundingClientRect().top + document.body.scrollTop;
-      const scrollTop: number = document.body.scrollTop + mobileHeaderHeight;
-      const floatingHeader: HTMLElement = <HTMLElement>fixedAreas[i].querySelector('.floating-header');
-
-      if ((scrollTop > offsetTop) && (scrollTop < offsetTop + el.getBoundingClientRect().height)) {
-        floatingHeader.style.visibility = 'visible';
-      } else {
-        floatingHeader.style.visibility = 'hidden';
-      }
-    }
+    window.removeEventListener('scroll', () => {
+      new FixedHeaders(this.$el.querySelectorAll('.concerts .fixed-area')).updateFixedHeaders();
+    });
   }
 
   private updateConcerts() {
@@ -80,33 +67,16 @@ export class ConcertsComponent extends Vue {
       new CriteriaBuilder(
         this.selectedProvince,
         this.selectedGenres
-      ).build().meetCriteria(
-        this.concerts
-      )
+      ).build()
+        .meetCriteria(
+          this.concerts
+        )
     ).splitByMonths();
     this.loaded = true;
 
     // Fixed month headers:
     this.$nextTick(() => {
-      const fixedAreas = this.$el.querySelectorAll('.concerts .fixed-area');
-      let clonedHeaderRow;
-
-      for (let i = 0, len = fixedAreas.length; i < len; i++) {
-        clonedHeaderRow = fixedAreas[i].querySelector('.subtitle');
-        clonedHeaderRow.parentNode.insertBefore(
-          clonedHeaderRow.cloneNode(true),
-          clonedHeaderRow
-        );
-        this.addClass(clonedHeaderRow, 'floating-header');
-      }
+      new FixedHeaders(this.$el.querySelectorAll('.concerts .fixed-area')).cloneHeaderRow();
     });
-  }
-
-  private addClass(el: HTMLElement, className: string) {
-    if (el.classList) {
-      el.classList.add(className);
-    } else {
-      el.className += ' ' + className;
-    }
   }
 }
