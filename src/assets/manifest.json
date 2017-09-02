@@ -1,0 +1,28 @@
+{
+  "name": "Koncert",
+  "short_name": "Koncert",
+  "theme_color": "#001f3f",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/koncert/",
+  "start_url": "/koncert/",
+  "description": "A progressive web app displaying Danish concerts.",
+  "icons": [
+    {
+      "src": "img/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}
