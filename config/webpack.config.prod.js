@@ -82,10 +82,10 @@ webpackConfig.plugins = [...webpackConfig.plugins,
       minifyURLs: true
     }
   }),
-  /* new UglifyJsPlugin({
+  new UglifyJsPlugin({
     include: /\.min\.js$/,
     minimize: true
-  }), */
+  }),
   new CompressionPlugin({
     asset: '[path].gz[query]',
     test: /\.min\.js$/
@@ -100,17 +100,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     maximumFileSizeToCacheInBytes: 3000000,
     staticFileGlobs: ['dist/**/*.{js,html,css}'],
     minify: true,
-    stripPrefix: 'dist/',
-    runtimeCaching: [
-      {
-        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-        handler: 'cacheFirst'
-      },
-      {
-        urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
-        handler: 'cacheFirst'
-      },
-      ]
+    stripPrefix: 'dist/'
   })
 ];
 
