@@ -16,15 +16,21 @@ export class FirebaseServiceApi implements ServiceApi {
   getConcerts(callback: ServiceCallback, startAt: number) {
     try {
       let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
-      ref.on('value', (response) => {
-        let data = response.val();
-        let concerts: Concert[] = [];
-        for (let key in data) {
-          data[key].id = key;
-          concerts.push(data[key]);
-        }
-        callback.onLoaded(concerts);
-      });
+      if (navigator.onLine) {
+        ref.on('value', (response) => {
+          let data = response.val();
+          let concerts: Concert[] = [];
+          for (let key in data) {
+            data[key].id = key;
+            concerts.push(data[key]);
+          }
+          localStorage.setItem('concerts', JSON.stringify(concerts));
+          callback.onLoaded(concerts);
+        });
+      } else {
+        // Not online. Get concerts from local storage:
+        this.handleOffline(callback, 'concerts');
+      }
     }
     catch (e) {
       callback.onError(e);
@@ -33,16 +39,37 @@ export class FirebaseServiceApi implements ServiceApi {
 
   getProvinces(callback: ServiceCallback) {
     let ref = this.database.ref('data/provinces');
-    ref.on('value', (response) => {
-      callback.onLoaded(response.val());
-    });
+    if (navigator.onLine) {
+      ref.on('value', (response) => {
+        localStorage.setItem('provinces', JSON.stringify(response.val()));
+        callback.onLoaded(response.val());
+      });
+    } else {
+      // Not online. Get provinces from local storage:
+      this.handleOffline(callback, 'provinces');
+    }
   }
 
   getGenres(callback: ServiceCallback) {
     let ref = this.database.ref('data/genres');
-    ref.on('value', (response) => {
-      callback.onLoaded(response.val());
-    });
+    if (navigator.onLine) {
+      ref.on('value', (response) => {
+        localStorage.setItem('genres', JSON.stringify(response.val()));
+        callback.onLoaded(response.val());
+      });
+    } else {
+      // Not online. Get genres from local storage:
+      this.handleOffline(callback, 'genres');
+    }
+  }
+
+  private handleOffline(callback: ServiceCallback, itemKey: string): void {
+    const localStorageItems = localStorage.getItem(itemKey);
+    if (localStorageItems != null) {
+      callback.onLoaded(JSON.parse(localStorageItems));
+    } else {
+      callback.onError(new Error('Couldn\'t load ' + itemKey + ' when offline.'));
+    }
   }
 
 }

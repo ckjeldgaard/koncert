@@ -23,7 +23,7 @@ export class GenreFilterComponent extends Vue {
           this.updateGenres(data);
         },
         onError: (exception) => {
-          console.log('An error occurred.', exception);
+          console.error('An error occurred.', exception);
         },
       });
     });

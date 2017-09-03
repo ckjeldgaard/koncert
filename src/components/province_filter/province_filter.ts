@@ -22,7 +22,7 @@ export class ProvinceFilterComponent extends Vue {
           this.updateProvinces(data);
         },
         onError: (exception) => {
-          console.log('An error occurred.', exception);
+          console.error('An error occurred.', exception);
         },
       });
     });
