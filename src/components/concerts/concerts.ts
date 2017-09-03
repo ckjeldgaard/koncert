@@ -24,6 +24,7 @@ export class ConcertsComponent extends Vue {
   public months: Month[] = [];
   public loaded: boolean = false;
 
+  private searchTerm: string;
   private selectedProvince: string;
   public selectedGenres: Genre[] = [];
 
@@ -50,6 +51,10 @@ export class ConcertsComponent extends Vue {
       this.selectedGenres = genres;
       this.updateConcerts();
     });
+    this.bus.$on('search', (term) => {
+      this.searchTerm = term;
+      this.updateConcerts();
+    });
 
     window.addEventListener('scroll', () => {
       new FixedHeaders(this.$el.querySelectorAll('.concerts .fixed-area')).updateFixedHeaders();
@@ -65,6 +70,7 @@ export class ConcertsComponent extends Vue {
   private updateConcerts() {
     this.months = new ConcertSplit(
       new CriteriaBuilder(
+        this.searchTerm,
         this.selectedProvince,
         this.selectedGenres
       ).build()

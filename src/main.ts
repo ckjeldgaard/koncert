@@ -15,6 +15,7 @@ import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 import {ErrorComponent} from './components/error/error';
 import {SelectComponent} from './components/select/select';
+import {SearchComponent} from './components/search/search';
 import {ServiceApi} from './data/service-api';
 
 // register the plugin
@@ -39,6 +40,7 @@ Vue.component('province_filter', ProvinceFilterComponent);
 Vue.component('genre_filter', GenreFilterComponent);
 Vue.component('error', ErrorComponent);
 Vue.component('multiselect', SelectComponent);
+Vue.component('search', SearchComponent);
 
 const eventBus = new Vue();
 

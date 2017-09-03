@@ -13,6 +13,7 @@ describe('Criteria', () => {
   const testConcerts: Concert[] = [
     {
       id: 'event-1',
+      artists: [],
       cancelled: false,
       dateStart: JANUARY_2017,
       dateEnd: JANUARY_2017,
@@ -28,6 +29,7 @@ describe('Criteria', () => {
     },
     {
       id: 'event-2',
+      artists: [],
       cancelled: false,
       dateStart: FEBRUARY_2017,
       dateEnd: FEBRUARY_2017,
@@ -43,6 +45,7 @@ describe('Criteria', () => {
     },
     {
       id: 'event-3',
+      artists: [],
       cancelled: false,
       dateStart: FEBRUARY_2017,
       dateEnd: FEBRUARY_2017,

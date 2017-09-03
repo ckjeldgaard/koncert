@@ -4,21 +4,27 @@ import {CriteriaProvince} from '../../../util/criteria/criteria-province';
 import {AndCriteria} from '../../../util/criteria/and-criteria';
 import {OrCriteria} from '../../../util/criteria/or-criteria';
 import {CriteriaGenre} from '../../../util/criteria/criteria-genre';
+import {CriteriaSearch} from '../../../util/criteria/criteria-search';
 
 export class CriteriaBuilder {
 
+  private readonly search: string;
   private readonly province: string;
   private readonly genres: Genre[];
 
-  constructor(province: string, genres: Genre[]) {
+  constructor(search: string, province: string, genres: Genre[]) {
+    this.search = search;
     this.province = province;
     this.genres = genres;
   }
 
   public build(): Criteria {
     return new AndCriteria(
-      new CriteriaProvince(this.province),
-      this.buildGenreCriteria()
+      new AndCriteria(
+        new CriteriaProvince(this.province),
+        this.buildGenreCriteria()
+      ),
+      new CriteriaSearch(this.search)
     );
   }
 

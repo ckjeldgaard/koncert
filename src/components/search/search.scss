@@ -1,0 +1,14 @@
+input {
+  &[type="text"] {
+    &:focus, &:valid {
+      &::-webkit-input-placeholder {
+        transform: none;
+        visibility: hidden !important;
+        display:none;
+      }
+    }
+    &::-webkit-input-placeholder {
+      transition: all 0.2s $cubic;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 export interface Concert {
   id: string;
+  artists: string[];
   cancelled: boolean;
   dateStart: number;
   dateEnd: number;
