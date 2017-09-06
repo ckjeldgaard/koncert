@@ -19,7 +19,7 @@
           <p>Line-up</p>
           <ul v-if="concert">
             <li v-for="artist in concert.artists">
-              {{artist}}
+              {{artist.name}}
             </li>
           </ul>
           <div v-if="concert.startTime || concert.ticketPrice || concert.buyLink || concert.facebookLink">

@@ -48,9 +48,9 @@ describe('Criteria', () => {
   it('should filter by multiple genres when using the OR criteria', async () => {
 
     const concertList: Concert[] = [
-      DomainObjectBuilder.aNew().concert().withGenres(['genre1', 'genre2']).build(),
-      DomainObjectBuilder.aNew().concert().withGenres(['genre1']).build(),
-      DomainObjectBuilder.aNew().concert().withGenres(['genre3']).build(),
+      DomainObjectBuilder.aNew().concert().withId('1').withGenres(['genre1', 'genre2']).build(),
+      DomainObjectBuilder.aNew().concert().withId('2').withGenres(['genre1']).build(),
+      DomainObjectBuilder.aNew().concert().withId('3').withGenres(['genre3']).build(),
     ];
 
     const criteriaGenre1: CriteriaGenre = new CriteriaGenre('genre1');
