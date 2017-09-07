@@ -12,9 +12,14 @@ $mobile-header-height: 48px;
 @import '../components/error/error.scss';
 @import '../components/select/select.scss';
 @import '../components/search/search.scss';
+@import '../components/subscriptions/subscriptions.scss';
 
 #app-main {
   width:100%;
+}
+
+html, body, #app-main, #app-content {
+  height: 100%;
 }
 
 @media screen and (max-width: $media-tiny) {

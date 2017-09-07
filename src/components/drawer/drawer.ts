@@ -15,7 +15,8 @@ export class DrawerComponent extends Vue {
 
   links: Link[] = [
     new Link('Home', '/'),
-    new Link('About', '/about')
+    new Link('About', '/about'),
+    new Link('Subscriptions', '/subscriptions')
   ];
 
   pathChanged() {
@@ -30,6 +31,5 @@ export class DrawerComponent extends Vue {
     if (!this.logger)
       this.logger = new Logger();
 
-    this.$nextTick(() => this.logger.info(this.object.default));
   }
 }

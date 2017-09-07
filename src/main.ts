@@ -17,6 +17,7 @@ import {ErrorComponent} from './components/error/error';
 import {SelectComponent} from './components/select/select';
 import {SearchComponent} from './components/search/search';
 import {ServiceApi} from './data/service-api';
+import {SubscriptionsComponent} from './components/subscriptions/subscriptions';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -24,7 +25,8 @@ Vue.use(VueRouter);
 let router = new VueRouter({
   routes: [
     { path: '/', component: HomeComponent },
-    { path: '/about', component: AboutComponent }
+    { path: '/about', component: AboutComponent },
+    { path: '/subscriptions', component: SubscriptionsComponent }
   ]
 });
 
@@ -41,6 +43,7 @@ Vue.component('genre_filter', GenreFilterComponent);
 Vue.component('error', ErrorComponent);
 Vue.component('multiselect', SelectComponent);
 Vue.component('search', SearchComponent);
+Vue.component('subscriptions', SubscriptionsComponent);
 
 const eventBus = new Vue();
 
