@@ -41,9 +41,7 @@ describe('Drawer component', () => {
     directiveTest.createComponent({ router: router });
 
     await directiveTest.execute((vm) => { // ensure Vue has bootstrapped/run change detection
-      debugger;
-      assert.calledWith(loggerSpy, 'Default object property!');
-      expect(vm.$el.querySelectorAll('nav a').length).to.equal(2);
+      expect(vm.$el.querySelectorAll('nav a').length).to.equal(3);
     });
   });
 
