@@ -79,7 +79,6 @@ export class FirebaseServiceApi implements ServiceApi {
         .limitToFirst(10)
         .startAt(searchQuery)
         .endAt(searchQuery + '\uf8ff');
-        // .endAt(end);
       ref.on('value', (response) => {
         callback.onLoaded(response.val());
       });

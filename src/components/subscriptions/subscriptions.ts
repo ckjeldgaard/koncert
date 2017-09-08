@@ -12,6 +12,7 @@ export class SubscriptionsComponent extends Vue {
   public artistsSearchResult = [];
 
   @Inject(serviceApi) serviceApi: ServiceApi;
+  @Inject(bus) bus: Vue;
 
   public search(searchQuery: string) {
     if (searchQuery.length > 1) {
@@ -20,7 +21,7 @@ export class SubscriptionsComponent extends Vue {
           this.artistsSearchResult = data;
         },
         onError: (exception) => {
-          console.error('An error occurred.', exception);
+          this.bus.$emit('error', exception);
         },
       }, searchQuery);
     } else {
