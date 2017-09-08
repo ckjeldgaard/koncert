@@ -1,20 +1,30 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import {ServiceApi} from '../../data/service-api';
+import {serviceApi, bus} from '../../util/constants';
+import {Inject} from 'vue-property-decorator';
 
 @Component({
   template: require('./subscriptions.html')
 })
 export class SubscriptionsComponent extends Vue {
 
-  mounted() {
-    this.$nextTick(() => {
-      let fixedContent = <HTMLElement>this.$el.querySelector('.fixed-content');
+  public artistsSearchResult = [];
 
-      let list = <HTMLElement>this.$el.querySelector('.subscriptions-list');
-      // list.style.marginTop = fixedContent.offsetHeight + 'px';
+  @Inject(serviceApi) serviceApi: ServiceApi;
 
-      console.log('ELEMENT = ', fixedContent.offsetHeight);
-      // getComputedStyle(element)[''];
-    });
+  public search(searchQuery: string) {
+    if (searchQuery.length > 1) {
+      this.serviceApi.searchArtists({
+        onLoaded: (data) => {
+          this.artistsSearchResult = data;
+        },
+        onError: (exception) => {
+          console.error('An error occurred.', exception);
+        },
+      }, searchQuery);
+    } else {
+      this.artistsSearchResult = [];
+    }
   }
 }

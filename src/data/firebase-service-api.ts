@@ -72,4 +72,19 @@ export class FirebaseServiceApi implements ServiceApi {
     }
   }
 
+  searchArtists(callback: ServiceCallback, searchQuery: string) {
+    try {
+      let ref = this.database.ref('data/artists')
+        .orderByChild('lowercase')
+        .limitToFirst(10)
+        .startAt(searchQuery)
+        .endAt(searchQuery + '\uf8ff');
+        // .endAt(end);
+      ref.on('value', (response) => {
+        callback.onLoaded(response.val());
+      });
+    } catch (e) {
+      callback.onError(e);
+    }
+  }
 }

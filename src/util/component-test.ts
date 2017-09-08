@@ -104,4 +104,7 @@ export class MockServiceApi implements ServiceApi {
     this.serviceSpy(MockServiceApi.testGenres);
   }
 
+  searchArtists(callback: ServiceCallback, searchQuery: string) {
+  }
+
 }
