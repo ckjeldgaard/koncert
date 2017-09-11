@@ -78,8 +78,8 @@ export class FirebaseServiceApi implements ServiceApi {
       let ref = this.database.ref('data/artists')
         .orderByChild('lowercase')
         .limitToFirst(7)
-        .startAt(searchQuery)
-        .endAt(searchQuery + '\uf8ff');
+        .startAt(searchQuery.toLowerCase())
+        .endAt(searchQuery.toLowerCase() + '\uf8ff');
       ref.on('value', (response) => {
         let data = response.val();
         let artists: Artist[] = [];
