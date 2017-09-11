@@ -4,21 +4,39 @@
     form {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      input {
-        &[type="search"] {
-          color: $primary;
-          box-shadow: $box-shadow-card;
-          border: 0;
-          border-radius: $border-radius-small;
-          padding: 15px;
-          flex-grow: 2;
-          background-color: white;
+      align-items: flex-start;
+      .search-input {
+        position: relative;
+        flex-grow: 2;
+        input {
+          &[type="search"] {
+            color: $primary;
+            box-shadow: $box-shadow-card;
+            border: 0;
+            border-radius: $border-radius-small;
+            padding: 15px;
+            background-color: white;
+            width: 100%;
+          }
+        }
+        ul {
+          position: absolute;
+          width: 100%;
+          border: 1px solid $grey;
+          margin: 0;
+          padding: 0;
+          li {
+            background-color: $paper;
+            margin: 0;
+            padding: $space-small;
+            &:nth-child(odd) {
+              background-color: white;
+            }
+          }
         }
       }
       button {
         margin: 5px 0 5px $space-small;
-        align-self: center;
         &:disabled {
           color: $off-white;
           background-color: $grey;

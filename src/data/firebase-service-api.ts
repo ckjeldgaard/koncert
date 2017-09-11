@@ -3,6 +3,7 @@ import {ServiceCallback} from './servic-callback';
 import * as Firebase from 'firebase';
 import Database = firebase.database.Database;
 import {Concert} from '../model/concert';
+import {Artist} from '../model/artist';
 
 export class FirebaseServiceApi implements ServiceApi {
 
@@ -76,11 +77,17 @@ export class FirebaseServiceApi implements ServiceApi {
     try {
       let ref = this.database.ref('data/artists')
         .orderByChild('lowercase')
-        .limitToFirst(10)
+        .limitToFirst(7)
         .startAt(searchQuery)
         .endAt(searchQuery + '\uf8ff');
       ref.on('value', (response) => {
-        callback.onLoaded(response.val());
+        let data = response.val();
+        let artists: Artist[] = [];
+        for (let key in data) {
+          data[key].id = key;
+          artists.push(data[key]);
+        }
+        callback.onLoaded(artists);
       });
     } catch (e) {
       callback.onError(e);

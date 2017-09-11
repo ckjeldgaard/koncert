@@ -3,12 +3,14 @@
     <h2>Subscriptions</h2>
     <p>Receive a push notification whenever there's a new concert with your favorite band!</p>
     <form>
-      <input type="search" placeholder="Search artists" @input="search($event.target.value)" />
-      <button class="btn--raised btn--accent">Add</button>
+      <div class="search-input">
+        <input type="search" placeholder="Search artists" @input="search($event.target.value)" ref="search" />
+        <ul v-if="artistsSearchResult.length > 0" v-on-click-outside="close">
+          <li v-for="artist in artistsSearchResult" @click="select(artist)">{{artist.name}}</li>
+        </ul>
+      </div>
+      <button class="btn--raised btn--accent" :disabled="buttonDisabled" @click="addSelected()">Add</button>
     </form>
-    <ul>
-      <li v-for="artist in artistsSearchResult">{{artist.name}}</li>
-    </ul>
   </div>
   <ul class="subscriptions-list">
     <li>Artist 1</li>
