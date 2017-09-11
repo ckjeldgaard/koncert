@@ -18,7 +18,7 @@ export class CriteriaSearch implements Criteria {
     for (let concert of concerts) {
       if (concert.name.toLowerCase().includes(searchTerm)
         || concert.venue.toLowerCase().includes(searchTerm)
-        || concert.artists.some(artist => artist.toLowerCase().includes(searchTerm))) {
+        || concert.artists.some(artist => artist['name'].toLowerCase().includes(searchTerm))) {
         searchConcerts.push(concert);
       }
     }
