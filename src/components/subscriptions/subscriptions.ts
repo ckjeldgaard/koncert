@@ -5,6 +5,7 @@ import {ServiceApi} from '../../data/service-api';
 import {serviceApi, bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 import {Artist} from '../../model/artist';
+import {PushNotification} from './push-notification';
 
 @Component({
   template: require('./subscriptions.html'),
@@ -23,6 +24,12 @@ export class SubscriptionsComponent extends Vue {
 
   mounted() {
     this.searchField = this.$refs['search'] as HTMLInputElement;
+  }
+
+  created() {
+    /* let notification: PushNotification = new PushNotification();
+    notification.isPushSupported();
+    notification.subscribePush(); */
   }
 
   public search(searchQuery: string) {
