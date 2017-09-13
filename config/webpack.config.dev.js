@@ -2,6 +2,7 @@ const helpers = require('./helpers'),
   webpackConfig = require('./webpack.config.base'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   DefinePlugin = require('webpack/lib/DefinePlugin'),
+  SWPrecacheWebpackDevPlugin = require('sw-precache-webpack-dev-plugin'),
   env = require('../environment/dev.env');
 
 webpackConfig.module.rules = [...webpackConfig.module.rules,
@@ -32,6 +33,13 @@ webpackConfig.plugins = [...webpackConfig.plugins,
   }),
   new DefinePlugin({
     'process.env': env
+  }),
+  new SWPrecacheWebpackDevPlugin({
+    cacheId: 'koncert-app',
+    filename: 'service-worker.js',
+    staticFileGlobs: [],
+    minify: false,
+    handleFetch: false,
   })
 ];
 
