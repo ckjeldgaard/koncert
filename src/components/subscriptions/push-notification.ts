@@ -71,7 +71,7 @@ export class PushNotification {
         await subscription.unsubscribe();
         console.log('Unsubscribed successfully.');
         console.info('Push notification unsubscribed.');
-        // TODO: deleteSubscriptionID(subscription);
+        this.deleteSubscriptionID(subscription);
         this.changePushStatus(false);
       } catch (error) {
         console.error(error);
@@ -83,8 +83,14 @@ export class PushNotification {
 
   public saveSubscriptionID(subscription) {
     const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
-    console.log('Subscription ID', subscriptionId);
+    console.log('saveSubscriptionID. Subscription ID = ', subscriptionId);
     // TODO: save subscription via API
+  }
+
+  public deleteSubscriptionID(subscription) {
+    const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
+    console.log('deleteSubscriptionID. Subscription ID = ', subscriptionId);
+    // TODO: Delete subscription via API
   }
 
 }
