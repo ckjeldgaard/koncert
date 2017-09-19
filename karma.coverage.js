@@ -1,6 +1,8 @@
 var parseArgs = require('minimist');
 var webpackConfig = require('./config/webpack.config.coverage');
 
+var coverageThreshold = 75;
+
 var args = parseArgs(process.argv.slice(2), {
   string: ['env'],
   default: {
@@ -46,7 +48,12 @@ var configuration = {
       dir: 'coverage/json',
       subdir: '.'
     }],
-    includeAllSources: true
+    includeAllSources: true,
+    check: {
+      global: {
+        statements: coverageThreshold
+      }
+    }
   },
   port: 9876,
   colors: true,
