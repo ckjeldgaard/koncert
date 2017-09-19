@@ -23,7 +23,7 @@
     "test": "cross-env NODE_ENV=development karma start karma.unit.js",
     "test:debug": "cross-env NODE_ENV=development karma start karma.debug.js",
     "test:watch": "cross-env NODE_ENV=development karma start karma.unit.js --singleRun=false --auto-watch",
-    "codecov": "codecov -f coverage/json/*.json"
+    "codecov": "codecov -f coverage/json/coverage-final.json"
   },
   "dependencies": {
     "firebase": "^4.2.0",
