@@ -27,9 +27,9 @@ export class SubscriptionsComponent extends Vue {
   }
 
   created() {
-    /* let notification: PushNotification = new PushNotification();
+    let notification: PushNotification = new PushNotification();
     notification.isPushSupported();
-    notification.subscribePush(); */
+    // notification.subscribePush();
   }
 
   public search(searchQuery: string) {

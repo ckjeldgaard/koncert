@@ -44,9 +44,9 @@ var configuration = {
     reporters: [{
       type: 'json',
       dir: 'coverage/json',
-      subdir: '.',
-      includeAllSources: true
-    }]
+      subdir: '.'
+    }],
+    includeAllSources: true
   },
   port: 9876,
   colors: true,
