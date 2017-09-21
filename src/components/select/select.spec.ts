@@ -1,11 +1,18 @@
 import { expect } from 'chai';
 import {SelectComponent} from './select';
-import Vue from 'vue';
+import {mount, Wrapper} from 'avoriaz';
 
 
 describe('Select component', () => {
-
   it('correctly sets the placeholder text', () => {
+    let placeholder = 'Select an option';
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: {placeholder} });
+    expect(wrapper.propsData().placeholder).to.equal('Select an option');
+    expect(wrapper.find('label > span')[0].text()).to.equal('Select an option');
+  });
+
+
+  it('selects an option', () => {
     let id = 'genres';
     let options: any[] = [
       {key: 'option1', value: 'Option 1'},
@@ -14,11 +21,12 @@ describe('Select component', () => {
     ];
     let placeholder = 'Select an option';
     let multiple = false;
-    const ctor = Vue.extend(SelectComponent);
-    const vm: any = new ctor({ propsData: { id, options, placeholder, multiple } }).$mount();
 
-    expect(vm.placeholder).to.equal('Select an option');
-    expect(vm.$el.querySelector('label span').textContent).to.equal('Select an option');
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: {id, options, placeholder, multiple} });
+    const option = wrapper.find('ul > li > input')[0];
+    option.trigger('click');
+
+    expect(wrapper.find('label > span')[1].text()).to.equal('Option 1');
   });
 
 });
