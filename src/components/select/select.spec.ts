@@ -17,10 +17,6 @@ describe('Select component', () => {
     const ctor = Vue.extend(SelectComponent);
     const vm: any = new ctor({ propsData: { id, options, placeholder, multiple } }).$mount();
 
-    console.log(vm.id);
-    console.log(vm.options);
-    console.log(vm.$el.querySelector('label span').textContent);
-
     expect(vm.placeholder).to.equal('Select an option');
     expect(vm.$el.querySelector('label span').textContent).to.equal('Select an option');
   });
