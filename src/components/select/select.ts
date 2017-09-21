@@ -3,21 +3,20 @@ import Component from 'vue-class-component';
 import { mixin as onClickOutside } from 'vue-on-click-outside';
 import {SelectOption} from '../../model/select-option';
 import {bus} from '../../util/constants';
-import {Inject} from 'vue-property-decorator';
+import {Inject, Prop} from 'vue-property-decorator';
 
 @Component({
   template: require('./select.html'),
-  mixins: [onClickOutside],
-  props: {
-    id: String,
-    options: Array,
-    placeholder: String,
-    multiple: Boolean
-  }
+  mixins: [onClickOutside]
 })
 export class SelectComponent extends Vue {
 
   @Inject(bus) bus: Vue;
+
+  @Prop() id: string;
+  @Prop() options: string[];
+  @Prop() placeholder: string;
+  @Prop() multiple: boolean;
 
   public open: Boolean = false;
   public selected: SelectOption[] = [];
