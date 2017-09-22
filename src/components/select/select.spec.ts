@@ -2,15 +2,13 @@ import { expect } from 'chai';
 import {SelectComponent} from './select';
 import {mount, Wrapper} from 'avoriaz';
 
-
 describe('Select component', () => {
   it('correctly sets the placeholder text', () => {
     let placeholder = 'Select an option';
     const wrapper: Wrapper = mount(SelectComponent, {propsData: {placeholder} });
-    expect(wrapper.propsData().placeholder).to.equal('Select an option');
+    expect(wrapper.vm.$props['placeholder']).to.equal('Select an option');
     expect(wrapper.find('label > span')[0].text()).to.equal('Select an option');
   });
-
 
   it('selects an option', () => {
     let id = 'genres';
@@ -22,7 +20,16 @@ describe('Select component', () => {
     let placeholder = 'Select an option';
     let multiple = false;
 
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: {id, options, placeholder, multiple} });
+    const wrapper: Wrapper = mount(
+      SelectComponent,
+      {
+        propsData: {id, options, placeholder, multiple},
+        provide: {
+          bus: 'my bus'
+        }
+      }
+    );
+
     const option = wrapper.find('ul > li > input')[0];
     option.trigger('click');
 
