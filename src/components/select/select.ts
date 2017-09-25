@@ -11,7 +11,7 @@ import {Inject, Prop} from 'vue-property-decorator';
 })
 export class SelectComponent extends Vue {
 
-  @Inject(bus) bus: any = null;
+  @Inject(bus) bus: Vue = null;
 
   @Prop() id: string;
   @Prop() options: string[];
