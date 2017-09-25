@@ -11,20 +11,19 @@ describe('Select component', () => {
     expect(wrapper.find('label > span')[0].text()).to.equal('Select an option');
   });
 
-  it('selects an option', () => {
+  it('selects a single option', () => {
     const busSpy = spy();
-
-    let id = 'genres';
-    let options: any[] = [
-      {key: 'option1', value: 'Option 1'},
-      {key: 'option2', value: 'Option 2'},
-      {key: 'option3', value: 'Option 3'}
-    ];
-    let placeholder = 'Select an option';
-    let multiple = false;
-
     const wrapper: Wrapper = mount(
-      SelectComponent, { propsData: {id, options, placeholder, multiple} }
+      SelectComponent, {
+        propsData: {
+          id: 'genres',
+          options: [
+            {key: 'option1', value: 'Option 1'},
+            {key: 'option2', value: 'Option 2'}
+          ],
+          placeholder: 'Select an option',
+          multiple: false}
+      }
     );
     wrapper.vm.$data['bus'] = {
       '$emit': busSpy
@@ -35,6 +34,7 @@ describe('Select component', () => {
 
     expect(wrapper.find('label > span')[1].text()).to.equal('Option 1');
     assert.called(busSpy);
+    assert.calledWith(busSpy, 'genres', [{key: 'option1', value: 'Option 1'}]);
   });
 
 });
