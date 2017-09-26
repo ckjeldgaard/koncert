@@ -1,13 +1,13 @@
 import { expect } from 'chai';
-import { ConcertsComponent } from './concerts';
-import {ComponentTest, MockServiceApi} from '../../util/component-test';
+import { ConcertsComponent } from '../../../src/components/concerts/concerts';
+import {ComponentTest, MockServiceApi} from '../../../src/util/component-test';
 import Component from 'vue-class-component';
 import {spy, assert} from 'sinon';
 
 let serviceSpy = spy();
 
 @Component({
-  template: require('./concerts.html')
+  template: require('../../../src/components/concerts/concerts.html')
 })
 class MockConcertsComponent extends ConcertsComponent {
   constructor() {

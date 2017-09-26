@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiDom from 'chai-dom';
-import { ProvinceFilterComponent } from './province_filter';
-import {ComponentTest, MockServiceApi} from '../../util/component-test';
+import { ProvinceFilterComponent } from '../../../src/components/province_filter/province_filter';
+import {ComponentTest, MockServiceApi} from '../../../src/util/component-test';
 import Component from 'vue-class-component';
 import {spy, assert} from 'sinon';
 
@@ -10,7 +10,7 @@ chai.use(chaiDom);
 let serviceSpy = spy();
 
 @Component({
-  template: require('./province_filter.html')
+  template: require('../../../src/components/province_filter/province_filter.html')
 })
 class MockProvinceFilterComponent extends ProvinceFilterComponent {
   constructor() {

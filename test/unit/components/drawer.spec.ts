@@ -3,13 +3,13 @@ import VueRouter from 'vue-router';
 import Component from 'vue-class-component';
 import { spy, assert } from 'sinon';
 import { expect } from 'chai';
-import {ComponentTest, MockLogger} from '../../util/component-test';
-import { DrawerComponent } from './drawer';
+import {ComponentTest, MockLogger} from '../../../src/util/component-test';
+import { DrawerComponent } from '../../../src/components/drawer/drawer';
 
 let loggerSpy = spy();
 
 @Component({
-  template: require('./drawer.html')
+  template: require('../../../src/components/drawer/drawer.html')
 })
 class MockDrawerComponent extends DrawerComponent {
   constructor() {

@@ -12,11 +12,11 @@ module.exports = function (config) {
         included: false,
         served: true
       },
-      'src/test.ts'
+      'test/test.ts'
     ],
     reporters: ['mocha'],
     preprocessors: {
-      'src/test.ts': ['webpack']
+      'test/test.ts': ['webpack']
     },
     webpack: webpackConfig,
     webpackServer: {

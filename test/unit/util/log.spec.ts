@@ -1,4 +1,4 @@
-import {Logger} from './log';
+import {Logger} from '../../../src/util/log';
 import * as sinon from 'sinon';
 import {assert} from 'sinon';
 

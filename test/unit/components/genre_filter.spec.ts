@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { GenreFilterComponent } from './genre_filter';
-import {MockServiceApi} from '../../util/component-test';
-import {spy, assert, SinonSpy} from 'sinon';
+import { GenreFilterComponent } from '../../../src/components/genre_filter/genre_filter';
+import {MockServiceApi} from '../../../src/util/component-test';
+import {spy, SinonSpy} from 'sinon';
 import {mount, Wrapper} from 'avoriaz';
 import Vue from 'vue';
 

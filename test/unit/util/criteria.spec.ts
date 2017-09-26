@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import {Concert} from '../../model/concert';
-import {CriteriaProvince} from './criteria-province';
-import {CriteriaGenre} from './criteria-genre';
-import {AndCriteria} from './and-criteria';
-import {OrCriteria} from './or-criteria';
-import {DomainObjectBuilder} from '../../test/domain-object-builder/dob';
+import {Concert} from '../../../src/model/concert';
+import {CriteriaProvince} from '../../../src/util/criteria/criteria-province';
+import {CriteriaGenre} from '../../../src/util/criteria/criteria-genre';
+import {AndCriteria} from '../../../src/util/criteria/and-criteria';
+import {OrCriteria} from '../../../src/util/criteria/or-criteria';
+import {DomainObjectBuilder} from '../domain-object-builder/dob';
 
 describe('Criteria', () => {
 

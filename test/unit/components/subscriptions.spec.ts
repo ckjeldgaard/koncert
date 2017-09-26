@@ -1,13 +1,13 @@
 import { spy, assert } from 'sinon';
 import { expect } from 'chai';
 import Component from 'vue-class-component';
-import { ComponentTest } from '../../util/component-test';
-import {SubscriptionsComponent} from './subscriptions';
+import { ComponentTest } from '../../../src/util/component-test';
+import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
 
 let loggerSpy = spy();
 
 @Component({
-  template: require('./subscriptions.html')
+  template: require('../../../src/components/subscriptions/subscriptions.html')
 })
 class MockSubscriptionsComponent extends SubscriptionsComponent {
   constructor() {

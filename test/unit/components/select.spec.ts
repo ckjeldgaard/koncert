@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {SelectComponent} from './select';
+import {SelectComponent} from '../../../src/components/select/select';
 import {mount, Wrapper} from 'avoriaz';
 import {spy, assert, SinonSpy} from 'sinon';
 

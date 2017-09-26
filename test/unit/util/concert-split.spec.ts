@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {ConcertSplit} from './concert-split';
+import {ConcertSplit} from '../../../src/util/concert-split';
 
 
 describe('Concert split', () => {

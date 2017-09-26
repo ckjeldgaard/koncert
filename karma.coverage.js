@@ -25,11 +25,11 @@ var configuration = {
   frameworks: ['mocha', 'chai-dom', 'chai', 'sinon'],
   files: [
     'node_modules/es6-promise/dist/es6-promise.auto.js',
-    'src/test.ts'
+    'test/test.ts'
   ],
   reporters: reporters,
   preprocessors: {
-    'src/test.ts': ['webpack']
+    'test/test.ts': ['webpack']
   },
   webpack: {
     devtool: 'inline-source-map',

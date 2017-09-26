@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { HomeComponent } from './home';
-import { ComponentTest } from '../../util/component-test';
+import { HomeComponent } from '../../../src/components/home/home';
+import { ComponentTest } from '../../../src/util/component-test';
 
 describe('Home component', () => {
   let directiveTest: ComponentTest;
