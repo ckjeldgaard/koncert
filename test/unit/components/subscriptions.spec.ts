@@ -14,7 +14,7 @@ describe('Subscriptions component', () => {
     const wrapper: Wrapper = mount(SubscriptionsComponent);
     setServiceApi(wrapper, spy());
 
-    let searchInput: Wrapper = wrapper.find('input')[0];
+    const searchInput: Wrapper = wrapper.find('input')[0];
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
     searchInput.trigger('input');
 
@@ -26,7 +26,7 @@ describe('Subscriptions component', () => {
     const wrapper: Wrapper = mount(SubscriptionsComponent);
     setServiceApi(wrapper, spy());
 
-    let searchInput: Wrapper = wrapper.find('input')[0];
+    const searchInput: Wrapper = wrapper.find('input')[0];
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
     searchInput.trigger('input');
 

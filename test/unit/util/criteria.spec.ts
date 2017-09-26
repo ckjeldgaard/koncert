@@ -5,6 +5,7 @@ import {CriteriaGenre} from '../../../src/util/criteria/criteria-genre';
 import {AndCriteria} from '../../../src/util/criteria/and-criteria';
 import {OrCriteria} from '../../../src/util/criteria/or-criteria';
 import {DomainObjectBuilder} from '../domain-object-builder/dob';
+import {CriteriaSearch} from '../../../src/util/criteria/criteria-search';
 
 describe('Criteria', () => {
 
@@ -27,6 +28,30 @@ describe('Criteria', () => {
       DomainObjectBuilder.aNew().concert().withGenres(['genre2']).build(),
     ];
     const criteria: CriteriaGenre = new CriteriaGenre('genre2');
+    expect(criteria.meetCriteria(concertList).length).to.equal(1);
+    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
+  });
+
+  it('should filter by search term for concert names', async () => {
+    const concertList: Concert[] = [
+      DomainObjectBuilder.aNew().concert().withName('concertA').build(),
+      DomainObjectBuilder.aNew().concert().withName('concertB').build(),
+    ];
+
+    const criteria: CriteriaSearch = new CriteriaSearch('concertA');
+
+    expect(criteria.meetCriteria(concertList).length).to.equal(1);
+    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[0]);
+  });
+
+  it('should filter by search term for concert venues', async () => {
+    const concertList: Concert[] = [
+      DomainObjectBuilder.aNew().concert().withVenue('venueA').build(),
+      DomainObjectBuilder.aNew().concert().withVenue('venueB').build(),
+    ];
+
+    const criteria: CriteriaSearch = new CriteriaSearch('venueB');
+
     expect(criteria.meetCriteria(concertList).length).to.equal(1);
     expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
   });
