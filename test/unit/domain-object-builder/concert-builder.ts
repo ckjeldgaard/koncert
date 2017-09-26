@@ -1,4 +1,4 @@
-import {Concert} from '../../src/model/concert';
+import {Concert} from '../../../src/model/concert';
 
 export class ConcertBuilder {
 

@@ -1,4 +1,5 @@
-import {ConcertBuilder} from '../concert-builder';
+import {ConcertBuilder} from './concert-builder';
+import {GenreBuilder} from './genre-builder';
 
 export class DomainObjectBuilder {
 
@@ -9,4 +10,10 @@ export class DomainObjectBuilder {
   public concert(): ConcertBuilder {
     return ConcertBuilder.create();
   }
+
+  public genre(): GenreBuilder {
+    return GenreBuilder.create();
+  }
+
+
 }
