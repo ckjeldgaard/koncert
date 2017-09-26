@@ -1,35 +1,25 @@
 import { expect } from 'chai';
-import * as chai from 'chai';
-import * as chaiDom from 'chai-dom';
 import { GenreFilterComponent } from './genre_filter';
-import {ComponentTest, MockServiceApi} from '../../util/component-test';
-import Component from 'vue-class-component';
-import {spy, assert} from 'sinon';
+import {MockServiceApi} from '../../util/component-test';
+import {spy, assert, SinonSpy} from 'sinon';
+import {mount, Wrapper} from 'avoriaz';
+import Vue from 'vue';
 
-chai.use(chaiDom);
-let serviceSpy = spy();
-
-@Component({
-  template: require('./genre_filter.html')
-})
-class MockGenreFilterComponent extends GenreFilterComponent {
-  constructor() {
-    super();
-    this.serviceApi = new MockServiceApi(serviceSpy);
-  }
-}
+const setServiceApi = (wrapper: Wrapper, serviceSpy: SinonSpy): void => {
+  wrapper.vm.$data['serviceApi'] = new MockServiceApi(serviceSpy);
+};
 
 describe('GenreFilter component', () => {
-  let directiveTest: ComponentTest;
 
-  beforeEach(() => {
-    directiveTest = new ComponentTest('<div><genre_filter></genre_filter></div>', {'genre_filter': MockGenreFilterComponent});
-  });
+  it('should fetch genres from the ServiceApi', async () => {
+    const serviceSpy = spy();
+    const wrapper: Wrapper = mount(GenreFilterComponent);
+    setServiceApi(wrapper, serviceSpy);
 
-  /* it('should verify the database mock', async () => {
-    directiveTest.createComponent();
-    await directiveTest.execute((vm) => {
-      assert.calledWith(serviceSpy, MockServiceApi.testProvinces);
+    let expectedGenres = [];
+    await Vue.nextTick(() => {
+      expectedGenres = wrapper.vm.$data['genres'];
     });
-  }); */
+    expect(expectedGenres.length).to.equal(3);
+  });
 });

@@ -10,7 +10,7 @@ import {Genre} from '../../model/genre';
 })
 export class GenreFilterComponent extends Vue {
 
-  @Inject(serviceApi) serviceApi: ServiceApi;
+  @Inject(serviceApi) serviceApi: ServiceApi = null;
   @Inject(bus) bus: Vue;
 
   public genres: Genre[] = [];
