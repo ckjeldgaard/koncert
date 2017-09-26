@@ -1,12 +1,24 @@
 import { expect } from 'chai';
 import {mount, Wrapper} from 'avoriaz';
 import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
+import {MockServiceApi} from '../../../src/util/component-test';
+import {spy, SinonSpy} from 'sinon';
+
+const setServiceApi = (wrapper: Wrapper, serviceSpy?: SinonSpy): void => {
+  wrapper.vm.$data['serviceApi'] = new MockServiceApi(serviceSpy);
+};
 
 describe('Subscriptions component', () => {
 
-  it('should render the component', async () => {
+  it('should search an artist', async () => {
     const wrapper: Wrapper = mount(SubscriptionsComponent);
-    // TODO: Write test
-    // expect(1).to.equal(2);
+    setServiceApi(wrapper, spy());
+
+    let searchInput: Wrapper = wrapper.find('input')[0];
+    (<HTMLInputElement>searchInput.element).value = 'searchArtist';
+    searchInput.trigger('input');
+
+    expect(wrapper.vm.$data['artistsSearchResult']).to.equal(MockServiceApi.testArtists);
+    expect(wrapper.find('.search-input > ul')[0].html()).to.equal('<ul><li>Alice</li><li>Bob</li></ul>');
   });
 });

@@ -19,7 +19,7 @@ export class SubscriptionsComponent extends Vue {
   private selectedArtist: Artist;
   private searchField: HTMLInputElement;
 
-  @Inject(serviceApi) serviceApi: ServiceApi;
+  @Inject(serviceApi) serviceApi: ServiceApi = null;
   @Inject(bus) bus: Vue;
 
   mounted() {

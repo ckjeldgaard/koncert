@@ -4,6 +4,7 @@ import merge from 'lodash.merge';
 import { ILogger } from './log';
 import {ServiceApi} from '../data/service-api';
 import {ServiceCallback} from '../data/servic-callback';
+import {Artist} from '../model/artist';
 
 export interface IComponents {
   [key: string]: Vue.Component;
@@ -86,6 +87,11 @@ export class MockServiceApi implements ServiceApi {
     death: 'Death metal'
   };
 
+  public static testArtists: Artist[] = [
+    new Artist('alice', 'Alice', 'alice'),
+    new Artist('bob', 'Bob', 'bob')
+  ];
+
   constructor(private serviceSpy: SinonSpy) {
   }
 
@@ -105,6 +111,8 @@ export class MockServiceApi implements ServiceApi {
   }
 
   searchArtists(callback: ServiceCallback, searchQuery: string) {
+    callback.onLoaded(MockServiceApi.testArtists);
+    this.serviceSpy(MockServiceApi.testArtists);
   }
 
 }
