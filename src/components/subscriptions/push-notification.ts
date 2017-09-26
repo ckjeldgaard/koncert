@@ -1,4 +1,4 @@
-import {PushApi} from "./api/push-api";
+import {PushApi} from './api/push-api';
 
 export class PushNotification {
 
