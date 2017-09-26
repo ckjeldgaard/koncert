@@ -1,4 +1,10 @@
 <div class="subscriptions g--10 m--1">
+
+  <div class="card subscribe-alert" v-if="errorMessage.length > 0">
+    <h3>⚠</h3>
+    <p>{{errorMessage}}</p>
+  </div>
+
   <div class="fixed-content">
     <h2>Subscriptions</h2>
     <p>Receive a push notification whenever there's a new concert with your favorite band!</p>

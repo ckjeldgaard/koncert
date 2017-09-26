@@ -1,5 +1,16 @@
 .subscriptions {
   margin-bottom: 0;
+  .subscribe-alert {
+    margin-bottom: 1em;
+    text-align: center;
+    p, h3 {
+      margin: 0;
+    }
+    h3 {
+      color: $pomegranate;
+      font-size: 3em;
+    }
+  }
   .fixed-content {
     form {
       display: flex;

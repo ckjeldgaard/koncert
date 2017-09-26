@@ -34,9 +34,7 @@ export class SelectComponent extends Vue {
       } else {
         this.selectSingle(event);
       }
-      if (this.bus) {
-        this.bus.$emit(this.$props['id'], this.selected);
-      }
+      this.bus.$emit(this.$props['id'], this.selected);
     }
   }
 

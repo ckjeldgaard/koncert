@@ -1,89 +1,78 @@
+import {PushApi} from "./api/push-api";
+
 export class PushNotification {
 
-  constructor() {
+  private readonly pushApi: PushApi;
 
+  constructor(pushApi: PushApi) {
+    this.pushApi = pushApi;
   }
 
-  public async isPushSupported() {
+  public async isPushSupported(): Promise<PushSubscription | boolean> {
     // Check whether the 'push notification' permission is denied by the user
     if ((Notification as any).permission === 'denied') {
-      alert('User has blocked push notification.');
-      return;
+      throw new Error('Push notifications are blocked.');
     }
 
-    // Check 'push notification' whether is supported or not
+    // Check whether 'push notification' is supported or not
     if (!('PushManager' in window)) {
-      alert('Sorry, Push notification isn\'t supported in your browser.');
-      return;
+      throw new Error('Sorry, Push notifications aren\'t supported in your browser.');
     }
 
     const registration = await navigator.serviceWorker.ready;
     try {
-      const subscription = await registration.pushManager.getSubscription();
-      if (subscription) {
-        this.changePushStatus(true);
-      }
-      else {
-        this.changePushStatus(false);
-      }
+      const subscription: PushSubscription = await registration.pushManager.getSubscription();
+      return (subscription) ? subscription : Promise.resolve(false);
     } catch (error) {
       console.error('Error occurred while enabling push ', error);
+      throw error;
     }
   }
 
   public async subscribePush() {
     const registration = await navigator.serviceWorker.ready;
     if (!registration.pushManager) {
-      alert('Your browser doesn\'t support push notification.');
-      return false;
+      throw new Error('Your browser doesn\'t support push notifications.');
     }
 
     try {
-      const subscription = await registration.pushManager.subscribe({
+      const subscription: PushSubscription = await registration.pushManager.subscribe({
         userVisibleOnly: true // Always show notification when received
       });
       console.info('Push notification subscribed.');
-      console.log(subscription);
-      this.saveSubscriptionID(subscription);
-      this.changePushStatus(true);
+      console.log('subscription', subscription);
+      // this.saveSubscriptionID(subscription);
     } catch (error) {
-      this.changePushStatus(false);
       console.error('Push notification subscription error: ', error);
+      throw error;
     }
-  }
-
-  public changePushStatus(status: boolean): void {
-    console.log('changePushStatus called with', status);
-    // TODO Implement
   }
 
   public async unsubscribePush() {
     const registration = await navigator.serviceWorker.ready;
     try {
       const subscription = await registration.pushManager.getSubscription();
-      // If no `push subscription`, then return
-      if (!subscription) {
-        alert('Unable to unregister push notification.');
-        return;
-      }
 
       try {
         await subscription.unsubscribe();
         console.log('Unsubscribed successfully.');
         console.info('Push notification unsubscribed.');
         this.deleteSubscriptionID(subscription);
-        this.changePushStatus(false);
       } catch (error) {
         console.error(error);
       }
     } catch (error) {
       console.error('Failed to unsubscribe push notification.', error);
+      throw error;
     }
   }
 
-  public saveSubscriptionID(subscription) {
+  public saveSubscriptionID(subscription: PushSubscription) {
     const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
     console.log('saveSubscriptionID. Subscription ID = ', subscriptionId);
+
+    this.pushApi.saveSubscription(subscriptionId, 4);
+
     // TODO: save subscription via API
   }
 

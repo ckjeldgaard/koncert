@@ -6,6 +6,7 @@ import {serviceApi, bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 import {Artist} from '../../model/artist';
 import {PushNotification} from './push-notification';
+import {HttpPushApi} from './api/http-push-api';
 
 @Component({
   template: require('./subscriptions.html'),
@@ -15,9 +16,11 @@ export class SubscriptionsComponent extends Vue {
 
   public buttonDisabled = true;
   public artistsSearchResult: Artist[] = [];
+  public errorMessage: string = '';
 
   private selectedArtist: Artist;
   private searchField: HTMLInputElement;
+  private pushNotification: PushNotification;
 
   @Inject(serviceApi) serviceApi: ServiceApi = null;
   @Inject(bus) bus: Vue;
@@ -26,10 +29,30 @@ export class SubscriptionsComponent extends Vue {
     this.searchField = this.$refs['search'] as HTMLInputElement;
   }
 
-  created() {
-    // let notification: PushNotification = new PushNotification();
-    // notification.isPushSupported();
-    // notification.subscribePush();
+  async created() {
+    this.pushNotification = new PushNotification(new HttpPushApi());
+    try {
+      const subscription = await this.pushNotification.isPushSupported();
+      if (!subscription) {
+        await this.handleSubscription();
+      }
+
+      console.log('subscription = ', subscription);
+      this.pushNotification.saveSubscriptionID((<PushSubscription>subscription));
+
+    } catch (e) {
+      this.errorMessage = e.toString();
+      console.error('Error occurred: ', e);
+    }
+  }
+
+  private async handleSubscription() {
+    try {
+      await this.pushNotification.subscribePush();
+    } catch (e) {
+      this.errorMessage = e.toString();
+      console.error('Error occurred: ', e);
+    }
   }
 
   public search(searchQuery: string) {
