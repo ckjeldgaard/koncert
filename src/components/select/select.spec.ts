@@ -1,10 +1,9 @@
 import { expect } from 'chai';
 import {SelectComponent} from './select';
 import {mount, Wrapper} from 'avoriaz';
-import { spy, assert } from 'sinon';
-import {isUndefined} from "util";
+import {spy, assert, SinonSpy} from 'sinon';
 
-let props = {
+let defaultProps = {
   id: 'genres',
   options: [
     {key: 'option1', value: 'Option 1'},
@@ -14,7 +13,19 @@ let props = {
   multiple: false
 };
 
+const setBus = (wrapper: Wrapper, bus?: any): void => {
+  wrapper.vm.$data['bus'] = {
+    '$emit': bus
+  };
+};
+
 describe('Select component', () => {
+
+  let busSpy: SinonSpy;
+  beforeEach(() => {
+    busSpy = spy();
+  });
+
   it('correctly sets the placeholder text', () => {
     let placeholder = 'Select an option';
     const wrapper: Wrapper = mount(SelectComponent, {propsData: {placeholder} });
@@ -23,11 +34,8 @@ describe('Select component', () => {
   });
 
   it('selects a single option', () => {
-    const busSpy = spy();
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: props});
-    wrapper.vm.$data['bus'] = {
-      '$emit': busSpy
-    };
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
+    setBus(wrapper, busSpy);
 
     const option = wrapper.find('ul > li > input')[0];
     option.trigger('click');
@@ -37,13 +45,20 @@ describe('Select component', () => {
     assert.calledWith(busSpy, 'genres', [{key: 'option1', value: 'Option 1'}]);
   });
 
+  it('should close after selecting a single option', () => {
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
+    setBus(wrapper, busSpy);
+
+    const option = wrapper.find('ul > li > input')[0];
+    option.trigger('click');
+
+    expect(wrapper.vm.$data['open']).to.be.false;
+  });
+
   it('is able to select multiple options', () => {
-    const busSpy = spy();
-    props.multiple = true;
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: props});
-    wrapper.vm.$data['bus'] = {
-      '$emit': busSpy
-    };
+    defaultProps.multiple = true;
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
+    setBus(wrapper, busSpy);
 
     const option1 = wrapper.find('ul > li > input')[0];
     option1.trigger('click');
@@ -56,12 +71,9 @@ describe('Select component', () => {
   });
 
   it('should remove selected options when deselecting', () => {
-    const busSpy = spy();
-    props.multiple = true;
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: props});
-    wrapper.vm.$data['bus'] = {
-      '$emit': busSpy
-    };
+    defaultProps.multiple = true;
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
+    setBus(wrapper, busSpy);
 
     // Select first and second option:
     wrapper.find('ul > li > input')[0].trigger('click');
@@ -70,6 +82,22 @@ describe('Select component', () => {
     wrapper.find('ul > li > input')[0].trigger('click');
 
     expect(wrapper.find('label > span')[1].text()).to.equal('Option 2');
+  });
+
+  it('should shorten the selected text when many options are selected', () => {
+    defaultProps.multiple = true;
+    defaultProps.options = [
+      {key: 'option1', value: 'A very long option name'},
+      {key: 'option2', value: 'Another very long option name'}
+    ];
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
+    setBus(wrapper, busSpy);
+
+    // Select first and second option:
+    wrapper.find('ul > li > input')[0].trigger('click');
+    wrapper.find('ul > li > input')[1].trigger('click');
+
+    expect(wrapper.find('label > span')[1].text()).to.equal('2 selected');
   });
 
 });
