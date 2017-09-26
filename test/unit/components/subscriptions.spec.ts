@@ -1,30 +1,12 @@
-import { spy, assert } from 'sinon';
 import { expect } from 'chai';
-import Component from 'vue-class-component';
-import { ComponentTest } from '../../../src/util/component-test';
+import {mount, Wrapper} from 'avoriaz';
 import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
 
-let loggerSpy = spy();
+describe('Subscriptions component', () => {
 
-@Component({
-  template: require('../../../src/components/subscriptions/subscriptions.html')
-})
-class MockSubscriptionsComponent extends SubscriptionsComponent {
-  constructor() {
-    super();
-  }
-}
-
-describe('About component', () => {
-  let directiveTest: ComponentTest;
-
-  beforeEach(() => {
-    directiveTest = new ComponentTest('<div><subscriptions></subscriptions></div>', { 'subscriptions': MockSubscriptionsComponent });
-  });
-
-  it('should render correct contents', async () => {
-    directiveTest.createComponent();
-
-
+  it('should render the component', async () => {
+    const wrapper: Wrapper = mount(SubscriptionsComponent);
+    // TODO: Write test
+    // expect(1).to.equal(2);
   });
 });

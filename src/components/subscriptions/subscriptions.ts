@@ -27,8 +27,8 @@ export class SubscriptionsComponent extends Vue {
   }
 
   created() {
-    let notification: PushNotification = new PushNotification();
-    notification.isPushSupported();
+    // let notification: PushNotification = new PushNotification();
+    // notification.isPushSupported();
     // notification.subscribePush();
   }
 
