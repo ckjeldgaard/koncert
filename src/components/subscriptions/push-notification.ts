@@ -72,8 +72,6 @@ export class PushNotification {
     console.log('saveSubscriptionID. Subscription ID = ', subscriptionId);
 
     this.pushApi.saveSubscription(subscriptionId, 4);
-
-    // TODO: save subscription via API
   }
 
   public deleteSubscriptionID(subscription) {
