@@ -26,6 +26,7 @@
     "codecov": "codecov -f coverage/json/coverage-final.json"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "firebase": "^4.2.0",
     "moment": "^2.18.1",
     "surface": "github:mildrenben/surface",
