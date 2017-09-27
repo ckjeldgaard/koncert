@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import {ServiceApi} from '../../data/service-api';
-import {serviceApi, bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 import {Genre} from '../../model/genre';
 
@@ -10,8 +9,8 @@ import {Genre} from '../../model/genre';
 })
 export class GenreFilterComponent extends Vue {
 
-  @Inject(serviceApi) serviceApi: ServiceApi = null;
-  @Inject(bus) bus: Vue;
+  @Inject() serviceApi: ServiceApi;
+  @Inject() bus: Vue;
 
   public genres: Genre[] = [];
 

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Inject} from 'vue-property-decorator';
 import {ServiceApi} from '../../data/service-api';
-import {serviceApi, bus} from '../../util/constants';
 import {Province} from '../../model/Province';
 
 @Component({
@@ -10,8 +9,8 @@ import {Province} from '../../model/Province';
 })
 export class ProvinceFilterComponent extends Vue {
 
-  @Inject(serviceApi) serviceApi: ServiceApi;
-  @Inject(bus) bus: Vue;
+  @Inject() serviceApi: ServiceApi;
+  @Inject() bus: Vue;
 
   public provinces: Province[] = [];
 

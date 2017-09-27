@@ -4,7 +4,6 @@ import {Inject} from 'vue-property-decorator';
 import {Month} from '../../model/month';
 import {ConcertSplit} from '../../util/concert-split';
 import {ServiceApi} from '../../data/service-api';
-import {serviceApi, bus} from '../../util/constants';
 import {Concert} from '../../model/concert';
 import {Genre} from '../../model/genre';
 import {CriteriaBuilder} from './helpers/criteria_builder';
@@ -15,8 +14,8 @@ import {FixedHeaders} from './helpers/fixed_headers';
 })
 export class ConcertsComponent extends Vue {
 
-  @Inject(serviceApi) serviceApi: ServiceApi;
-  @Inject(bus) bus: Vue;
+  @Inject() serviceApi: ServiceApi;
+  @Inject() bus: Vue;
 
   private readonly currentTime = new Date().getTime() / 1000 - 86400;
 

@@ -2,17 +2,12 @@ import { expect } from 'chai';
 import {mount, Wrapper} from 'avoriaz';
 import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
 import {MockServiceApi} from '../../../src/util/component-test';
-import {spy, SinonSpy} from 'sinon';
-
-const setServiceApi = (wrapper: Wrapper, serviceSpy?: SinonSpy): void => {
-  wrapper.vm.$data['serviceApi'] = new MockServiceApi(serviceSpy);
-};
+import {spy} from 'sinon';
 
 describe('Subscriptions component', () => {
 
   it('should search an artist', async () => {
-    const wrapper: Wrapper = mount(SubscriptionsComponent);
-    setServiceApi(wrapper, spy());
+    const wrapper: Wrapper = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi(spy())}});
 
     const searchInput: Wrapper = wrapper.find('input')[0];
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
@@ -23,8 +18,7 @@ describe('Subscriptions component', () => {
   });
 
   it('should select an artist', async () => {
-    const wrapper: Wrapper = mount(SubscriptionsComponent);
-    setServiceApi(wrapper, spy());
+    const wrapper: Wrapper = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi(spy())}});
 
     const searchInput: Wrapper = wrapper.find('input')[0];
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';

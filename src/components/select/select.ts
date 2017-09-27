@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { mixin as onClickOutside } from 'vue-on-click-outside';
 import {SelectOption} from '../../model/select-option';
-import {bus} from '../../util/constants';
 import {Inject, Prop} from 'vue-property-decorator';
 
 @Component({
@@ -11,7 +10,7 @@ import {Inject, Prop} from 'vue-property-decorator';
 })
 export class SelectComponent extends Vue {
 
-  @Inject(bus) bus: Vue = null;
+  @Inject() bus: Vue;
 
   @Prop() id: string;
   @Prop() options: string[];

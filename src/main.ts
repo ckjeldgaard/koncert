@@ -11,7 +11,6 @@ import {SpinnerComponent} from './components/spinner';
 import {ConcertsComponent} from './components/concerts/concerts';
 import {ProvinceFilterComponent} from './components/province_filter/province_filter';
 import {GenreFilterComponent} from './components/genre_filter/genre_filter';
-import {serviceApi, bus} from './util/constants';
 import {FirebaseServiceApi} from './data/firebase-service-api';
 import {ErrorComponent} from './components/error/error';
 import {SelectComponent} from './components/select/select';
@@ -72,8 +71,8 @@ let app = new Vue({
   },
   provide() {
     return {
-      [serviceApi]: api,
-      [bus]: eventBus,
+      serviceApi: api,
+      bus: eventBus,
     };
   },
   created() {

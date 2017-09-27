@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 
 @Component({
@@ -8,7 +7,7 @@ import {Inject} from 'vue-property-decorator';
 })
 export class SearchComponent extends Vue {
 
-  @Inject(bus) bus: Vue;
+  @Inject() bus: Vue;
 
   public updateValue(value: string) {
     this.bus.$emit('search', value);

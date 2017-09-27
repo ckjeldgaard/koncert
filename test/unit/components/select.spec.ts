@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import {SelectComponent} from '../../../src/components/select/select';
 import {mount, Wrapper} from 'avoriaz';
 import {spy, assert, SinonSpy} from 'sinon';
+import Vue from 'vue';
 
 let defaultProps = {
   id: 'genres',
@@ -13,17 +14,14 @@ let defaultProps = {
   multiple: false
 };
 
-const setBus = (wrapper: Wrapper, bus?: any): void => {
-  wrapper.vm.$data['bus'] = {
-    '$emit': bus
-  };
-};
-
 describe('Select component', () => {
 
+  let fakeBus: Vue;
   let busSpy: SinonSpy;
   beforeEach(() => {
     busSpy = spy();
+    fakeBus = new Vue();
+    fakeBus.$emit = busSpy;
   });
 
   it('correctly sets the placeholder text', () => {
@@ -34,8 +32,7 @@ describe('Select component', () => {
   });
 
   it('selects a single option', () => {
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
-    setBus(wrapper, busSpy);
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
 
     const option = wrapper.find('ul > li > input')[0];
     option.trigger('click');
@@ -45,9 +42,9 @@ describe('Select component', () => {
     assert.calledWith(busSpy, 'genres', [{key: 'option1', value: 'Option 1'}]);
   });
 
+
   it('should close after selecting a single option', () => {
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
-    setBus(wrapper, busSpy);
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
 
     const option = wrapper.find('ul > li > input')[0];
     option.trigger('click');
@@ -57,8 +54,7 @@ describe('Select component', () => {
 
   it('is able to select multiple options', () => {
     defaultProps.multiple = true;
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
-    setBus(wrapper, busSpy);
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
 
     const option1 = wrapper.find('ul > li > input')[0];
     option1.trigger('click');
@@ -72,8 +68,7 @@ describe('Select component', () => {
 
   it('should remove selected options when deselecting', () => {
     defaultProps.multiple = true;
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
-    setBus(wrapper, busSpy);
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
 
     // Select first and second option:
     wrapper.find('ul > li > input')[0].trigger('click');
@@ -90,8 +85,7 @@ describe('Select component', () => {
       {key: 'option1', value: 'A very long option name'},
       {key: 'option2', value: 'Another very long option name'}
     ];
-    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps});
-    setBus(wrapper, busSpy);
+    const wrapper: Wrapper = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
 
     // Select first and second option:
     wrapper.find('ul > li > input')[0].trigger('click');

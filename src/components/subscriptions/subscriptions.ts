@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { mixin as onClickOutside } from 'vue-on-click-outside';
 import {ServiceApi} from '../../data/service-api';
-import {serviceApi, bus} from '../../util/constants';
 import {Inject} from 'vue-property-decorator';
 import {Artist} from '../../model/artist';
 import {PushNotification} from './push-notification';
@@ -22,8 +21,8 @@ export class SubscriptionsComponent extends Vue {
   private searchField: HTMLInputElement;
   private pushNotification: PushNotification;
 
-  @Inject(serviceApi) serviceApi: ServiceApi = null;
-  @Inject(bus) bus: Vue;
+  @Inject() serviceApi: ServiceApi;
+  @Inject() bus: Vue;
 
   mounted() {
     this.searchField = this.$refs['search'] as HTMLInputElement;
