@@ -71,11 +71,11 @@ export class PushNotification {
     }
   }
 
-  public saveSubscriptionID(subscription: PushSubscription) {
+  public async saveSubscriptionID(subscription: PushSubscription) {
     const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
     console.log('saveSubscriptionID. Subscription ID = ', subscriptionId);
 
-    this.pushApi.saveSubscription(subscriptionId, 4);
+    await this.pushApi.saveSubscription(subscriptionId, 4);
   }
 
   public deleteSubscriptionID(subscription) {

@@ -27,15 +27,4 @@ describe('PushNotification', () => {
     expect(err.message).to.equal('Push notifications are blocked.');
   });
 
-  it('should throw an error if push notifications are not supported in browser', async () => {
-    let err;
-    try {
-      pushSupportStub.getNotificationPermission =  () => { return 'granted'; };
-      await new PushNotification(new FakePushApi(), pushSupportStub).isPushSupported();
-    } catch (e) {
-      err = e;
-    }
-    expect(err.message).to.equal('Sorry, Push notifications aren\'t supported in your browser.');
-  });
-  
 });

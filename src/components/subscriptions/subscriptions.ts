@@ -38,10 +38,10 @@ export class SubscriptionsComponent extends Vue {
       }
 
       console.log('subscription = ', subscription);
-      this.pushNotification.saveSubscriptionID((<PushSubscription>subscription));
+      await this.pushNotification.saveSubscriptionID((<PushSubscription>subscription));
 
     } catch (e) {
-      this.errorMessage = e.toString();
+      this.errorMessage = e.message;
       console.error('Error occurred: ', e);
     }
   }
