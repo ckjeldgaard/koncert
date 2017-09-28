@@ -4,8 +4,9 @@ import { mixin as onClickOutside } from 'vue-on-click-outside';
 import {ServiceApi} from '../../data/service-api';
 import {Inject} from 'vue-property-decorator';
 import {Artist} from '../../model/artist';
-import {PushNotification} from './push-notification';
+import {PushNotification} from './helpers/push-notification';
 import {HttpPushApi} from './api/http-push-api';
+import {PushSupportBrowser} from './helpers/push-support-browser';
 
 @Component({
   template: require('./subscriptions.html'),
@@ -29,7 +30,7 @@ export class SubscriptionsComponent extends Vue {
   }
 
   async created() {
-    this.pushNotification = new PushNotification(new HttpPushApi());
+    this.pushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
     try {
       const subscription = await this.pushNotification.isPushSupported();
       if (!subscription) {
