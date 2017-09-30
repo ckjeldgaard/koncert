@@ -9,4 +9,8 @@ export class PushSupportBrowser implements PushSupport {
   isPushManagerSupported(): boolean {
     return ('PushManager' in window);
   }
+
+  async getServiceWorkerRegistration(): Promise<ServiceWorkerRegistration> {
+    return await navigator.serviceWorker.ready;
+  }
 }
