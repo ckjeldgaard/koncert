@@ -32,19 +32,16 @@ export class PushNotification {
     }
   }
 
-  public async subscribePush() {
-    const registration = await navigator.serviceWorker.ready;
+  public async subscribePush(): Promise<PushSubscription> {
+    const registration = await this.pushSupport.getServiceWorkerRegistration();
     if (!registration.pushManager) {
       throw new Error('Your browser doesn\'t support push notifications.');
     }
 
     try {
-      const subscription: PushSubscription = await registration.pushManager.subscribe({
+      return await registration.pushManager.subscribe({
         userVisibleOnly: true // Always show notification when received
       });
-      console.info('Push notification subscribed.');
-      console.log('subscription', subscription);
-      // this.saveSubscriptionID(subscription);
     } catch (error) {
       console.error('Push notification subscription error: ', error);
       throw error;

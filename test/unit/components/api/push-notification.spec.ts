@@ -75,4 +75,37 @@ describe('PushNotification', () => {
     expect(returnValue).to.be.false;
   });
 
+  it('should throw an error if no push manager when subscribing', async () => {
+    let err;
+    try {
+      pushSupportStub.getServiceWorkerRegistration =  () => {
+        return new Promise<ServiceWorkerRegistration>((resolve) => {
+          resolve( <ServiceWorkerRegistration> {
+            pushManager: null
+          });
+        });
+      };
+      await new PushNotification(new FakePushApi(), pushSupportStub).subscribePush();
+    } catch (e) {
+      err = e;
+    }
+    expect(err.message).to.equal('Your browser doesn\'t support push notifications.');
+  });
+
+  it('should subscribe', async () => {
+    pushSupportStub.getServiceWorkerRegistration =  () => {
+      return new Promise<ServiceWorkerRegistration>((resolve) => {
+        resolve( <ServiceWorkerRegistration> {
+          pushManager: <PushManager>{
+            subscribe: () => { return new Promise<PushSubscription>((resolve) => {
+              resolve(fakeSubscription);
+            }); }
+          },
+        });
+      });
+    };
+    const pushSubscription: PushSubscription = await new PushNotification(new FakePushApi(), pushSupportStub).subscribePush();
+    expect(pushSubscription).to.equal(fakeSubscription);
+  });
+
 });
