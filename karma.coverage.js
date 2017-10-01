@@ -1,7 +1,7 @@
 var parseArgs = require('minimist');
 var webpackConfig = require('./config/webpack.config.coverage');
 
-var coverageThreshold = 20;
+var coverageThreshold = 75;
 
 var args = parseArgs(process.argv.slice(2), {
   string: ['env'],
