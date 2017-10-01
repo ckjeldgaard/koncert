@@ -133,4 +133,29 @@ describe('PushNotification', () => {
     expect(err.message).to.equal('Cannot subscribe to push notifications');
   });
 
+  it('should unsubscribe', async () => {
+    fakeSubscription.unsubscribe = () => {
+      return new Promise<boolean>((resolve) => {
+        resolve(true);
+      });
+    };
+    const unsubscribed: boolean = await new PushNotification(new FakePushApi(), pushSupportStub).unsubscribePush();
+    expect(unsubscribed).to.equal(true);
+  });
+
+  it('should throw an exception in case of unsubscription errors', async () => {
+    fakeSubscription.unsubscribe = () => {
+      return new Promise<boolean>((resolve, reject) => {
+        reject(new Error('Failed to unsubscribe push notification.'));
+      });
+    };
+    let err;
+    try {
+      await new PushNotification(new FakePushApi(), pushSupportStub).unsubscribePush();
+    } catch (e) {
+      err = e;
+    }
+    expect(err.message).to.equal('Failed to unsubscribe push notification.');
+  });
+
 });

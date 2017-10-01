@@ -48,19 +48,11 @@ export class PushNotification {
     }
   }
 
-  public async unsubscribePush() {
-    const registration = await navigator.serviceWorker.ready;
+  public async unsubscribePush(): Promise<boolean> {
+    const registration = await this.pushSupport.getServiceWorkerRegistration()
     try {
       const subscription = await registration.pushManager.getSubscription();
-
-      try {
-        await subscription.unsubscribe();
-        console.log('Unsubscribed successfully.');
-        console.info('Push notification unsubscribed.');
-        this.deleteSubscriptionID(subscription);
-      } catch (error) {
-        console.error(error);
-      }
+      return await subscription.unsubscribe();
     } catch (error) {
       console.error('Failed to unsubscribe push notification.', error);
       throw error;
