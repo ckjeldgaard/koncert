@@ -22,8 +22,7 @@ export class PushNotification {
       throw new Error('Sorry, Push notifications aren\'t supported in your browser.');
     }
 
-    const registration = await navigator.serviceWorker.ready;
-    console.log('registration', registration);
+    const registration = await this.pushSupport.getServiceWorkerRegistration();
     try {
       const subscription: PushSubscription = await registration.pushManager.getSubscription();
       return (subscription) ? subscription : Promise.resolve(false);

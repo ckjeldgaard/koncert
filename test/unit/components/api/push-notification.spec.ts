@@ -3,6 +3,9 @@ import {PushNotification} from '../../../../src/components/subscriptions/helpers
 import {PushApi} from '../../../../src/components/subscriptions/api/push-api';
 import {PushSupport} from '../../../../src/components/subscriptions/helpers/push-support';
 
+let fakeSubscription: PushSubscription;
+let pushSupportStub: PushSupport;
+
 class FakePushApi implements PushApi {
   saveSubscription(subscriptionId: string, artistId: number) {
   }
@@ -11,12 +14,29 @@ class FakePushApi implements PushApi {
   }
 }
 
-let pushSupportStub = <PushSupport>{
-  getNotificationPermission: () => { return 'denied'; },
-  isPushManagerSupported: () => { return false; }
-};
-
 describe('PushNotification', () => {
+
+  beforeEach(() => {
+    fakeSubscription = <PushSubscription> {
+      endpoint: <USVString> 'fakeSubscription'
+    };
+    pushSupportStub = <PushSupport>{
+      getNotificationPermission: () => { return 'denied'; },
+      isPushManagerSupported: () => { return false; },
+      getServiceWorkerRegistration: () => {
+        return new Promise<ServiceWorkerRegistration>((resolve) => {
+          resolve( <ServiceWorkerRegistration> {
+            pushManager: <PushManager>{
+              getSubscription: () => { return new Promise<PushSubscription>((resolve) => {
+                resolve(fakeSubscription);
+              }); }
+            },
+          });
+        });
+      }
+    };
+  });
+
   it('should throw an error if permission is denied', async () => {
     let err;
     try {
@@ -36,6 +56,23 @@ describe('PushNotification', () => {
       err = e;
     }
     expect(err.message).to.equal('Sorry, Push notifications aren\'t supported in your browser.');
+  });
+
+  it('should get a service worker registration', async () => {
+    pushSupportStub.getNotificationPermission =  () => { return 'granted'; };
+    pushSupportStub.isPushManagerSupported =  () => { return true; };
+
+    const pushSubscription = await new PushNotification(new FakePushApi(), pushSupportStub).isPushSupported();
+    expect(pushSubscription).to.equal(fakeSubscription);
+  });
+
+  it('should return false if no service worker registration', async () => {
+    pushSupportStub.getNotificationPermission =  () => { return 'granted'; };
+    pushSupportStub.isPushManagerSupported =  () => { return true; };
+    fakeSubscription = null;
+
+    const returnValue = await new PushNotification(new FakePushApi(), pushSupportStub).isPushSupported();
+    expect(returnValue).to.be.false;
   });
 
 });
