@@ -97,15 +97,40 @@ describe('PushNotification', () => {
       return new Promise<ServiceWorkerRegistration>((resolve) => {
         resolve( <ServiceWorkerRegistration> {
           pushManager: <PushManager>{
-            subscribe: () => { return new Promise<PushSubscription>((resolve) => {
-              resolve(fakeSubscription);
-            }); }
+            subscribe: () => {
+              return new Promise<PushSubscription>((resolve) => {
+                resolve(fakeSubscription);
+              });
+            }
           },
         });
       });
     };
     const pushSubscription: PushSubscription = await new PushNotification(new FakePushApi(), pushSupportStub).subscribePush();
     expect(pushSubscription).to.equal(fakeSubscription);
+  });
+
+  it('should throw an error if subscription is not possible', async () => {
+    let err;
+    try {
+      pushSupportStub.getServiceWorkerRegistration =  () => {
+        return new Promise<ServiceWorkerRegistration>((resolve) => {
+          resolve( <ServiceWorkerRegistration> {
+            pushManager: <PushManager>{
+              subscribe: () => {
+                return new Promise<PushSubscription>((resolve, reject) => {
+                  reject(new Error('Cannot subscribe to push notifications'));
+                });
+              }
+            },
+          });
+        });
+      };
+      await new PushNotification(new FakePushApi(), pushSupportStub).subscribePush();
+    } catch (e) {
+      err = e;
+    }
+    expect(err.message).to.equal('Cannot subscribe to push notifications');
   });
 
 });
