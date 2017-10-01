@@ -49,7 +49,7 @@ export class PushNotification {
   }
 
   public async unsubscribePush(): Promise<boolean> {
-    const registration = await this.pushSupport.getServiceWorkerRegistration()
+    const registration = await this.pushSupport.getServiceWorkerRegistration();
     try {
       const subscription = await registration.pushManager.getSubscription();
       return await subscription.unsubscribe();
