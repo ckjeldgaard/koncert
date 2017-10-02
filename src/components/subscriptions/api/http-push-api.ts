@@ -29,14 +29,9 @@ export class HttpPushApi implements PushApi {
     let subscriptions: Artist[] = [];
     try {
       const response: AxiosResponse = await axios.get(process.env.PUSH_API_URL + this.GET_ENDPOINT + subscriptionId);
-      console.log('response', response.data.subscriptions);
       for (let key in response.data.subscriptions) {
-
         subscriptions.push(<Artist>response.data.subscriptions[key]);
-        // data[key].id = key;
-        // subscriptions.push(data[key]);
       }
-
       return subscriptions;
     } catch (e) {
       console.error('An error occurred while getting subscriptions', e);
