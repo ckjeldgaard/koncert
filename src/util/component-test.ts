@@ -88,8 +88,8 @@ export class MockServiceApi implements ServiceApi {
   };
 
   public static testArtists: Artist[] = [
-    new Artist('alice', 'Alice', 'alice'),
-    new Artist('bob', 'Bob', 'bob')
+    new Artist(1, 'Alice', 'alice'),
+    new Artist(2, 'Bob', 'bob')
   ];
 
   constructor(private serviceSpy: SinonSpy) {

@@ -17,16 +17,19 @@ export class SubscriptionsComponent extends Vue {
   public buttonDisabled = true;
   public artistsSearchResult: Artist[] = [];
   public errorMessage: string = '';
+  public currentSubscriptions: Artist[] = [];
 
   private selectedArtist: Artist;
   private searchField: HTMLInputElement;
   private pushNotification: PushNotification;
+  private subscription: PushSubscription;
 
   @Inject() serviceApi: ServiceApi;
   @Inject() bus: Vue;
 
   mounted() {
     this.searchField = this.$refs['search'] as HTMLInputElement;
+
   }
 
   async created() {
@@ -35,24 +38,18 @@ export class SubscriptionsComponent extends Vue {
       const subscription = await this.pushNotification.isPushSupported();
       if (!subscription) {
         await this.handleSubscription();
+      } else {
+        this.subscription = <PushSubscription>subscription;
       }
 
-      console.log('subscription = ', subscription);
-      await this.pushNotification.saveSubscriptionID((<PushSubscription>subscription));
-
+      this.updateCurrentSubscriptions();
     } catch (e) {
       this.errorMessage = e.message;
-      console.error('Error occurred: ', e);
     }
   }
 
-  private async handleSubscription() {
-    try {
-      await this.pushNotification.subscribePush();
-    } catch (e) {
-      this.errorMessage = e.toString();
-      console.error('Error occurred: ', e);
-    }
+  private async updateCurrentSubscriptions(): Promise<void> {
+    this.currentSubscriptions = await this.pushNotification.getCurrentSubscriptions(this.subscription);
   }
 
   public search(searchQuery: string) {
@@ -78,8 +75,27 @@ export class SubscriptionsComponent extends Vue {
     this.artistsSearchResult = [];
   }
 
-  public addSelected(): void {
-    console.log('ADD SELECTED', this.selectedArtist);
+  public addSelectedClick(): boolean {
+    this.addSelected();
+    return false;
+  }
+
+  private async addSelected() {
+    try {
+      await this.pushNotification.saveSubscription(this.subscription, this.selectedArtist);
+
+      this.updateCurrentSubscriptions();
+    } catch (e) {
+      this.errorMessage = e.message;
+    }
+  }
+
+  private async handleSubscription() {
+    try {
+      await this.pushNotification.subscribePush();
+    } catch (e) {
+      this.errorMessage = e.toString();
+    }
   }
 
   public close(): void {

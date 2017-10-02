@@ -1,7 +1,10 @@
 import {PushApi} from '../api/push-api';
 import {PushSupport} from './push-support';
+import {Artist} from '../../../model/artist';
 
 export class PushNotification {
+
+  private static readonly LOCALSTORAGE_SUBSCRIPTIONS_KEY = 'subscriptions';
 
   private readonly pushApi: PushApi;
   private readonly pushSupport: PushSupport;
@@ -59,17 +62,22 @@ export class PushNotification {
     }
   }
 
-  public async saveSubscriptionID(subscription: PushSubscription) {
-    const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
-    console.log('saveSubscriptionID. Subscription ID = ', subscriptionId);
+  public async saveSubscription(subscription: PushSubscription, artist: Artist) {
+    await this.pushApi.saveSubscription(this.subscriptionId(subscription), artist.id);
+  }
 
-    await this.pushApi.saveSubscription(subscriptionId, 4);
+  public async getCurrentSubscriptions(subscription: PushSubscription): Promise<Artist[]> {
+    return await this.pushApi.getSubscriptions(this.subscriptionId(subscription));
   }
 
   public deleteSubscriptionID(subscription) {
     const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
     console.log('deleteSubscriptionID. Subscription ID = ', subscriptionId);
     // TODO: Delete subscription via API
+  }
+
+  private subscriptionId(subscription: PushSubscription): string {
+    return subscription.endpoint.split('gcm/send/')[1];
   }
 
 }

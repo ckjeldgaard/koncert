@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import {PushNotification} from '../../../../src/components/subscriptions/helpers/push-notification';
 import {PushApi} from '../../../../src/components/subscriptions/api/push-api';
 import {PushSupport} from '../../../../src/components/subscriptions/helpers/push-support';
+import {Artist} from '../../../../src/model/artist';
 
 let fakeSubscription: PushSubscription;
 let pushSupportStub: PushSupport;
@@ -11,6 +12,9 @@ class FakePushApi implements PushApi {
   }
 
   deleteSubscription(subscriptionId: string, artistId: number) {
+  }
+  getSubscriptions(subscriptionId: string): Promise<Artist[]> {
+    return undefined;
   }
 }
 
