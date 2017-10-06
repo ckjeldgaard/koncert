@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import {spy, assert, SinonSpy} from 'sinon';
 import {PushNotification} from '../../../../src/components/subscriptions/helpers/push-notification';
 import {PushApi} from '../../../../src/components/subscriptions/api/push-api';
 import {PushSupport} from '../../../../src/components/subscriptions/helpers/push-support';
@@ -8,7 +9,15 @@ let fakeSubscription: PushSubscription;
 let pushSupportStub: PushSupport;
 
 class FakePushApi implements PushApi {
+
+  private readonly apiSpy: SinonSpy;
+
+  constructor(spy?: SinonSpy) {
+    this.apiSpy = spy;
+  }
+
   saveSubscription(subscriptionId: string, artistId: number) {
+    this.apiSpy(subscriptionId, artistId);
   }
 
   deleteSubscription(subscriptionId: string, artistId: number) {
@@ -22,7 +31,7 @@ describe('PushNotification', () => {
 
   beforeEach(() => {
     fakeSubscription = <PushSubscription> {
-      endpoint: <USVString> 'fakeSubscription'
+      endpoint: <USVString> 'gcm/send/fakeSubscriptionId'
     };
     pushSupportStub = <PushSupport>{
       getNotificationPermission: () => { return 'denied'; },
@@ -160,6 +169,12 @@ describe('PushNotification', () => {
       err = e;
     }
     expect(err.message).to.equal('Failed to unsubscribe push notification.');
+  });
+
+  it('should save a subscription', async () => {
+    let pushApiSpy = spy();
+    await new PushNotification(new FakePushApi(pushApiSpy), pushSupportStub).saveSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
+    assert.calledWith(pushApiSpy, 'fakeSubscriptionId', 1);
   });
 
 });
