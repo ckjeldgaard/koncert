@@ -51,7 +51,7 @@ var configuration = {
     includeAllSources: true,
     check: {
       global: {
-        statements: coverageThreshold
+        lines: coverageThreshold
       }
     }
   },
