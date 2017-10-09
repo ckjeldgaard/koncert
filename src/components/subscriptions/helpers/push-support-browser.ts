@@ -11,6 +11,7 @@ export class PushSupportBrowser implements PushSupport {
   }
 
   async getServiceWorkerRegistration(): Promise<ServiceWorkerRegistration> {
+    console.log('navigator in pushsupport = ', navigator);
     return await navigator.serviceWorker.ready;
   }
 }

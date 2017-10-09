@@ -21,6 +21,7 @@ class FakePushApi implements PushApi {
   }
 
   deleteSubscription(subscriptionId: string, artistId: number) {
+    this.apiSpy(subscriptionId, artistId);
   }
   getSubscriptions(subscriptionId: string): Promise<Artist[]> {
     return undefined;
@@ -174,6 +175,12 @@ describe('PushNotification', () => {
   it('should save a subscription', async () => {
     let pushApiSpy = spy();
     await new PushNotification(new FakePushApi(pushApiSpy), pushSupportStub).saveSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
+    assert.calledWith(pushApiSpy, 'fakeSubscriptionId', 1);
+  });
+
+  it('should delete a subscription', async () => {
+    let pushApiSpy = spy();
+    await new PushNotification(new FakePushApi(pushApiSpy), pushSupportStub).deleteSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
     assert.calledWith(pushApiSpy, 'fakeSubscriptionId', 1);
   });
 

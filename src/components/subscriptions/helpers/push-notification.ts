@@ -62,7 +62,7 @@ export class PushNotification {
     }
   }
 
-  public async saveSubscription(subscription: PushSubscription, artist: Artist) {
+  public async saveSubscription(subscription: PushSubscription, artist: Artist): Promise<void> {
     await this.pushApi.saveSubscription(this.subscriptionId(subscription), artist.id);
   }
 
@@ -70,10 +70,8 @@ export class PushNotification {
     return await this.pushApi.getSubscriptions(this.subscriptionId(subscription));
   }
 
-  public deleteSubscriptionID(subscription) {
-    const subscriptionId = subscription.endpoint.split('gcm/send/')[1];
-    console.log('deleteSubscriptionID. Subscription ID = ', subscriptionId);
-    // TODO: Delete subscription via API
+  public async deleteSubscription(subscription: PushSubscription, artist: Artist): Promise<void> {
+    await this.pushApi.deleteSubscription(this.subscriptionId(subscription), artist.id);
   }
 
   private subscriptionId(subscription: PushSubscription): string {
