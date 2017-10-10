@@ -4,8 +4,8 @@ import {Artist} from '../../../model/artist';
 
 export class HttpPushApi implements PushApi {
 
-  private readonly SAVE_ENDPOINT: string = 'firebase/api/add';
-  private readonly GET_ENDPOINT: string = 'firebase/api/get/';
+  public static readonly SAVE_ENDPOINT: string = 'firebase/api/add';
+  public static readonly GET_ENDPOINT: string = 'firebase/api/get/';
 
   async saveSubscription(subscriptionId: string, artistId: number) {
 
@@ -14,7 +14,7 @@ export class HttpPushApi implements PushApi {
     params.append('artist_id', artistId.toString());
 
     try {
-      const response: AxiosResponse = await axios.post(process.env.PUSH_API_URL + this.SAVE_ENDPOINT, params);
+      const response: AxiosResponse = await axios.post(process.env.PUSH_API_URL + HttpPushApi.SAVE_ENDPOINT, params);
       console.log('response', response);
     } catch (e) {
       console.error('An error occurred while saving', e);
@@ -28,7 +28,7 @@ export class HttpPushApi implements PushApi {
   async getSubscriptions(subscriptionId: string): Promise<Artist[]> {
     let subscriptions: Artist[] = [];
     try {
-      const response: AxiosResponse = await axios.get(process.env.PUSH_API_URL + this.GET_ENDPOINT + subscriptionId);
+      const response: AxiosResponse = await axios.get(process.env.PUSH_API_URL + HttpPushApi.GET_ENDPOINT + subscriptionId);
       for (let key in response.data.subscriptions) {
         subscriptions.push(<Artist>response.data.subscriptions[key]);
       }
