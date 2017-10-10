@@ -50,4 +50,10 @@ describe('HttpPushApi', () => {
     }
     expect(err.message).to.equal('A save error occurred');
   });
+
+  it('should perform a delete request', async () => {
+    const stub: SinonStub = sandbox.stub(axios, 'delete').returns(new Promise((r) => r({})));
+    await new HttpPushApi().deleteSubscription('testSubscriptionId', 1);
+    assert.calledWith(stub, process.env.PUSH_API_URL + HttpPushApi.DELETE_ENDPOINT + 'testSubscriptionId' + '/' + 1);
+  });
 });

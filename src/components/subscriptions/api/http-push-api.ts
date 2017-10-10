@@ -6,6 +6,7 @@ export class HttpPushApi implements PushApi {
 
   public static readonly SAVE_ENDPOINT: string = 'firebase/api/add';
   public static readonly GET_ENDPOINT: string = 'firebase/api/get/';
+  public static readonly DELETE_ENDPOINT: string = 'firebase/api/delete/';
 
   async saveSubscription(subscriptionId: string, artistId: number) {
 
@@ -17,12 +18,12 @@ export class HttpPushApi implements PushApi {
       const response: AxiosResponse = await axios.post(process.env.PUSH_API_URL + HttpPushApi.SAVE_ENDPOINT, params);
       console.log('response', response);
     } catch (e) {
-      console.error('An error occurred while saving', e);
       throw e;
     }
   }
 
-  deleteSubscription(subscriptionId: string, artistId: number) {
+  async deleteSubscription(subscriptionId: string, artistId: number) {
+    await axios.delete(process.env.PUSH_API_URL + HttpPushApi.DELETE_ENDPOINT + subscriptionId + '/' + artistId);
   }
 
   async getSubscriptions(subscriptionId: string): Promise<Artist[]> {
@@ -34,7 +35,6 @@ export class HttpPushApi implements PushApi {
       }
       return subscriptions;
     } catch (e) {
-      console.error('An error occurred while getting subscriptions', e);
       throw e;
     }
   }
