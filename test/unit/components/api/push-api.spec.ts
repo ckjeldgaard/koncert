@@ -22,8 +22,7 @@ describe('HttpPushApi', () => {
   });
 
   it('should throw an exception in case of an error get getting subscriptions', async () => {
-    const error: Error = new Error('An error occurred');
-    sandbox.stub(axios, 'get').throws(error);
+    sandbox.stub(axios, 'get').throws(new Error('An error occurred'));
 
     let err;
     try {
@@ -38,5 +37,17 @@ describe('HttpPushApi', () => {
     const stub: SinonStub = sandbox.stub(axios, 'post').returns(new Promise((r) => r({})));
     await new HttpPushApi().saveSubscription('', 1);
     assert.calledWith(stub, process.env.PUSH_API_URL + HttpPushApi.SAVE_ENDPOINT);
+  });
+
+  it('should throw an exception in case of an error when saving subscriptions', async () => {
+    sandbox.stub(axios, 'post').throws(new Error('A save error occurred'));
+
+    let err;
+    try {
+      await new HttpPushApi().saveSubscription('testSubscriptionId', 1);
+    } catch (e) {
+      err = e;
+    }
+    expect(err.message).to.equal('A save error occurred');
   });
 });
