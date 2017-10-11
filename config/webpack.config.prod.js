@@ -67,6 +67,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     inject: true,
     template: helpers.root('/src/index.html'),
     favicon: helpers.root('/src/favicon.ico'),
+    excludeChunks: ['sw-push-listener'],
     minify: {
       removeComments: true,
       collapseWhitespace: true,

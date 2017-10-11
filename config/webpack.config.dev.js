@@ -29,7 +29,8 @@ webpackConfig.plugins = [...webpackConfig.plugins,
   new HtmlWebpackPlugin({
     inject: true,
     template: helpers.root('/src/index.html'),
-    favicon: helpers.root('/src/favicon.ico')
+    favicon: helpers.root('/src/favicon.ico'),
+    excludeChunks: ['sw-push-listener']
   }),
   new DefinePlugin({
     'process.env': env
@@ -40,6 +41,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     staticFileGlobs: [],
     minify: false,
     handleFetch: false,
+    importScripts: ['js/sw-push-listener.[hash].js']
   })
 ];
 

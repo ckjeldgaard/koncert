@@ -42,8 +42,11 @@ export class SubscriptionsComponent extends Vue {
         this.subscription = <PushSubscription>subscription;
       }
 
+      console.log('subscription = ', this.subscription);
+
       this.updateCurrentSubscriptions();
     } catch (e) {
+      console.error(e);
       this.errorMessage = e.message;
     }
   }
@@ -75,7 +78,7 @@ export class SubscriptionsComponent extends Vue {
     this.artistsSearchResult = [];
   }
 
-  public addSelectedClick(): boolean {
+  public addSelectedClick(event): boolean {
     this.addSelected();
     return false;
   }
@@ -94,6 +97,7 @@ export class SubscriptionsComponent extends Vue {
     try {
       await this.pushNotification.subscribePush();
     } catch (e) {
+      console.error(e);
       this.errorMessage = e.toString();
     }
   }

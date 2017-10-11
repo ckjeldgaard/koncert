@@ -3,7 +3,8 @@ const helpers = require('./helpers'),
 
 let config = {
   entry: {
-    'main': helpers.root('/src/main.ts')
+    'main': helpers.root('/src/main.ts'),
+    'sw-push-listener': helpers.root('/src/sw-push-listener.ts')
   },
   output: {
     path: helpers.root('/dist'),
