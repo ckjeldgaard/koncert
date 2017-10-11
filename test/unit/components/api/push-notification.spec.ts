@@ -4,6 +4,7 @@ import {PushNotification} from '../../../../src/components/subscriptions/helpers
 import {PushApi} from '../../../../src/components/subscriptions/api/push-api';
 import {PushSupport} from '../../../../src/components/subscriptions/helpers/push-support';
 import {Artist} from '../../../../src/model/artist';
+import {ConcertNotification} from '../../../../src/model/concert-notification';
 
 let fakeSubscription: PushSubscription;
 let pushSupportStub: PushSupport;
@@ -23,7 +24,12 @@ class FakePushApi implements PushApi {
   deleteSubscription(subscriptionId: string, artistId: number) {
     this.apiSpy(subscriptionId, artistId);
   }
+
   getSubscriptions(subscriptionId: string): Promise<Artist[]> {
+    return undefined;
+  }
+
+  getNotification(subscriptionId: string): Promise<ConcertNotification> {
     return undefined;
   }
 }

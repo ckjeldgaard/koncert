@@ -1,6 +1,7 @@
 import {PushApi} from '../api/push-api';
 import {PushSupport} from './push-support';
 import {Artist} from '../../../model/artist';
+import {ConcertNotification} from '../../../model/concert-notification';
 
 export class PushNotification {
 
@@ -68,6 +69,10 @@ export class PushNotification {
 
   public async getCurrentSubscriptions(subscription: PushSubscription): Promise<Artist[]> {
     return await this.pushApi.getSubscriptions(this.subscriptionId(subscription));
+  }
+
+  public async getNotification(subscription: PushSubscription): Promise<ConcertNotification> {
+    return await this.pushApi.getNotification(this.subscriptionId(subscription));
   }
 
   public async deleteSubscription(subscription: PushSubscription, artist: Artist): Promise<void> {

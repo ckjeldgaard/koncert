@@ -93,6 +93,15 @@ export class SubscriptionsComponent extends Vue {
     }
   }
 
+  public async deleteSubscription(artist: Artist) {
+    try {
+      await this.pushNotification.deleteSubscription(this.subscription, artist);
+      this.updateCurrentSubscriptions();
+    } catch (e) {
+      this.errorMessage = e.message;
+    }
+  }
+
   private async handleSubscription() {
     try {
       await this.pushNotification.subscribePush();

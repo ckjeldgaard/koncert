@@ -1,4 +1,7 @@
-// import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
+import {HttpPushApi} from './components/subscriptions/api/http-push-api';
+import {PushNotification} from './components/subscriptions/helpers/push-notification';
+import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
+import {ConcertNotification} from './model/concert-notification';
 
 interface ExtendableWindow extends Window {
   registration: ServiceWorkerRegistration;
@@ -8,27 +11,24 @@ interface ExtendableEvent extends Event {
   waitUntil(fn: Promise<any>): void;
 }
 
-let thisself: ExtendableWindow = <ExtendableWindow>self;
+let selfWindow: ExtendableWindow = <ExtendableWindow>self;
 
-thisself.addEventListener('push', async (event: ExtendableEvent) => {
-
-  console.info('Event: Push ', event);
-
-  let title = 'New concert';
-
-  let body = {
-    'body': 'Click to see the concert',
-    'tag': 'pwa',
-    'icon': './assets/img/icons/icon-128x128.png'
-  };
-
-  /*
-  const registration: ServiceWorkerRegistration = await new PushSupportBrowser().getServiceWorkerRegistration();
-  registration.showNotification(title, body);
-  */
-
+selfWindow.addEventListener('push', async (event: ExtendableEvent) => {
   event.waitUntil(
-    thisself.registration.showNotification(title, body)
+    (async() => {
+      const subscription: PushSubscription = await selfWindow.registration.pushManager.getSubscription();
+      try {
+        const notification: ConcertNotification = await new PushNotification(new HttpPushApi(), new PushSupportBrowser()).getNotification(subscription);
+        return selfWindow.registration.showNotification(
+          notification.title,
+          {
+            'body': notification.body,
+            'icon': './assets/img/icons/icon-128x128.png'
+          }
+        );
+      } catch (e) {
+        console.error('Error when fetching notification', e);
+      }
+    })()
   );
-
 });
