@@ -16,7 +16,7 @@ var configuration = {
   port: 9876,
   colors: true,
   autoWatch: false,
-  browsers: ['ChromeHeadless'],
+  browsers: ['ChromeHeadless', 'FirefoxHeadless'],
   mime: {
     'text/x-typescript': ['ts']
   },
@@ -25,6 +25,10 @@ var configuration = {
     Chrome_travis_ci: {
       base: 'Chrome',
       flags: ['--no-sandbox']
+    },
+    FirefoxHeadless: {
+      base: 'Firefox',
+      flags: [ '-headless' ],
     }
   }
 };
