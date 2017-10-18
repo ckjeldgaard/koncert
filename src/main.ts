@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, {RouterOptions} from 'vue-router';
 import moment from 'moment';
 
 import './sass/main.scss';
@@ -21,7 +21,7 @@ import {SubscriptionsComponent} from './components/subscriptions/subscriptions';
 // register the plugin
 Vue.use(VueRouter);
 
-let router = new VueRouter({
+let router = new VueRouter(<RouterOptions>{
   routes: [
     { path: '/', component: HomeComponent },
     { path: '/about', component: AboutComponent },

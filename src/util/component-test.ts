@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, {Component} from 'vue';
 import { SinonSpy } from 'sinon';
 import merge from 'lodash.merge';
 import { ILogger } from './log';
@@ -7,7 +7,7 @@ import {ServiceCallback} from '../data/servic-callback';
 import {Artist} from '../model/artist';
 
 export interface IComponents {
-  [key: string]: Vue.Component;
+  [key: string]: Component;
 }
 
 export class ComponentTest {

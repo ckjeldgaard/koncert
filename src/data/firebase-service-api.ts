@@ -1,7 +1,7 @@
 import {ServiceApi} from './service-api';
 import {ServiceCallback} from './servic-callback';
 import * as Firebase from 'firebase';
-import Database = firebase.database.Database;
+import Database = Firebase.database.Database;
 import {Concert} from '../model/concert';
 import {Artist} from '../model/artist';
 
