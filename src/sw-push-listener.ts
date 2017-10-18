@@ -23,7 +23,7 @@ selfWindow.addEventListener('push', async (event: ExtendableEvent) => {
           notification.title,
           {
             'body': notification.body,
-            'icon': './assets/img/icons/icon-128x128.png'
+            'icon': '../assets/img/icons/icon-128x128.png'
           }
         );
       } catch (e) {
