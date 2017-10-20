@@ -11,6 +11,16 @@ interface ExtendableEvent extends Event {
   waitUntil(fn: Promise<any>): void;
 }
 
+interface Clients {
+  openWindow(url: USVString);
+}
+
+interface NotificationEvent extends ExtendableEvent {
+  action: string;
+  notification: Notification;
+}
+
+declare const clients: Clients;
 let selfWindow: ExtendableWindow = <ExtendableWindow>self;
 
 selfWindow.addEventListener('push', async (event: ExtendableEvent) => {
@@ -23,12 +33,20 @@ selfWindow.addEventListener('push', async (event: ExtendableEvent) => {
           notification.title,
           {
             'body': notification.body,
-            'icon': '../assets/img/icons/icon-128x128.png'
+            'icon': '../assets/img/icons/icon-128x128.png',
+            'tag': notification.url
           }
         );
       } catch (e) {
         console.error('Error when fetching notification', e);
       }
     })()
+  );
+});
+
+selfWindow.addEventListener('notificationclick', async (event: NotificationEvent) => {
+  console.log('notificationclick', event);
+  event.waitUntil(
+    clients.openWindow(event.notification.tag)
   );
 });

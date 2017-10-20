@@ -33,7 +33,6 @@ export class SubscriptionsComponent extends Vue {
   }
 
   async created() {
-    console.log('created');
     this.pushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
     try {
       const subscription = await this.pushNotification.isPushSupported();

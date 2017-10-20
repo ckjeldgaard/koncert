@@ -45,6 +45,6 @@ export class HttpPushApi implements PushApi {
     const url: string = process.env.PUSH_API_URL + HttpPushApi.NOTIFICATION_ENDPOINT + subscriptionId;
     const response = await fetch(url);
     const data = await response.json();
-    return new ConcertNotification(data.notification.title, data.notification.body);
+    return new ConcertNotification(data.notification.title, data.notification.body, window.location.href);
   }
 }
