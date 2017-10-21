@@ -2,13 +2,14 @@ import { expect } from 'chai';
 import {mount, Wrapper} from 'avoriaz';
 import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
 import {MockServiceApi} from '../../../src/util/component-test';
-import {spy, assert, stub} from 'sinon';
+import {spy, assert, stub, SinonStub} from 'sinon';
 import {PushNotification} from '../../../src/components/subscriptions/helpers/push-notification';
 import {FakePushApi} from '../util/fake-push-api';
 import {PushSupport} from '../../../src/components/subscriptions/helpers/push-support';
 
 let fakeSubscription: PushSubscription;
 let pushSupportStub: PushSupport;
+let confirmStub: SinonStub = stub(window, 'confirm').returns(true);
 
 describe('Subscriptions component', () => {
 
@@ -108,5 +109,29 @@ describe('Subscriptions component', () => {
     wrapper.find('input')[0].trigger('change');
 
     assert.calledOnce(subscribeSpy);
+  });
+
+  it('should unsubscribe for push notifications', async () => {
+    let push: PushNotification = new PushNotification(new FakePushApi(), pushSupportStub);
+    confirmStub.returns(true);
+    const unsubscribeSpy = spy(push, 'unsubscribePush');
+
+    let wrapper: Wrapper = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(spy()), pushNotification: push}});
+    wrapper.setData({pushEnabled: false});
+    wrapper.find('input')[0].trigger('change');
+
+    assert.calledOnce(unsubscribeSpy);
+  });
+
+  it('should not unsubscribe for push notifications if user cancels confirm dialog', async () => {
+    let push: PushNotification = new PushNotification(new FakePushApi(), pushSupportStub);
+    confirmStub.returns(false);
+    const unsubscribeSpy = spy(push, 'unsubscribePush');
+
+    let wrapper: Wrapper = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(spy()), pushNotification: push}});
+    wrapper.setData({pushEnabled: false});
+    wrapper.find('input')[0].trigger('change');
+
+    assert.notCalled(unsubscribeSpy);
   });
 });
