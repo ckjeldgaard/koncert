@@ -20,7 +20,7 @@ export class SubscriptionsComponent extends Vue {
   public currentSubscriptions: Artist[] = [];
 
   private selectedArtist: Artist;
-  public searchField: HTMLInputElement;
+  private searchField: HTMLInputElement;
   private subscription: PushSubscription;
 
   @Inject() pushNotification: PushNotification;
@@ -31,10 +31,10 @@ export class SubscriptionsComponent extends Vue {
     this.searchField = this.$refs['search'] as HTMLInputElement;
     try {
       const subscription = await this.pushNotification.isPushSupported();
-      if (subscription instanceof PushSubscription) {
+      if (subscription !== false) {
         this.subscription = <PushSubscription>subscription;
         this.pushEnabled = true;
-        this.updateCurrentSubscriptions();
+        await this.updateCurrentSubscriptions();
       }
     } catch (e) {
       this.errorMessage = e.message;
@@ -43,7 +43,6 @@ export class SubscriptionsComponent extends Vue {
 
   public async changePermission(event) {
     if (this.pushEnabled) {
-      console.log('changePermission');
       try {
         this.subscription = await this.pushNotification.subscribePush();
         this.updateCurrentSubscriptions();
