@@ -63,6 +63,7 @@ export class SubscriptionsComponent extends Vue {
 
   private async updateCurrentSubscriptions(): Promise<void> {
     if (!isUndefined(this.subscription)) {
+      console.log('updateCurrentSubscriptions');
       this.currentSubscriptions = await this.pushNotification.getCurrentSubscriptions(this.subscription);
     }
   }

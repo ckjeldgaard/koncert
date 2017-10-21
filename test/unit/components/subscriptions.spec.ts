@@ -98,4 +98,15 @@ describe('Subscriptions component', () => {
     assert.calledOnce(deleteSpy);
     assert.calledWith(deleteSpy, fakeSubscription, MockServiceApi.testArtists[0]);
   });
+
+  it('should change permissions', async () => {
+    let push: PushNotification = new PushNotification(new FakePushApi(), pushSupportStub);
+    const subscribeSpy = spy(push, 'subscribePush');
+
+    let wrapper: Wrapper = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(spy()), pushNotification: push}});
+    wrapper.setData({pushEnabled: true});
+    wrapper.find('input')[0].trigger('change');
+
+    assert.calledOnce(subscribeSpy);
+  });
 });
