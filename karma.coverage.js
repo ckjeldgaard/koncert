@@ -58,7 +58,7 @@ var configuration = {
   port: 9876,
   colors: true,
   autoWatch: false,
-  browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+  browsers: ['ChromeHeadless'],
   mime: {
     'text/x-typescript': ['ts']
   },
@@ -76,7 +76,7 @@ var configuration = {
 };
 
 if(process.env.TRAVIS) {
-  configuration.browsers = ['Chrome_travis_ci', 'FirefoxHeadless'];
+  configuration.browsers = ['Chrome_travis_ci'];
 }
 
 module.exports = function(config) {

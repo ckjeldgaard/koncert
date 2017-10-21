@@ -17,6 +17,9 @@ import {SelectComponent} from './components/select/select';
 import {SearchComponent} from './components/search/search';
 import {ServiceApi} from './data/service-api';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions';
+import {PushNotification} from './components/subscriptions/helpers/push-notification';
+import {HttpPushApi} from './components/subscriptions/api/http-push-api';
+import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -45,6 +48,7 @@ Vue.component('search', SearchComponent);
 Vue.component('subscriptions', SubscriptionsComponent);
 
 const eventBus = new Vue();
+const push: PushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
 
 let api: ServiceApi;
 if (process.env.ENV === 'development') {
@@ -73,6 +77,7 @@ let app = new Vue({
     return {
       serviceApi: api,
       bus: eventBus,
+      pushNotification: push,
     };
   },
   created() {

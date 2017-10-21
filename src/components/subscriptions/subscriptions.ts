@@ -5,8 +5,6 @@ import {ServiceApi} from '../../data/service-api';
 import {Inject} from 'vue-property-decorator';
 import {Artist} from '../../model/artist';
 import {PushNotification} from './helpers/push-notification';
-import {HttpPushApi} from './api/http-push-api';
-import {PushSupportBrowser} from './helpers/push-support-browser';
 import {isUndefined} from 'util';
 
 @Component({
@@ -23,18 +21,14 @@ export class SubscriptionsComponent extends Vue {
 
   private selectedArtist: Artist;
   public searchField: HTMLInputElement;
-  private pushNotification: PushNotification;
   private subscription: PushSubscription;
 
+  @Inject() pushNotification: PushNotification;
   @Inject() serviceApi: ServiceApi;
   @Inject() bus: Vue;
 
-  mounted() {
+  async mounted() {
     this.searchField = this.$refs['search'] as HTMLInputElement;
-  }
-
-  async created() {
-    this.pushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
     try {
       const subscription = await this.pushNotification.isPushSupported();
       if (subscription instanceof PushSubscription) {
