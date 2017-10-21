@@ -76,7 +76,6 @@ export class SubscriptionsComponent extends Vue {
 
   public search(searchQuery: string) {
     this.buttonDisabled = true;
-    console.log('searchQuery', searchQuery);
     if (searchQuery.length > 1) {
       this.serviceApi.searchArtists({
         onLoaded: (data) => {
