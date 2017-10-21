@@ -58,7 +58,7 @@ export class SubscriptionsComponent extends Vue {
         this.errorMessage = e.message;
       }
     } else {
-      if (confirm('Are you want to disable push notifications?')) {
+      if (confirm('Are you sure you want to disable push notifications?')) {
         this.pushNotification.unsubscribePush();
         this.subscription = null;
         this.currentSubscriptions = [];
