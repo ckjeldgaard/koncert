@@ -6,7 +6,7 @@ export class ConcertBuilder {
   private static readonly FEBRUARY_2017: number = 1487116800;
 
   private id: string;
-  private artists: string[];
+  private artists: object[];
   private cancelled: boolean;
   private dateStart: number;
   private dateEnd: number;
@@ -20,7 +20,7 @@ export class ConcertBuilder {
   private buyLink: string;
   private facebookLink: string;
 
-  constructor(id: string, artists: string[], cancelled: boolean, dateStart: number, dateEnd: number, festival: boolean, name: string, venue: string, province: string, genres: string[], startTime: string, ticketPrice: string, buyLink: string, facebookLink: string) {
+  constructor(id: string, artists: object[], cancelled: boolean, dateStart: number, dateEnd: number, festival: boolean, name: string, venue: string, province: string, genres: string[], startTime: string, ticketPrice: string, buyLink: string, facebookLink: string) {
     this.id = id;
     this.artists = artists;
     this.cancelled = cancelled;
@@ -75,7 +75,7 @@ export class ConcertBuilder {
     );
   }
 
-  public withArtists(artists: string[]): ConcertBuilder {
+  public withArtists(artists: object[]): ConcertBuilder {
     return new ConcertBuilder(
       this.id,
       artists,

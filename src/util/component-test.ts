@@ -5,6 +5,8 @@ import { ILogger } from './log';
 import {ServiceApi} from '../data/service-api';
 import {ServiceCallback} from '../data/servic-callback';
 import {Artist} from '../model/artist';
+import {DomainObjectBuilder} from '../../test/unit/domain-object-builder/dob';
+import {Concert} from '../model/concert';
 
 export interface IComponents {
   [key: string]: Component;
@@ -53,28 +55,6 @@ export class MockLogger implements ILogger {
 
 export class MockServiceApi implements ServiceApi {
 
-  public static JANUARY_2017: number = 1484438400;
-  public static FEBRUARY_2017: number = 1487116800;
-
-  public static testConcerts = {
-    concert1: {
-      cancelled: false,
-      dateEnd: MockServiceApi.JANUARY_2017,
-      dateStart: MockServiceApi.JANUARY_2017,
-      festival: true,
-      name: 'Concert 1',
-      venue: 'Venue 1'
-    },
-    concert2: {
-      cancelled: false,
-      dateEnd: MockServiceApi.FEBRUARY_2017,
-      dateStart: MockServiceApi.FEBRUARY_2017,
-      festival: true,
-      name: 'Concert 2',
-      venue: 'Venue 2'
-    }
-  };
-
   public static testProvinces = {
     bornholm: 'Bornholm',
     koebenhavn: 'København',
@@ -92,12 +72,35 @@ export class MockServiceApi implements ServiceApi {
     new Artist(2, 'Bob', 'bob')
   ];
 
+  public readonly concerts: Concert[] = [];
+
   constructor(private serviceSpy: SinonSpy) {
+    this.buildConcerts();
+  }
+
+  private buildConcerts() {
+    let time: number = new Date().getTime() / 1000;
+    const provinces: string[] = ['bornholm', 'koebenhavn', 'sydsoenderjylland'];
+    const genres: string[] = ['heavymetal', 'black', 'death'];
+
+    for (let i: number = 0; i < 10; i++) {
+      let concertDate = time + (i * 259200);
+      this.concerts.push(
+        DomainObjectBuilder.aNew().concert()
+          .withName('Concert' + i)
+          .startingAt(concertDate)
+          .endingAt(concertDate)
+          .withArtists([{id: 'artist' + i, name: 'Artist ' + i}])
+          .withGenres([genres[i % 3]])
+          .inProvince(provinces[i % 3])
+          .build()
+      );
+    }
   }
 
   getConcerts(callback: ServiceCallback, startAt: number) {
-    callback.onLoaded(MockServiceApi.testConcerts);
-    this.serviceSpy(MockServiceApi.testConcerts);
+    callback.onLoaded(this.concerts);
+    this.serviceSpy(this.concerts);
   }
 
   getProvinces(callback: ServiceCallback) {

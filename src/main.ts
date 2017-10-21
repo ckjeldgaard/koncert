@@ -20,6 +20,8 @@ import {SubscriptionsComponent} from './components/subscriptions/subscriptions';
 import {PushNotification} from './components/subscriptions/helpers/push-notification';
 import {HttpPushApi} from './components/subscriptions/api/http-push-api';
 import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
+import {MockServiceApi} from './util/component-test';
+import {spy} from 'sinon';
 
 // register the plugin
 Vue.use(VueRouter);
@@ -51,10 +53,14 @@ const eventBus = new Vue();
 const push: PushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
 
 let api: ServiceApi;
-if (process.env.ENV === 'development') {
-  api = new FirebaseServiceApi('koncert');
-} else {
-  api = new FirebaseServiceApi('koncert');
+switch (process.env.ENV) {
+  case 'production':
+  case 'development':
+    api = new FirebaseServiceApi('koncert');
+    break;
+  case 'mock':
+    api = new MockServiceApi(spy());
+    break;
 }
 
 if ('serviceWorker' in navigator) {

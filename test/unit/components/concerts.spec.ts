@@ -5,6 +5,7 @@ import Component from 'vue-class-component';
 import {spy, assert} from 'sinon';
 
 let serviceSpy = spy();
+let mockServiceApi = new MockServiceApi(serviceSpy);
 
 @Component({
   template: require('../../../src/components/concerts/concerts.html')
@@ -12,7 +13,7 @@ let serviceSpy = spy();
 class MockConcertsComponent extends ConcertsComponent {
   constructor() {
     super();
-    this.serviceApi = new MockServiceApi(serviceSpy);
+    this.serviceApi = mockServiceApi;
   }
 }
 
@@ -26,7 +27,7 @@ describe('Concerts component', () => {
   it('should verify the database mock', async () => {
     directiveTest.createComponent();
     await directiveTest.execute((vm) => {
-      assert.calledWith(serviceSpy, MockServiceApi.testConcerts);
+      assert.calledWith(serviceSpy, mockServiceApi.concerts);
     });
   });
 
