@@ -15,9 +15,13 @@ export class PushNotification {
     this.pushSupport = pushSupport;
   }
 
+  public notificationPermission(): string {
+    return this.pushSupport.getNotificationPermission();
+  }
+
   public async isPushSupported(): Promise<PushSubscription | boolean> {
     // Check whether the 'push notification' permission is denied by the user
-    if (this.pushSupport.getNotificationPermission() === 'denied') {
+    if (this.notificationPermission() === 'denied') {
       throw new Error('Push notifications are blocked.');
     }
 

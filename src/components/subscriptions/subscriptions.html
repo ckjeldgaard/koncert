@@ -8,9 +8,15 @@
   <div class="fixed-content">
     <h2>Subscriptions</h2>
     <p>Receive a push notification whenever there's a new concert with your favorite band!</p>
+    <p>
+    <label class="push" for="pushEnabled">
+      <input type="checkbox" id="pushEnabled" v-model="pushEnabled" @change="changePermission">
+      <span>Enable push notifications</span>
+    </label>
+    </p>
     <form>
       <div class="search-input">
-        <input type="search" placeholder="Search artists" @input="search($event.target.value)" ref="search" />
+        <input type="search" placeholder="Search artists" @input="search($event.target.value)" :disabled="!pushEnabled" ref="search" />
         <ul v-if="artistsSearchResult.length > 0" v-on-click-outside="close">
           <li v-for="artist in artistsSearchResult" @click="select(artist)">{{artist.name}}</li>
         </ul>
@@ -18,7 +24,7 @@
       <button class="btn--raised btn--accent" :disabled="buttonDisabled" @click="addSelected()">Add</button>
     </form>
   </div>
-  <ul class="subscriptions-list">
+  <ul class="subscriptions-list" v-if="pushEnabled">
     <li v-for="artist in currentSubscriptions"><p>{{artist.name}}</p><button class="btn--raised btn--red" @click="deleteSubscription(artist)">Delete</button></li>
   </ul>
 </div>

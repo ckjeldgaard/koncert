@@ -7,6 +7,7 @@ import {Artist} from '../../model/artist';
 import {PushNotification} from './helpers/push-notification';
 import {HttpPushApi} from './api/http-push-api';
 import {PushSupportBrowser} from './helpers/push-support-browser';
+import {isUndefined} from 'util';
 
 @Component({
   template: require('./subscriptions.html'),
@@ -14,13 +15,14 @@ import {PushSupportBrowser} from './helpers/push-support-browser';
 })
 export class SubscriptionsComponent extends Vue {
 
+  public pushEnabled = false;
   public buttonDisabled = true;
   public artistsSearchResult: Artist[] = [];
   public errorMessage: string = '';
   public currentSubscriptions: Artist[] = [];
 
   private selectedArtist: Artist;
-  private searchField: HTMLInputElement;
+  public searchField: HTMLInputElement;
   private pushNotification: PushNotification;
   private subscription: PushSubscription;
 
@@ -29,30 +31,46 @@ export class SubscriptionsComponent extends Vue {
 
   mounted() {
     this.searchField = this.$refs['search'] as HTMLInputElement;
-
   }
 
   async created() {
     this.pushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
     try {
       const subscription = await this.pushNotification.isPushSupported();
-      if (!subscription) {
-        await this.handleSubscription();
-      } else {
+      if (subscription instanceof PushSubscription) {
         this.subscription = <PushSubscription>subscription;
+        this.pushEnabled = true;
+        this.updateCurrentSubscriptions();
       }
-
-      console.log('subscription = ', this.subscription);
-
-      this.updateCurrentSubscriptions();
     } catch (e) {
-      console.error(e);
       this.errorMessage = e.message;
     }
   }
 
+  public async changePermission(event) {
+    if (this.pushEnabled) {
+      try {
+        this.subscription = await this.pushNotification.subscribePush();
+        this.updateCurrentSubscriptions();
+      } catch (e) {
+        this.pushEnabled = false;
+        this.errorMessage = e.message;
+      }
+    } else {
+      if (confirm('Are you want to disable push notifications?')) {
+        this.pushNotification.unsubscribePush();
+        this.subscription = null;
+        this.currentSubscriptions = [];
+      } else {
+        this.pushEnabled = true;
+      }
+    }
+  }
+
   private async updateCurrentSubscriptions(): Promise<void> {
-    this.currentSubscriptions = await this.pushNotification.getCurrentSubscriptions(this.subscription);
+    if (!isUndefined(this.subscription)) {
+      this.currentSubscriptions = await this.pushNotification.getCurrentSubscriptions(this.subscription);
+    }
   }
 
   public search(searchQuery: string) {
@@ -99,15 +117,6 @@ export class SubscriptionsComponent extends Vue {
       this.updateCurrentSubscriptions();
     } catch (e) {
       this.errorMessage = e.message;
-    }
-  }
-
-  private async handleSubscription() {
-    try {
-      this.subscription = await this.pushNotification.subscribePush();
-    } catch (e) {
-      console.error(e);
-      this.errorMessage = e.toString();
     }
   }
 

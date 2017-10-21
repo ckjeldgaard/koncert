@@ -12,6 +12,17 @@
     }
   }
   .fixed-content {
+    .push {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      input {
+        margin-right:$space-med;
+      }
+      span {
+        padding-top:7px;
+      }
+    }
     form {
       display: flex;
       flex-direction: row;
