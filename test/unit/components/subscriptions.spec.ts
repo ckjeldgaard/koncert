@@ -9,7 +9,8 @@ describe('Subscriptions component', () => {
   it('should search an artist', async () => {
     const wrapper: Wrapper = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi(spy())}});
 
-    const searchInput: Wrapper = wrapper.find('input')[0];
+    const searchInput: Wrapper = wrapper.find('input')[1];
+    (<HTMLInputElement>searchInput.element).disabled = false;
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
     searchInput.trigger('input');
 
@@ -20,7 +21,8 @@ describe('Subscriptions component', () => {
   it('should select an artist', async () => {
     const wrapper: Wrapper = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi(spy())}});
 
-    const searchInput: Wrapper = wrapper.find('input')[0];
+    const searchInput: Wrapper = wrapper.find('input')[1];
+    (<HTMLInputElement>searchInput.element).disabled = false;
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
     searchInput.trigger('input');
 
@@ -29,6 +31,6 @@ describe('Subscriptions component', () => {
     option.trigger('click');
 
     expect(wrapper.vm.$data['buttonDisabled']).to.be.false;
-    expect((<HTMLInputElement>wrapper.find('input')[0].element).value).to.equal('Alice');
+    expect((<HTMLInputElement>wrapper.find('input')[1].element).value).to.equal('Alice');
   });
 });

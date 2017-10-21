@@ -49,6 +49,7 @@ export class SubscriptionsComponent extends Vue {
 
   public async changePermission(event) {
     if (this.pushEnabled) {
+      console.log('changePermission');
       try {
         this.subscription = await this.pushNotification.subscribePush();
         this.updateCurrentSubscriptions();
@@ -75,6 +76,7 @@ export class SubscriptionsComponent extends Vue {
 
   public search(searchQuery: string) {
     this.buttonDisabled = true;
+    console.log('searchQuery', searchQuery);
     if (searchQuery.length > 1) {
       this.serviceApi.searchArtists({
         onLoaded: (data) => {
