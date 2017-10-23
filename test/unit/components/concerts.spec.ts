@@ -1,34 +1,26 @@
 import { expect } from 'chai';
 import { ConcertsComponent } from '../../../src/components/concerts/concerts';
-import {ComponentTest, MockServiceApi} from '../../../src/util/component-test';
-import Component from 'vue-class-component';
-import {spy, assert} from 'sinon';
+import {MockServiceApi} from '../../../src/util/component-test';
+import {spy, SinonSpy} from 'sinon';
+import {mount, Wrapper} from 'avoriaz';
+import Vue from 'vue';
 
-let serviceSpy = spy();
-let mockServiceApi = new MockServiceApi(serviceSpy);
-
-@Component({
-  template: require('../../../src/components/concerts/concerts.html')
-})
-class MockConcertsComponent extends ConcertsComponent {
-  constructor() {
-    super();
-    this.serviceApi = mockServiceApi;
-  }
-}
+const serviceSpy = spy();
+const mockServiceApi: MockServiceApi = new MockServiceApi(serviceSpy);
 
 describe('Concerts component', () => {
-  let directiveTest: ComponentTest;
 
+  let fakeBus: Vue;
+  let busSpy: SinonSpy;
   beforeEach(() => {
-    directiveTest = new ComponentTest('<div><concerts></concerts></div>', { 'concerts': MockConcertsComponent });
+    busSpy = spy();
+    fakeBus = new Vue();
+    fakeBus.$emit = busSpy;
   });
 
-  it('should verify the database mock', async () => {
-    directiveTest.createComponent();
-    await directiveTest.execute((vm) => {
-      assert.calledWith(serviceSpy, mockServiceApi.concerts);
-    });
+  it('should do something', () => {
+    const wrapper: Wrapper = mount(ConcertsComponent, {provide: {bus: fakeBus, serviceApi: mockServiceApi} });
+    expect(wrapper.vm.$data['concerts']).to.equal(mockServiceApi.concerts);
   });
 
 });

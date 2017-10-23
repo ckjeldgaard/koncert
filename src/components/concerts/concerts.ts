@@ -28,17 +28,15 @@ export class ConcertsComponent extends Vue {
   public selectedGenres: Genre[] = [];
 
   mounted() {
-    this.$nextTick(() => {
-      this.serviceApi.getConcerts({
-        onLoaded: (data) => {
-          this.concerts = data;
-          this.updateConcerts();
-        },
-        onError: (exception) => {
-          this.bus.$emit('error', exception);
-        },
-      }, this.currentTime);
-    });
+    this.serviceApi.getConcerts({
+      onLoaded: (data) => {
+        this.concerts = data;
+        this.updateConcerts();
+      },
+      onError: (exception) => {
+        this.bus.$emit('error', exception);
+      },
+    }, this.currentTime);
   }
 
   created() {
