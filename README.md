@@ -8,7 +8,7 @@
 
 ## Tools and libraries
 
-[Logos](https://i.imgur.com/28AMyei.png)
+![Logos](https://i.imgur.com/28AMyei.png)
 
 The web app is implemented using the JavaScript frontend framework [Vue.js](https://vuejs.org/) using [a CLI project template](https://github.com/ducksoupdev/vue-webpack-typescript) to set it up with [Webpack](https://webpack.github.io/) and [TypeScript](https://www.typescriptlang.org/).
 [Firebase Realtime Database](https://firebase.google.com/) is used to store concerts, artists, provinces and genres.
