@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { ConcertsComponent } from '../../../src/components/concerts/concerts';
 import {MockServiceApi} from '../../../src/util/component-test';
-import {spy, SinonSpy} from 'sinon';
+import {spy, assert, SinonSpy} from 'sinon';
 import {mount, Wrapper} from 'avoriaz';
 import Vue from 'vue';
 
@@ -15,12 +15,21 @@ describe('Concerts component', () => {
   beforeEach(() => {
     busSpy = spy();
     fakeBus = new Vue();
-    fakeBus.$emit = busSpy;
+    fakeBus.$on = busSpy;
   });
 
-  it('should do something', () => {
+  it('should display concerts on initial load', () => {
     const wrapper: Wrapper = mount(ConcertsComponent, {provide: {bus: fakeBus, serviceApi: mockServiceApi} });
     expect(wrapper.vm.$data['concerts']).to.equal(mockServiceApi.concerts);
   });
+
+  /*
+  it('should update the concerts list when a province is selected', () => {
+    const wrapper: Wrapper = mount(ConcertsComponent, {provide: {bus: fakeBus, serviceApi: mockServiceApi} });
+    // wrapper.vm['bus'].$emit('province', 'koebenhavn');
+    assert.called(busSpy);
+    expect(1).to.equal(2);
+  });
+  */
 
 });

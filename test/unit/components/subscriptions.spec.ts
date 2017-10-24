@@ -61,7 +61,7 @@ describe('Subscriptions component', () => {
     expect(wrapper.vm.$data['pushEnabled']).to.be.true;
   });
 
-  it('should display an error in push notifications are blocked by the user.', async () => {
+  it('should display an error if push notifications are blocked by the user.', async () => {
     const push: PushNotification = new PushNotification(new FakePushApi(), pushSupportStub);
     let wrapper: Wrapper = await mount(SubscriptionsComponent, {provide: {pushNotification: push}});
     expect(wrapper.vm.$data['errorMessage']).to.equal('Push notifications are blocked.');
