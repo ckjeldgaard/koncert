@@ -8,6 +8,16 @@
 
 > A progressive web app displaying Danish concerts.
 
+Watch it online on [ckjeldgaard.github.io/koncert/](https://ckjeldgaard.github.io/koncert/#/).
+
+![Screenshots](https://imgur.com/fXUfYtp.png)
+
+## Features
+
+* Displays the concerts from the [Heavymetal.dk concert calendar](http://heavymetal.dk/koncertkalender).
+* Search for a specific concert or filter by province or genre.
+* Sign up for push notifications and receive a message when there's a new concert with a favorite artist.
+
 ## Tools and libraries
 
 ![Logos](https://i.imgur.com/28AMyei.png)
