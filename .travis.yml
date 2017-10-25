@@ -12,7 +12,14 @@ before_install:
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
 before_script:
-  - npm run mock
+  ## runs the 'mock' script which
+  ## boots a local mock server on port 8080
+  ## which cypress expects to be running
+  ## -----------------------------------
+  ## using the '&' ampersand which tells
+  ## travis to run this process in the background
+  ## else it would block execution and hang travis
+  - npm run mock &
 script:
   - bash ./deploy.sh
 deploy:
