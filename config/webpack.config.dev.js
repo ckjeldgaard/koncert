@@ -2,8 +2,14 @@ const helpers = require('./helpers'),
   webpackConfig = require('./webpack.config.base'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   DefinePlugin = require('webpack/lib/DefinePlugin'),
-  SWPrecacheWebpackDevPlugin = require('sw-precache-webpack-dev-plugin'),
+  SWPrecacheWebpackDevPlugin = require('sw-precache-webpack-dev-plugin');
+
+const mock = process.argv.indexOf('process.env.NODE_ENV=mock') !== -1;
+if (mock) {
+  env = require('../environment/mock.env');
+} else {
   env = require('../environment/dev.env');
+}
 
 webpackConfig.module.rules = [...webpackConfig.module.rules,
   {

@@ -18,6 +18,7 @@
     "coverage:remap": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html-ts -t html",
     "coverage:run": "cross-env NODE_ENV=development karma start karma.coverage.js",
     "dev": "webpack-dev-server --hot --inline",
+    "mock": "webpack-dev-server --hot --inline --define process.env.NODE_ENV=\"mock\"",
     "lint": "tslint 'src/**/*.ts'",
     "serve": "http-server dist/ -o",
     "test": "cross-env NODE_ENV=development karma start karma.unit.js",
