@@ -1,5 +1,5 @@
 {
   "baseUrl": "http://localhost:8080",
   "integrationFolder": "test/integration",
-  "videoRecording": false
+  "projectId": "88qhw8"
 }

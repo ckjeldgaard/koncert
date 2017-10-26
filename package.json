@@ -20,7 +20,7 @@
     "coverage:run": "cross-env NODE_ENV=development karma start karma.coverage.js",
     "cypress:open": "./node_modules/cypress/bin/cypress open",
     "dev": "webpack-dev-server --hot --inline",
-    "e2e": "./node_modules/cypress/bin/cypress run",
+    "e2e": "./node_modules/cypress/bin/cypress run --record --key 7d4c3ee7-b775-4203-9727-43328ecbfbf0",
     "lint": "tslint 'src/**/*.ts'",
     "mock": "webpack-dev-server --hot --inline --define process.env.NODE_ENV=\"mock\" --quiet",
     "serve": "http-server dist/ -o",
