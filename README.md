@@ -3,8 +3,7 @@
 [![Build Status](https://travis-ci.org/ckjeldgaard/koncert.svg?branch=master)](https://travis-ci.org/ckjeldgaard/koncert)
 [![codecov](https://codecov.io/gh/ckjeldgaard/koncert/branch/master/graph/badge.svg)](https://codecov.io/gh/ckjeldgaard/koncert)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/ckjeldgaard/koncert/blob/master/LICENSE.txt)
-[![BCH compliance](https://bettercodehub.com/edge/badge/ckjeldgaard/koncert?branch=master)](https://bettercodehub.com/)
-[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://dashboard.cypress.io/#/projects/88qhw8)
 
 > A progressive web app displaying Danish concerts.
 
