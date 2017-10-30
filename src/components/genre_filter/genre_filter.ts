@@ -6,6 +6,7 @@ import {Genre} from '../../model/genre';
 
 @Component({
   template: require('./genre_filter.html')
+  // template: '<div class="genres g--12"><multiselect :id="\'genres\'" :options="genres" :placeholder="\'Genres\'" :multiple="true" /></div>'
 })
 export class GenreFilterComponent extends Vue {
 
