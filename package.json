@@ -32,7 +32,7 @@
     "transform": {
       "^.+\\.(tsx?|html)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -43,7 +43,8 @@
     "collectCoverage": true,
     "globals": {
       "__TRANSFORM_HTML__": true
-    }
+    },
+    "testEnvironment": "jest-environment-jsdom-11.0.0"
   },
   "dependencies": {
     "axios": "^0.17.0",
@@ -82,6 +83,7 @@
     "http-server": "~0.10.0",
     "istanbul-instrumenter-loader": "~3.0.0",
     "jest": "^21.2.1",
+    "jest-environment-jsdom-11.0.0": "^20.0.9",
     "json-loader": "~0.5.7",
     "karma": "~1.7.1",
     "karma-chai": "~0.1.0",
