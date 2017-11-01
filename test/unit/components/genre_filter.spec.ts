@@ -1,6 +1,5 @@
 import { GenreFilterComponent } from '../../../src/components/genre_filter/genre_filter';
 import {FakeServiceApi} from '../../../src/util/fake-service-api';
-import {spy} from 'sinon';
 import {mount, Wrapper} from 'vue-test-utils';
 import Vue from 'vue';
 

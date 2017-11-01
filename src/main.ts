@@ -21,7 +21,6 @@ import {PushNotification} from './components/subscriptions/helpers/push-notifica
 import {HttpPushApi} from './components/subscriptions/api/http-push-api';
 import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
 import {FakeServiceApi} from './util/fake-service-api';
-import {spy} from 'sinon';
 
 // register the plugin
 Vue.use(VueRouter);

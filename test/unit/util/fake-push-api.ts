@@ -1,5 +1,4 @@
 import {PushApi} from '../../../src/components/subscriptions/api/push-api';
-import {SinonSpy} from 'sinon';
 import {Artist} from '../../../src/model/artist';
 import {ConcertNotification} from '../../../src/model/concert-notification';
 
