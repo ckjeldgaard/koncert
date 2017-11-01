@@ -1,6 +1,4 @@
-import { expect } from 'chai';
 import {ConcertSplit} from '../../../src/util/concert-split';
-
 
 describe('Concert split', () => {
 
@@ -40,8 +38,8 @@ describe('Concert split', () => {
   it('should split concerts by month', async () => {
     let concertSplit: ConcertSplit = new ConcertSplit(testConcerts);
 
-    expect(concertSplit.splitByMonths()[0].name).to.equal('January 2017');
-    expect(concertSplit.splitByMonths()[1].name).to.equal('February 2017');
+    expect(concertSplit.splitByMonths()[0].name).toBe('January 2017');
+    expect(concertSplit.splitByMonths()[1].name).toBe('February 2017');
   });
 
 });

@@ -1,14 +1,11 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import { Link } from './link';
-import { Logger } from '../../util/log';
 
 @Component({
   template: require('./drawer.html')
 })
 export class DrawerComponent extends Vue {
-  protected logger: Logger;
-
   public open: Boolean = false;
 
   object: { default: string } = { default: 'Default object property!' }; // objects as default values don't need to be wrapped into functions
@@ -20,7 +17,7 @@ export class DrawerComponent extends Vue {
   ];
 
   pathChanged() {
-    this.logger.info('Changed current path to: ' + this.$route.path);
+    console.info('Changed current path to: ' + this.$route.path);
   }
 
   drawerLinkClickListener(event) {
@@ -28,8 +25,6 @@ export class DrawerComponent extends Vue {
   }
 
   mounted() {
-    if (!this.logger)
-      this.logger = new Logger();
 
   }
 }

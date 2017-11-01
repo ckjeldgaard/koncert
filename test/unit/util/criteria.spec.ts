@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import {Concert} from '../../../src/model/concert';
 import {CriteriaProvince} from '../../../src/util/criteria/criteria-province';
 import {CriteriaGenre} from '../../../src/util/criteria/criteria-genre';
@@ -17,8 +16,8 @@ describe('Criteria', () => {
     ];
 
     const criteria: CriteriaProvince = new CriteriaProvince('province2');
-    expect(criteria.meetCriteria(concertList).length).to.equal(1);
-    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
+    expect(criteria.meetCriteria(concertList).length).toBe(1);
+    expect(criteria.meetCriteria(concertList)[0]).toBe(concertList[1]);
   });
 
   it('should filter by genre when using genre criteria', async () => {
@@ -28,8 +27,8 @@ describe('Criteria', () => {
       DomainObjectBuilder.aNew().concert().withGenres(['genre2']).build(),
     ];
     const criteria: CriteriaGenre = new CriteriaGenre('genre2');
-    expect(criteria.meetCriteria(concertList).length).to.equal(1);
-    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
+    expect(criteria.meetCriteria(concertList).length).toBe(1);
+    expect(criteria.meetCriteria(concertList)[0]).toBe(concertList[1]);
   });
 
   it('should filter by search term for concert names', async () => {
@@ -40,8 +39,8 @@ describe('Criteria', () => {
 
     const criteria: CriteriaSearch = new CriteriaSearch('concertA');
 
-    expect(criteria.meetCriteria(concertList).length).to.equal(1);
-    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[0]);
+    expect(criteria.meetCriteria(concertList).length).toBe(1);
+    expect(criteria.meetCriteria(concertList)[0]).toBe(concertList[0]);
   });
 
   it('should filter by search term for concert venues', async () => {
@@ -52,8 +51,8 @@ describe('Criteria', () => {
 
     const criteria: CriteriaSearch = new CriteriaSearch('venueB');
 
-    expect(criteria.meetCriteria(concertList).length).to.equal(1);
-    expect(criteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
+    expect(criteria.meetCriteria(concertList).length).toBe(1);
+    expect(criteria.meetCriteria(concertList)[0]).toBe(concertList[1]);
   });
 
   it('should filter by province and genre when using the AND criteria', async () => {
@@ -66,8 +65,8 @@ describe('Criteria', () => {
     const criteriaGenre: CriteriaGenre = new CriteriaGenre('genre2');
     const provinceAndGenreCriteria: AndCriteria = new AndCriteria(criteriaProvince, criteriaGenre);
 
-    expect(provinceAndGenreCriteria.meetCriteria(concertList).length).to.equal(1);
-    expect(provinceAndGenreCriteria.meetCriteria(concertList)[0]).to.eql(concertList[1]);
+    expect(provinceAndGenreCriteria.meetCriteria(concertList).length).toBe(1);
+    expect(provinceAndGenreCriteria.meetCriteria(concertList)[0]).toBe(concertList[1]);
   });
 
   it('should filter by multiple genres when using the OR criteria', async () => {
@@ -82,9 +81,9 @@ describe('Criteria', () => {
     const criteriaGenre2: CriteriaGenre = new CriteriaGenre('genre2');
     const orCriteria: OrCriteria = new OrCriteria(criteriaGenre1, criteriaGenre2);
 
-    expect(orCriteria.meetCriteria(concertList).length).to.equal(2);
-    expect(orCriteria.meetCriteria(concertList)[0]).to.eql(concertList[0]);
-    expect(orCriteria.meetCriteria(concertList)[1]).to.eql(concertList[1]);
+    expect(orCriteria.meetCriteria(concertList).length).toBe(2);
+    expect(orCriteria.meetCriteria(concertList)[0]).toBe(concertList[0]);
+    expect(orCriteria.meetCriteria(concertList)[1]).toBe(concertList[1]);
   });
 
 });
