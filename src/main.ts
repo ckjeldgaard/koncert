@@ -4,10 +4,10 @@ import moment from 'moment';
 
 import './sass/main.scss';
 
-import { HomeComponent } from './components/home';
-import { AboutComponent } from './components/about';
-import {DrawerComponent} from './components/drawer';
-import {SpinnerComponent} from './components/spinner';
+import { HomeComponent } from './components/home/home';
+import { AboutComponent } from './components/about/about';
+import {DrawerComponent} from './components/drawer/drawer';
+import {SpinnerComponent} from './components/spinner/spinner';
 import {ConcertsComponent} from './components/concerts/concerts';
 import {ProvinceFilterComponent} from './components/province_filter/province_filter';
 import {GenreFilterComponent} from './components/genre_filter/genre_filter';
