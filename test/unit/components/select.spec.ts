@@ -1,8 +1,7 @@
-import { expect } from 'chai';
 import {SelectComponent} from '../../../src/components/select/select';
 import {mount, Wrapper} from 'vue-test-utils';
-import {spy, assert, SinonSpy} from 'sinon';
 import Vue from 'vue';
+import SpyInstance = jest.SpyInstance;
 
 let defaultProps = {
   id: 'genres',
@@ -17,18 +16,22 @@ let defaultProps = {
 describe('Select component', () => {
 
   let fakeBus: Vue;
-  let busSpy: SinonSpy;
+  let busSpy: SpyInstance;
   beforeEach(() => {
-    busSpy = spy();
     fakeBus = new Vue();
-    fakeBus.$emit = busSpy;
+    busSpy = jest.spyOn(fakeBus, '$emit');
+  });
+
+  afterEach(() => {
+    busSpy.mockReset();
+    busSpy.mockRestore();
   });
 
   it('correctly sets the placeholder text', () => {
     let placeholder = 'Select an option';
     const wrapper: Wrapper<Vue> = mount(SelectComponent, {propsData: {placeholder} });
-    expect(wrapper.vm.$props['placeholder']).to.equal('Select an option');
-    expect(wrapper.find('label > span').text()).to.equal('Select an option');
+    expect(wrapper.vm.$props['placeholder']).toBe('Select an option');
+    expect(wrapper.find('label > span').text()).toBe('Select an option');
   });
 
   it('selects a single option', () => {
@@ -37,9 +40,10 @@ describe('Select component', () => {
     const option = wrapper.findAll('ul > li > input').at(0);
     option.trigger('click');
 
-    expect(wrapper.findAll('label > span').at(1).text()).to.equal('Option 1');
-    assert.called(busSpy);
-    assert.calledWith(busSpy, 'genres', [{key: 'option1', value: 'Option 1'}]);
+    expect(wrapper.findAll('label > span').at(1).text()).toBe('Option 1');
+
+    expect(busSpy).toHaveBeenCalled();
+    expect(busSpy).toBeCalledWith('genres', [{key: 'option1', value: 'Option 1'}]);
   });
 
 
@@ -49,7 +53,7 @@ describe('Select component', () => {
     const option = wrapper.findAll('ul > li > input').at(0);
     option.trigger('click');
 
-    expect(wrapper.vm.$data['open']).to.be.false;
+    expect(wrapper.vm.$data['open']).toBeFalsy();
   });
 
   it('is able to select multiple options', () => {
@@ -61,9 +65,10 @@ describe('Select component', () => {
     const option2 = wrapper.findAll('ul > li > input').at(1);
     option2.trigger('click');
 
-    expect(wrapper.findAll('label > span').at(1).text()).to.equal('Option 1, Option 2');
-    assert.called(busSpy);
-    assert.calledWith(busSpy, 'genres', [{key: 'option1', value: 'Option 1'}, {key: 'option2', value: 'Option 2'}]);
+    expect(wrapper.findAll('label > span').at(1).text()).toBe('Option 1, Option 2');
+
+    expect(busSpy).toHaveBeenCalled();
+    expect(busSpy).toBeCalledWith('genres', [{key: 'option1', value: 'Option 1'}, {key: 'option2', value: 'Option 2'}]);
   });
 
   it('should remove selected options when deselecting', () => {
@@ -76,7 +81,7 @@ describe('Select component', () => {
     // Deselect first option:
     wrapper.findAll('ul > li > input').at(0).trigger('click');
 
-    expect(wrapper.findAll('label > span').at(1).text()).to.equal('Option 2');
+    expect(wrapper.findAll('label > span').at(1).text()).toBe('Option 2');
   });
 
   it('should shorten the selected text when many options are selected', () => {
@@ -91,7 +96,7 @@ describe('Select component', () => {
     wrapper.findAll('ul > li > input').at(0).trigger('click');
     wrapper.findAll('ul > li > input').at(1).trigger('click');
 
-    expect(wrapper.findAll('label > span').at(1).text()).to.equal('2 selected');
+    expect(wrapper.findAll('label > span').at(1).text()).toBe('2 selected');
   });
 
 });
