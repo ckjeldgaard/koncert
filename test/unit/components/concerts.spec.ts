@@ -1,11 +1,11 @@
 import { ConcertsComponent } from '../../../src/components/concerts/concerts';
-import {MockServiceApi} from '../../../src/util/component-test';
+import {FakeServiceApi} from '../../../src/util/fake-service-api';
 import {mount, Wrapper} from 'vue-test-utils';
 import Vue from 'vue';
 import SpyInstance = jest.SpyInstance;
 import {Province} from '../../../src/model/Province';
 
-const mockServiceApi: MockServiceApi = new MockServiceApi();
+const mockServiceApi: FakeServiceApi = new FakeServiceApi();
 
 describe('Concerts component', () => {
 

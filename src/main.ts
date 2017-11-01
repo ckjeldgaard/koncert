@@ -20,7 +20,7 @@ import {SubscriptionsComponent} from './components/subscriptions/subscriptions';
 import {PushNotification} from './components/subscriptions/helpers/push-notification';
 import {HttpPushApi} from './components/subscriptions/api/http-push-api';
 import {PushSupportBrowser} from './components/subscriptions/helpers/push-support-browser';
-import {MockServiceApi} from './util/component-test';
+import {FakeServiceApi} from './util/fake-service-api';
 import {spy} from 'sinon';
 
 // register the plugin
@@ -59,7 +59,7 @@ switch (process.env.ENV) {
     api = new FirebaseServiceApi('koncert');
     break;
   case 'mock':
-    api = new MockServiceApi();
+    api = new FakeServiceApi();
     break;
 }
 

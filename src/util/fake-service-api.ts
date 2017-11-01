@@ -1,39 +1,10 @@
-import Vue, {Component} from 'vue';
-import merge from 'lodash.merge';
 import {ServiceApi} from '../data/service-api';
 import {ServiceCallback} from '../data/servic-callback';
 import {Artist} from '../model/artist';
 import {DomainObjectBuilder} from '../../test/unit/domain-object-builder/dob';
 import {Concert} from '../model/concert';
 
-export interface IComponents {
-  [key: string]: Component;
-}
-
-export class ComponentTest {
-
-  public vm: Vue;
-
-  constructor(private template: string, private components: IComponents) {
-  }
-
-  public createComponent(createOptions?: any): void {
-    let options = {
-      template: this.template,
-      components: this.components
-    };
-    if (createOptions) merge(options, createOptions);
-    this.vm = new Vue(options).$mount();
-  }
-
-  public async execute(callback: (vm: Vue) => Promise<void> | void): Promise<void> {
-    await Vue.nextTick();
-    await callback(this.vm);
-  }
-
-}
-
-export class MockServiceApi implements ServiceApi {
+export class FakeServiceApi implements ServiceApi {
 
   public static testProvinces = {
     bornholm: 'Bornholm',
@@ -83,15 +54,15 @@ export class MockServiceApi implements ServiceApi {
   }
 
   getProvinces(callback: ServiceCallback) {
-    callback.onLoaded(MockServiceApi.testProvinces);
+    callback.onLoaded(FakeServiceApi.testProvinces);
   }
 
   getGenres(callback: ServiceCallback) {
-    callback.onLoaded(MockServiceApi.testGenres);
+    callback.onLoaded(FakeServiceApi.testGenres);
   }
 
   searchArtists(callback: ServiceCallback, searchQuery: string) {
-    callback.onLoaded(MockServiceApi.testArtists);
+    callback.onLoaded(FakeServiceApi.testArtists);
   }
 
 }

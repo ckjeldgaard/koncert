@@ -1,6 +1,6 @@
 import {mount, Wrapper} from 'vue-test-utils';
 import {SubscriptionsComponent} from '../../../src/components/subscriptions/subscriptions';
-import {MockServiceApi} from '../../../src/util/component-test';
+import {FakeServiceApi} from '../../../src/util/fake-service-api';
 import {PushNotification} from '../../../src/components/subscriptions/helpers/push-notification';
 import {FakePushApi} from '../util/fake-push-api';
 import {PushSupport} from '../../../src/components/subscriptions/helpers/push-support';
@@ -22,19 +22,19 @@ describe('Subscriptions component', () => {
   });
 
   it('should search an artist', async () => {
-    const wrapper: Wrapper<Vue> = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi()}});
+    const wrapper: Wrapper<Vue> = mount(SubscriptionsComponent, { provide: {serviceApi: new FakeServiceApi()}});
 
     const searchInput: Wrapper<Vue> = wrapper.findAll('input').at(1);
     (<HTMLInputElement>searchInput.element).disabled = false;
     (<HTMLInputElement>searchInput.element).value = 'searchArtist';
     searchInput.trigger('input');
 
-    expect(wrapper.vm.$data['artistsSearchResult']).toBe(MockServiceApi.testArtists);
+    expect(wrapper.vm.$data['artistsSearchResult']).toBe(FakeServiceApi.testArtists);
     expect(wrapper.find('.search-input > ul').html()).toBe('<ul><li>Alice</li><li>Bob</li></ul>');
   });
 
   it('should select an artist', async () => {
-    const wrapper: Wrapper<Vue> = mount(SubscriptionsComponent, { provide: {serviceApi: new MockServiceApi()}});
+    const wrapper: Wrapper<Vue> = mount(SubscriptionsComponent, { provide: {serviceApi: new FakeServiceApi()}});
 
     const searchInput: Wrapper<Vue> = wrapper.findAll('input').at(1);
     (<HTMLInputElement>searchInput.element).disabled = false;
@@ -72,7 +72,7 @@ describe('Subscriptions component', () => {
     push.isPushSupported = jest.fn().mockReturnValue(fakeSubscription);
     const saveSpy = jest.spyOn(push, 'saveSubscription');
 
-    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(), pushNotification: push}});
+    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new FakeServiceApi(), pushNotification: push}});
 
     const searchInput: Wrapper<Vue> = wrapper.findAll('input').at(1);
     (<HTMLInputElement>searchInput.element).disabled = false;
@@ -84,7 +84,7 @@ describe('Subscriptions component', () => {
     wrapper.find('button').trigger('click');
 
     expect(saveSpy).toBeCalled();
-    expect(saveSpy).toBeCalledWith(fakeSubscription, MockServiceApi.testArtists[0]);
+    expect(saveSpy).toBeCalledWith(fakeSubscription, FakeServiceApi.testArtists[0]);
   });
 
   it('should delete subscription for an artist', async () => {
@@ -92,19 +92,19 @@ describe('Subscriptions component', () => {
     push.isPushSupported = jest.fn().mockReturnValue(fakeSubscription);
     const deleteSpy = jest.spyOn(push, 'deleteSubscription');
 
-    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(), pushNotification: push}});
-    wrapper.setData({currentSubscriptions: MockServiceApi.testArtists});
+    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new FakeServiceApi(), pushNotification: push}});
+    wrapper.setData({currentSubscriptions: FakeServiceApi.testArtists});
     wrapper.find('.subscriptions-list > li > button').trigger('click');
 
     expect(deleteSpy).toBeCalled();
-    expect(deleteSpy).toBeCalledWith(fakeSubscription, MockServiceApi.testArtists[0]);
+    expect(deleteSpy).toBeCalledWith(fakeSubscription, FakeServiceApi.testArtists[0]);
   });
 
   it('should change permissions', async () => {
     let push: PushNotification = new PushNotification(new FakePushApi(), pushSupportStub);
     const subscribeSpy = jest.spyOn(push, 'subscribePush');
 
-    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(), pushNotification: push}});
+    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new FakeServiceApi(), pushNotification: push}});
     wrapper.setData({pushEnabled: true});
     wrapper.find('input').trigger('change');
 
@@ -116,7 +116,7 @@ describe('Subscriptions component', () => {
     window.confirm = jest.fn().mockReturnValue(true);
     const unsubscribeSpy = jest.spyOn(push, 'unsubscribePush');
 
-    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(), pushNotification: push}});
+    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new FakeServiceApi(), pushNotification: push}});
     wrapper.setData({pushEnabled: false});
     wrapper.find('input').trigger('change');
 
@@ -128,7 +128,7 @@ describe('Subscriptions component', () => {
     window.confirm = jest.fn().mockReturnValue(false);
     const unsubscribeSpy = jest.spyOn(push, 'unsubscribePush');
 
-    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new MockServiceApi(), pushNotification: push}});
+    let wrapper: Wrapper<Vue> = await mount(SubscriptionsComponent, {provide: {serviceApi: new FakeServiceApi(), pushNotification: push}});
     wrapper.setData({pushEnabled: false});
     wrapper.find('input').trigger('change');
 

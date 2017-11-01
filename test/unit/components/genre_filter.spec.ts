@@ -1,5 +1,5 @@
 import { GenreFilterComponent } from '../../../src/components/genre_filter/genre_filter';
-import {MockServiceApi} from '../../../src/util/component-test';
+import {FakeServiceApi} from '../../../src/util/fake-service-api';
 import {spy} from 'sinon';
 import {mount, Wrapper} from 'vue-test-utils';
 import Vue from 'vue';
@@ -7,7 +7,7 @@ import Vue from 'vue';
 describe('GenreFilter component', () => {
 
   it('should fetch genres from the ServiceApi', async () => {
-    const wrapper: Wrapper<Vue> = mount(GenreFilterComponent, { provide: {serviceApi: new MockServiceApi()}} );
+    const wrapper: Wrapper<Vue> = mount(GenreFilterComponent, { provide: {serviceApi: new FakeServiceApi()}} );
 
     let expectedGenres = [];
     await Vue.nextTick(() => {
