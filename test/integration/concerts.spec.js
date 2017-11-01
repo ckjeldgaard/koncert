@@ -26,4 +26,25 @@ describe('Concerts page', function() {
     cy.get('.card label .concert-title')
       .should('have.length', 3);
   });
+
+  it('Should filter by genre', function() {
+    cy.visit('/');
+
+    cy.get('.genres .select .card label')
+      .first()
+      .click();
+
+    cy.get('.genres .select .card ul li')
+      .should('have.length', 3);
+
+    cy.get('.genres .select .card ul li input[type=checkbox]')
+      .first()
+      .click();
+
+    // Click outside to close:
+    cy.get('main').click();
+
+    cy.get('.card label .concert-title')
+      .should('have.length', 4);
+  });
 });
