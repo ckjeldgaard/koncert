@@ -5,18 +5,13 @@ import {ConcertNotification} from '../../../src/model/concert-notification';
 
 export class FakePushApi implements PushApi {
 
-  private readonly apiSpy: SinonSpy;
-
-  constructor(spy?: SinonSpy) {
-    this.apiSpy = spy;
+  constructor() {
   }
 
   saveSubscription(subscriptionId: string, artistId: number) {
-    this.apiSpy(subscriptionId, artistId);
   }
 
   deleteSubscription(subscriptionId: string, artistId: number) {
-    this.apiSpy(subscriptionId, artistId);
   }
 
   getSubscriptions(subscriptionId: string): Promise<Artist[]> {

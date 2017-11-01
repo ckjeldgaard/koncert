@@ -59,7 +59,7 @@ switch (process.env.ENV) {
     api = new FirebaseServiceApi('koncert');
     break;
   case 'mock':
-    api = new MockServiceApi(spy());
+    api = new MockServiceApi();
     break;
 }
 

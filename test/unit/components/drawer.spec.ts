@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { expect } from 'chai';
 import { DrawerComponent } from '../../../src/components/drawer/drawer';
 import {mount, Wrapper} from 'vue-test-utils';
 
@@ -23,13 +22,13 @@ describe('Drawer component', () => {
 
   it('should render correct contents', () => {
     const wrapper: Wrapper<Vue> = mount(DrawerComponent, { router: router});
-    expect(wrapper.findAll('nav a').length).to.equal(3);
+    expect(wrapper.findAll('nav a').length).toBe(3);
   });
 
   it('should render correct about contents when clicking link', () => {
     const wrapper: Wrapper<Vue> = mount(DrawerComponent, { router: router});
     wrapper.find('nav a[href="#/about"]').trigger('click');
-    expect(router.currentRoute.path).to.equal('/about');
+    expect(router.currentRoute.path).toBe('/about');
   });
 
 });

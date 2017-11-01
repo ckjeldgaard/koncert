@@ -1,9 +1,8 @@
-import { expect } from 'chai';
-import {spy, assert, SinonSpy} from 'sinon';
 import {PushNotification} from '../../../../src/components/subscriptions/helpers/push-notification';
 import {PushSupport} from '../../../../src/components/subscriptions/helpers/push-support';
 import {Artist} from '../../../../src/model/artist';
 import {FakePushApi} from '../../util/fake-push-api';
+import {PushApi} from '../../../../src/components/subscriptions/api/push-api';
 
 let fakeSubscription: PushSubscription;
 let pushSupportStub: PushSupport;
@@ -38,7 +37,7 @@ describe('PushNotification', () => {
     } catch (e) {
       err = e;
     }
-    expect(err.message).to.equal('Push notifications are blocked.');
+    expect(err.message).toBe('Push notifications are blocked.');
   });
 
   it('should throw an error if push notifications are not supported in browser', async () => {
@@ -49,7 +48,7 @@ describe('PushNotification', () => {
     } catch (e) {
       err = e;
     }
-    expect(err.message).to.equal('Sorry, Push notifications aren\'t supported in your browser.');
+    expect(err.message).toBe('Sorry, Push notifications aren\'t supported in your browser.');
   });
 
   it('should get a service worker registration', async () => {
@@ -57,7 +56,7 @@ describe('PushNotification', () => {
     pushSupportStub.isPushManagerSupported =  () => { return true; };
 
     const pushSubscription = await new PushNotification(new FakePushApi(), pushSupportStub).isPushSupported();
-    expect(pushSubscription).to.equal(fakeSubscription);
+    expect(pushSubscription).toBe(fakeSubscription);
   });
 
   it('should return false if no service worker registration', async () => {
@@ -66,7 +65,7 @@ describe('PushNotification', () => {
     fakeSubscription = null;
 
     const returnValue = await new PushNotification(new FakePushApi(), pushSupportStub).isPushSupported();
-    expect(returnValue).to.be.false;
+    expect(returnValue).toBeFalsy();
   });
 
   it('should throw an error if no push manager when subscribing', async () => {
@@ -83,7 +82,7 @@ describe('PushNotification', () => {
     } catch (e) {
       err = e;
     }
-    expect(err.message).to.equal('Your browser doesn\'t support push notifications.');
+    expect(err.message).toBe('Your browser doesn\'t support push notifications.');
   });
 
   it('should subscribe', async () => {
@@ -101,7 +100,7 @@ describe('PushNotification', () => {
       });
     };
     const pushSubscription: PushSubscription = await new PushNotification(new FakePushApi(), pushSupportStub).subscribePush();
-    expect(pushSubscription).to.equal(fakeSubscription);
+    expect(pushSubscription).toBe(fakeSubscription);
   });
 
   it('should throw an error if subscription is not possible', async () => {
@@ -124,7 +123,7 @@ describe('PushNotification', () => {
     } catch (e) {
       err = e;
     }
-    expect(err.message).to.equal('Cannot subscribe to push notifications');
+    expect(err.message).toBe('Cannot subscribe to push notifications');
   });
 
   it('should unsubscribe', async () => {
@@ -134,7 +133,7 @@ describe('PushNotification', () => {
       });
     };
     const unsubscribed: boolean = await new PushNotification(new FakePushApi(), pushSupportStub).unsubscribePush();
-    expect(unsubscribed).to.equal(true);
+    expect(unsubscribed).toBe(true);
   });
 
   it('should throw an exception in case of unsubscription errors', async () => {
@@ -149,19 +148,21 @@ describe('PushNotification', () => {
     } catch (e) {
       err = e;
     }
-    expect(err.message).to.equal('Failed to unsubscribe push notification.');
+    expect(err.message).toBe('Failed to unsubscribe push notification.');
   });
 
   it('should save a subscription', async () => {
-    let pushApiSpy = spy();
-    await new PushNotification(new FakePushApi(pushApiSpy), pushSupportStub).saveSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
-    assert.calledWith(pushApiSpy, 'fakeSubscriptionId', 1);
+    const fakePushApi: PushApi = new FakePushApi();
+    const pushApiSpy = jest.spyOn(fakePushApi, 'saveSubscription');
+    await new PushNotification(fakePushApi, pushSupportStub).saveSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
+    expect(pushApiSpy).toBeCalledWith('fakeSubscriptionId', 1);
   });
 
   it('should delete a subscription', async () => {
-    let pushApiSpy = spy();
-    await new PushNotification(new FakePushApi(pushApiSpy), pushSupportStub).deleteSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
-    assert.calledWith(pushApiSpy, 'fakeSubscriptionId', 1);
+    const fakePushApi: PushApi = new FakePushApi();
+    const pushApiSpy = jest.spyOn(fakePushApi, 'deleteSubscription');
+    await new PushNotification(fakePushApi, pushSupportStub).deleteSubscription(fakeSubscription, new Artist(1, 'Alice', 'alice'));
+    expect(pushApiSpy).toBeCalledWith('fakeSubscriptionId', 1);
   });
 
 });

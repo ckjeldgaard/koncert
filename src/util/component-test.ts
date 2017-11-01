@@ -74,7 +74,7 @@ export class MockServiceApi implements ServiceApi {
 
   public readonly concerts: Concert[] = [];
 
-  constructor(private serviceSpy: SinonSpy) {
+  constructor() {
     this.buildConcerts();
   }
 
@@ -100,22 +100,18 @@ export class MockServiceApi implements ServiceApi {
 
   getConcerts(callback: ServiceCallback, startAt: number) {
     callback.onLoaded(this.concerts);
-    this.serviceSpy(this.concerts);
   }
 
   getProvinces(callback: ServiceCallback) {
     callback.onLoaded(MockServiceApi.testProvinces);
-    this.serviceSpy(MockServiceApi.testProvinces);
   }
 
   getGenres(callback: ServiceCallback) {
     callback.onLoaded(MockServiceApi.testGenres);
-    this.serviceSpy(MockServiceApi.testGenres);
   }
 
   searchArtists(callback: ServiceCallback, searchQuery: string) {
     callback.onLoaded(MockServiceApi.testArtists);
-    this.serviceSpy(MockServiceApi.testArtists);
   }
 
 }

@@ -7,8 +7,7 @@ import Vue from 'vue';
 describe('GenreFilter component', () => {
 
   it('should fetch genres from the ServiceApi', async () => {
-    const serviceSpy = spy();
-    const wrapper: Wrapper<Vue> = mount(GenreFilterComponent, { provide: {serviceApi: new MockServiceApi(serviceSpy)}} );
+    const wrapper: Wrapper<Vue> = mount(GenreFilterComponent, { provide: {serviceApi: new MockServiceApi()}} );
 
     let expectedGenres = [];
     await Vue.nextTick(() => {

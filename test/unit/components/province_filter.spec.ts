@@ -7,8 +7,7 @@ import Vue from 'vue';
 describe('ProvinceFilter component', () => {
 
   it('should fetch provinces from the ServiceApi', async () => {
-    const serviceSpy = spy();
-    const wrapper: Wrapper<Vue> = mount(ProvinceFilterComponent, { provide: {serviceApi: new MockServiceApi(serviceSpy)}} );
+    const wrapper: Wrapper<Vue> = mount(ProvinceFilterComponent, { provide: {serviceApi: new MockServiceApi()}} );
 
     let expectedGenres = [];
     await Vue.nextTick(() => {
