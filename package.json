@@ -41,7 +41,15 @@
     "globals": {
       "__TRANSFORM_HTML__": true
     },
-    "testEnvironment": "jest-environment-jsdom-11.0.0"
+    "testEnvironment": "jest-environment-jsdom-11.0.0",
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
   },
   "dependencies": {
     "axios": "^0.17.0",
