@@ -66,7 +66,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-let app = new Vue({
+export let app = new Vue({
   el: '#app-main',
   router: router,
   components: {

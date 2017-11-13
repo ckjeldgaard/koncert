@@ -1,0 +1,32 @@
+{
+  "transform": {
+    "^.+\\.(tsx?|html)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json"
+  ],
+  "moduleNameMapper": {
+    "^.+\\.(css|scss)$": "<rootDir>/config/sass-stub.js"
+  },
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*.{ts,js}"
+  ],
+  "globals": {
+    "__TRANSFORM_HTML__": true
+  },
+  "testEnvironment": "jest-environment-jsdom-11.0.0",
+  "coverageThreshold": {
+    "global": {
+      "branches": 40,
+      "functions": 40,
+      "lines": 40,
+      "statements": 40
+    }
+  }
+}

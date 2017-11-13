@@ -20,36 +20,7 @@
     "lint": "tslint 'src/**/*.ts'",
     "mock": "webpack-dev-server --hot --inline --define process.env.NODE_ENV=\"mock\" --quiet",
     "serve": "http-server dist/ -o",
-    "test": "jest"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.(tsx?|html)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{ts,js}"
-    ],
-    "globals": {
-      "__TRANSFORM_HTML__": true
-    },
-    "testEnvironment": "jest-environment-jsdom-11.0.0",
-    "coverageThreshold": {
-      "global": {
-        "branches": 40,
-        "functions": 40,
-        "lines": 40,
-        "statements": 40
-      }
-    }
+    "test": "jest --config jest.config.json"
   },
   "dependencies": {
     "axios": "^0.17.0",
