@@ -14,10 +14,15 @@ export class FakePushApi implements PushApi {
   }
 
   getSubscriptions(subscriptionId: string): Promise<Artist[]> {
-    return undefined;
+    let subscriptions: Artist[] = [];
+    return new Promise((resolve, reject) => {
+      resolve(subscriptions);
+    });
   }
 
   getNotification(subscriptionId: string): Promise<ConcertNotification> {
-    return undefined;
+    return new Promise((resolve, reject) => {
+      resolve(new ConcertNotification('title', 'body', 'url'));
+    });
   }
 }
