@@ -13,7 +13,7 @@
   "moduleNameMapper": {
     "^.+\\.(css|scss)$": "<rootDir>/config/sass-stub.js"
   },
-  "collectCoverage": true,
+  "collectCoverage": false,
   "collectCoverageFrom": [
     "src/**/*.{ts,js}"
   ],
@@ -23,10 +23,10 @@
   "testEnvironment": "jest-environment-jsdom-11.0.0",
   "coverageThreshold": {
     "global": {
-      "branches": 40,
-      "functions": 40,
-      "lines": 40,
-      "statements": 40
+      "branches": 75,
+      "functions": 75,
+      "lines": 75,
+      "statements": 75
     }
   }
 }

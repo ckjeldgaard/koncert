@@ -20,7 +20,8 @@
     "lint": "tslint 'src/**/*.ts'",
     "mock": "webpack-dev-server --hot --inline --define process.env.NODE_ENV=\"mock\" --quiet",
     "serve": "http-server dist/ -o",
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json",
+    "test:coverage": "jest --config jest.config.json --collectCoverage true"
   },
   "dependencies": {
     "axios": "^0.17.0",
