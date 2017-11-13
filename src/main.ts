@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter, {RouterOptions} from 'vue-router';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import './sass/main.scss';
 
