@@ -33,11 +33,33 @@ describe('FirebaseServiceApi', () => {
 
   it('should get provinces', () => {
     const spy = jest.spyOn(serviceCallback, 'onLoaded');
-    const returnValue: object = [{'name': 'Artistname'}];
+    const returnValue: object = [{'name': 'Province name'}];
     new FirebaseServiceApi(
       DomainObjectBuilder.aNew().database().withReturnValue(returnValue).build(),
       mockStorage
     ).getProvinces(serviceCallback);
+
+    expect(spy).toBeCalledWith(returnValue);
+  });
+
+  it('should get genres', () => {
+    const spy = jest.spyOn(serviceCallback, 'onLoaded');
+    const returnValue: object = [{'name': 'Genre'}];
+    new FirebaseServiceApi(
+      DomainObjectBuilder.aNew().database().withReturnValue(returnValue).build(),
+      mockStorage
+    ).getGenres(serviceCallback);
+
+    expect(spy).toBeCalledWith(returnValue);
+  });
+
+  it('should search artists', () => {
+    const spy = jest.spyOn(serviceCallback, 'onLoaded');
+    const returnValue: object = [{'id': 'Search result'}];
+    new FirebaseServiceApi(
+      DomainObjectBuilder.aNew().database().withReturnValue(returnValue).withQueries(['orderByChild', 'limitToFirst', 'startAt', 'endAt']).build(),
+      mockStorage
+    ).searchArtists(serviceCallback, 'searchQuery');
 
     expect(spy).toBeCalledWith(returnValue);
   });
