@@ -66,6 +66,7 @@
     "raw-loader": "~0.5.1",
     "rimraf": "~2.6.2",
     "sass-loader": "^6.0.6",
+    "service-worker-mock": "^1.7.2",
     "stryker": "^0.13.0",
     "stryker-api": "^0.11.0",
     "stryker-jest-runner": "^0.3.0",
