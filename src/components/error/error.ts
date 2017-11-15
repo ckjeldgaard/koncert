@@ -9,8 +9,4 @@ import Component from 'vue-class-component';
   }
 })
 export class ErrorComponent extends Vue {
-
-  mounted() {
-
-  }
 }
