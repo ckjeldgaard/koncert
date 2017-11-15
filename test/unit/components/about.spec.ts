@@ -1,34 +1,10 @@
-import { spy, assert } from 'sinon';
-import { expect } from 'chai';
-import Component from 'vue-class-component';
-import { ComponentTest, MockLogger } from '../../../src/util/component-test';
 import { AboutComponent } from '../../../src/components/about/about';
-
-let loggerSpy = spy();
-
-@Component({
-  template: require('../../../src/components/about/about.html')
-})
-class MockAboutComponent extends AboutComponent {
-  constructor() {
-    super();
-    this.logger = new MockLogger(loggerSpy);
-  }
-}
+import Vue from 'vue';
+import {mount, Wrapper} from 'vue-test-utils';
 
 describe('About component', () => {
-  let directiveTest: ComponentTest;
-
-  beforeEach(() => {
-    directiveTest = new ComponentTest('<div><about></about></div>', { 'about': MockAboutComponent });
-  });
-
   it('should render correct contents', async () => {
-    directiveTest.createComponent();
-
-    await directiveTest.execute((vm) => {
-      expect(vm.$el.querySelector('.repo-link').getAttribute('href')).to.equal('https://github.com/ducksoupdev/vue-webpack-typescript');
-      assert.calledWith(loggerSpy, 'about is ready!');
-    });
+    const wrapper: Wrapper<Vue> = mount(AboutComponent);
+    expect(wrapper.find('.repo-link').element.getAttribute('href')).toBe('https://github.com/ducksoupdev/vue-webpack-typescript');
   });
 });

@@ -7,3 +7,4 @@ src/css
 src/**/*.js
 src/**/*.map
 *.log
+.stryker-tmp

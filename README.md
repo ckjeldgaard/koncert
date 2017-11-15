@@ -26,10 +26,8 @@ The web app is implemented using the JavaScript frontend framework [Vue.js](http
 
 ### Other honorable mentions
 
-* [Mocha.js](https://mochajs.org/): JavaScript test framework.
-* [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/) for creating test assertions and test doubles.
-* [Karma](https://karma-runner.github.io/1.0/index.html) to run tests.
-* [avoriaz](https://eddyerburgh.gitbooks.io/avoriaz/content/) to test Vue.js components.
+* [Jest](http://facebook.github.io/jest/): JavaScript test framework.
+* [vue-test-utils](https://vue-test-utils.vuejs.org/) to test Vue.js components.
 * [Surface](https://mildrenben.github.io/surface/) - Material Design, CSS only framework.
 * [sw-precache](https://github.com/GoogleChromeLabs/sw-precache) to create a Service Worker.
 
@@ -45,14 +43,11 @@ npm run dev
 # lint the Typescript
 npm run lint
 
-# run the tests
+# run the unit tests
 npm test
 
-# run the tests on changes
-npm run test:watch
-
-# run the test suite and generate a coverage report
-npm run coverage
+# run the end-to-end tests
+npm e2e
 
 # build for production with minification
 npm run build

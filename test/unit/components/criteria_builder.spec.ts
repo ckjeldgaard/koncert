@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import {CriteriaBuilder} from '../../../src/components/concerts/helpers/criteria_builder';
 import {DomainObjectBuilder} from '../domain-object-builder/dob';
 import {Concert} from '../../../src/model/concert';
@@ -16,8 +15,8 @@ describe('Criteria builder', () => {
       [DomainObjectBuilder.aNew().genre().withKey('genre1').withName('Genre 1').build()]
     ).build().meetCriteria(concerts);
 
-    expect(result.length).to.equal(1);
-    expect(result[0].genres[0]).to.equal('genre1');
+    expect(result.length).toBe(1);
+    expect(result[0].genres[0]).toBe('genre1');
   });
 
   it('should filter by multiple genres', async () => {
@@ -35,8 +34,8 @@ describe('Criteria builder', () => {
       ]
     ).build().meetCriteria(concerts);
 
-    expect(result.length).to.equal(2);
-    expect(result[0].genres[0]).to.equal('genre2');
-    expect(result[1].genres[0]).to.equal('genre3');
+    expect(result.length).toBe(2);
+    expect(result[0].genres[0]).toBe('genre2');
+    expect(result[1].genres[0]).toBe('genre3');
   });
 });

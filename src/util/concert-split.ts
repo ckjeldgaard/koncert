@@ -1,5 +1,5 @@
 import {Month} from '../model/month';
-import moment from 'moment';
+import * as moment from 'moment';
 import {Concert} from '../model/concert';
 
 export class ConcertSplit {

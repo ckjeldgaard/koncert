@@ -1,36 +1,18 @@
-import { expect } from 'chai';
-import * as chai from 'chai';
-import * as chaiDom from 'chai-dom';
 import { ProvinceFilterComponent } from '../../../src/components/province_filter/province_filter';
-import {ComponentTest, MockServiceApi} from '../../../src/util/component-test';
-import Component from 'vue-class-component';
-import {spy, assert} from 'sinon';
-
-chai.use(chaiDom);
-let serviceSpy = spy();
-
-@Component({
-  template: require('../../../src/components/province_filter/province_filter.html')
-})
-class MockProvinceFilterComponent extends ProvinceFilterComponent {
-  constructor() {
-    super();
-    this.serviceApi = new MockServiceApi(serviceSpy);
-  }
-}
+import {FakeServiceApi} from '../../../src/util/fake-service-api';
+import {mount, Wrapper} from 'vue-test-utils';
+import Vue from 'vue';
 
 describe('ProvinceFilter component', () => {
-  let directiveTest: ComponentTest;
 
-  beforeEach(() => {
-    directiveTest = new ComponentTest('<div><province_filter></province_filter></div>', { 'province_filter': MockProvinceFilterComponent });
-  });
+  it('should fetch provinces from the ServiceApi', async () => {
+    const wrapper: Wrapper<Vue> = mount(ProvinceFilterComponent, { provide: {serviceApi: new FakeServiceApi()}} );
 
-  it('should verify the database mock', async () => {
-    directiveTest.createComponent();
-    await directiveTest.execute((vm) => {
-      assert.calledWith(serviceSpy, MockServiceApi.testProvinces);
+    let expectedGenres = [];
+    await Vue.nextTick(() => {
+      expectedGenres = wrapper.vm.$data['provinces'];
     });
+    expect(expectedGenres.length).toBe(4);
+    expect(expectedGenres[0].key).toBe('all');
   });
-
 });
