@@ -9,7 +9,7 @@
     "npm": ">=3"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run clean && npm run test && npm run compile",
+    "build": "cross-env NODE_ENV=production npm run clean && npm run test:coverage && npm run compile",
     "build:parts": "npm run sass && npm run compile",
     "clean": "rimraf dist && rimraf coverage",
     "codecov": "codecov -f coverage/coverage-final.json",
