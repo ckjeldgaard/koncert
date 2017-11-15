@@ -13,6 +13,7 @@ export class FirebaseServiceApi implements ServiceApi {
     try {
       let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
       if (navigator.onLine) {
+        console.log('ref', ref);
         ref.on('value', (response) => {
           let data = response.val();
           let concerts: Concert[] = [];

@@ -1,5 +1,6 @@
 import {ConcertBuilder} from './concert-builder';
 import {GenreBuilder} from './genre-builder';
+import {FirebaseDbBuilder} from './firebase-db-builder';
 
 export class DomainObjectBuilder {
 
@@ -15,5 +16,7 @@ export class DomainObjectBuilder {
     return GenreBuilder.create();
   }
 
-
+  public database(): FirebaseDbBuilder {
+    return FirebaseDbBuilder.create();
+  }
 }
