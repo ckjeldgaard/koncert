@@ -58,7 +58,8 @@ switch (process.env.ENV) {
   case 'development':
     api = new FirebaseServiceApi(
       Firebase.initializeApp(process.env.FIREBASE, 'koncert').database(),
-      localStorage
+      localStorage,
+      navigator
     );
     break;
   case 'mock':

@@ -7,13 +7,16 @@ import {Artist} from '../model/artist';
 
 export class FirebaseServiceApi implements ServiceApi {
 
-  constructor(private readonly database: Database, private readonly storage: Storage) {}
+  constructor(
+    private readonly database: Database,
+    private readonly storage: Storage,
+    private readonly navigatorOnline: NavigatorOnLine
+  ) {}
 
   getConcerts(callback: ServiceCallback, startAt: number) {
     try {
-      let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
-      if (navigator.onLine) {
-        console.log('ref', ref);
+      if (this.navigatorOnline.onLine) {
+        let ref = this.database.ref('data/events').orderByChild('dateStart').startAt(startAt);
         ref.on('value', (response) => {
           let data = response.val();
           let concerts: Concert[] = [];
@@ -36,7 +39,7 @@ export class FirebaseServiceApi implements ServiceApi {
 
   getProvinces(callback: ServiceCallback) {
     let ref = this.database.ref('data/provinces');
-    if (navigator.onLine) {
+    if (this.navigatorOnline.onLine) {
       ref.on('value', (response) => {
         this.storage.setItem('provinces', JSON.stringify(response.val()));
         callback.onLoaded(response.val());
@@ -49,7 +52,7 @@ export class FirebaseServiceApi implements ServiceApi {
 
   getGenres(callback: ServiceCallback) {
     let ref = this.database.ref('data/genres');
-    if (navigator.onLine) {
+    if (this.navigatorOnline.onLine) {
       ref.on('value', (response) => {
         this.storage.setItem('genres', JSON.stringify(response.val()));
         callback.onLoaded(response.val());
