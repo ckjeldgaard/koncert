@@ -24,7 +24,7 @@ describe('FirebaseServiceApi', () => {
     const spy = jest.spyOn(serviceCallback, 'onLoaded');
     const returnValue: object = [{'name': 'Artistname'}];
     new FirebaseServiceApi(
-      DomainObjectBuilder.aNew().database().withReturnValue(returnValue).build(),
+      DomainObjectBuilder.aNew().database().withReturnValue(returnValue).withQueries(['orderByChild', 'startAt']).build(),
       mockStorage
     ).getConcerts(serviceCallback, 1);
 
