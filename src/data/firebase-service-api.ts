@@ -7,12 +7,7 @@ import {Artist} from '../model/artist';
 
 export class FirebaseServiceApi implements ServiceApi {
 
-  private readonly database: Database;
-
-  constructor(name: string) {
-    let firebaseApp = Firebase.initializeApp(process.env.FIREBASE, name);
-    this.database = firebaseApp.database();
-  }
+  constructor(private readonly database: Database, private readonly storage: Storage) {}
 
   getConcerts(callback: ServiceCallback, startAt: number) {
     try {
@@ -25,7 +20,7 @@ export class FirebaseServiceApi implements ServiceApi {
             data[key].id = key;
             concerts.push(data[key]);
           }
-          localStorage.setItem('concerts', JSON.stringify(concerts));
+          this.storage.setItem('concerts', JSON.stringify(concerts));
           callback.onLoaded(concerts);
         });
       } else {
@@ -42,7 +37,7 @@ export class FirebaseServiceApi implements ServiceApi {
     let ref = this.database.ref('data/provinces');
     if (navigator.onLine) {
       ref.on('value', (response) => {
-        localStorage.setItem('provinces', JSON.stringify(response.val()));
+        this.storage.setItem('provinces', JSON.stringify(response.val()));
         callback.onLoaded(response.val());
       });
     } else {
@@ -55,7 +50,7 @@ export class FirebaseServiceApi implements ServiceApi {
     let ref = this.database.ref('data/genres');
     if (navigator.onLine) {
       ref.on('value', (response) => {
-        localStorage.setItem('genres', JSON.stringify(response.val()));
+        this.storage.setItem('genres', JSON.stringify(response.val()));
         callback.onLoaded(response.val());
       });
     } else {
@@ -65,7 +60,7 @@ export class FirebaseServiceApi implements ServiceApi {
   }
 
   private handleOffline(callback: ServiceCallback, itemKey: string): void {
-    const localStorageItems = localStorage.getItem(itemKey);
+    const localStorageItems = this.storage.getItem(itemKey);
     if (localStorageItems != null) {
       callback.onLoaded(JSON.parse(localStorageItems));
     } else {

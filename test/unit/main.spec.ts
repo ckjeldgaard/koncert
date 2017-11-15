@@ -1,5 +1,5 @@
 import * as main from '../../src/main';
-import Vue from 'vue';
+import Vue from 'vue/dist/vue.js';
 import {shallow, Wrapper} from 'vue-test-utils';
 
 let vueApp: Vue;
@@ -17,12 +17,14 @@ describe('Main', () => {
   });
 
   it('should provide a service API', () => {
+    /*
+    let extended = Vue.component('mainApp', vueApp);
+    console.log('extended = ', extended);
+    const wrapper: Wrapper<Vue> = shallow(vueApp);
+    console.log('wrapper = ', wrapper);
 
-/*
-    const wrapper: Wrapper<Vue> = shallow(main.app, {template: '<div id="app-main"></div>' });
-    console.log('VUE APP = ', wrapper);
     expect(1).toBe(2);
-*/
+    */
   });
 
 });

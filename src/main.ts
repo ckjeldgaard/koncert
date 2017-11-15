@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, {RouterOptions} from 'vue-router';
 import * as moment from 'moment';
+import * as Firebase from 'firebase';
 
 import './sass/main.scss';
 
@@ -55,7 +56,10 @@ let api: ServiceApi;
 switch (process.env.ENV) {
   case 'production':
   case 'development':
-    api = new FirebaseServiceApi('koncert');
+    api = new FirebaseServiceApi(
+      Firebase.initializeApp(process.env.FIREBASE, 'koncert').database(),
+      localStorage
+    );
     break;
   case 'mock':
     api = new FakeServiceApi();
