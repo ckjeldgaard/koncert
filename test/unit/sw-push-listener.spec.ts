@@ -1,5 +1,11 @@
 const makeServiceWorkerEnv = require('service-worker-mock');
 
+interface Window {
+  trigger?: any;
+  listeners?: any;
+}
+declare var window: Window;
+
 describe('Service Worker push listener', () => {
 
   beforeEach(() => {
@@ -10,8 +16,8 @@ describe('Service Worker push listener', () => {
   it('should add push listener', async () => {
     require('../../src/sw-push-listener');
 
-    await self.trigger('push');
-    expect(self.listeners['push']).toBeDefined();
+    await window.trigger('push');
+    expect(window.listeners['push']).toBeDefined();
   });
 
 });
