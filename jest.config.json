@@ -23,7 +23,7 @@
   "testEnvironment": "jest-environment-jsdom-11.0.0",
   "coverageThreshold": {
     "global": {
-      "statements": 75
+      "statements": 70
     }
   }
 }
