@@ -1,0 +1,492 @@
+{
+  "koebenhavn": [
+    {
+      "longitude": 12.2463226,
+      "latitude": 55.7116401
+    },
+    {
+      "longitude": 12.1522522,
+      "latitude": 55.6729382
+    },
+    {
+      "longitude": 12.1563721,
+      "latitude": 55.6140379
+    },
+    {
+      "longitude": 12.2731018,
+      "latitude": 55.6214053
+    },
+    {
+      "longitude": 12.3644257,
+      "latitude": 55.5927035
+    },
+    {
+      "longitude": 12.7166748,
+      "latitude": 55.5006387
+    },
+    {
+      "longitude": 12.8073120,
+      "latitude": 55.5779565
+    },
+    {
+      "longitude": 12.8526306,
+      "latitude": 55.6977118
+    },
+    {
+      "longitude": 12.7125549,
+      "latitude": 55.8101566
+    },
+    {
+      "longitude": 12.4186707,
+      "latitude": 55.7943334
+    }
+  ],
+  "nordsjaelland": [
+    {
+      "longitude": 11.8048096,
+      "latitude": 56.0052920
+    },
+    {
+      "longitude": 11.8501282,
+      "latitude": 55.8012810
+    },
+    {
+      "longitude": 11.8463516,
+      "latitude": 55.7360026
+    },
+    {
+      "longitude": 11.9208527,
+      "latitude": 55.7369690
+    },
+    {
+      "longitude": 11.9246292,
+      "latitude": 55.7458593
+    },
+    {
+      "longitude": 12.0640182,
+      "latitude": 55.7075782
+    },
+    {
+      "longitude": 12.1024704,
+      "latitude": 55.7271101
+    },
+    {
+      "longitude": 12.0763779,
+      "latitude": 55.7827515
+    },
+    {
+      "longitude": 12.2463226,
+      "latitude": 55.7116401
+    },
+    {
+      "longitude": 12.4186707,
+      "latitude": 55.7943334
+    },
+    {
+      "longitude": 12.7125549,
+      "latitude": 55.8101566
+    },
+    {
+      "longitude": 12.6129913,
+      "latitude": 55.9315101
+    },
+    {
+      "longitude": 12.6486969,
+      "latitude": 56.0440480
+    },
+    {
+      "longitude": 12.2888947,
+      "latitude": 56.1719343
+    }
+  ],
+  "sjaelland": [
+    {
+      "longitude": 12.2463226,
+      "latitude": 55.7116401
+    },
+    {
+      "longitude": 12.0763779,
+      "latitude": 55.7827515
+    },
+    {
+      "longitude": 12.1024704,
+      "latitude": 55.7271101
+    },
+    {
+      "longitude": 12.0640182,
+      "latitude": 55.7075782
+    },
+    {
+      "longitude": 11.9246292,
+      "latitude": 55.7458593
+    },
+    {
+      "longitude": 11.9208527,
+      "latitude": 55.7369690
+    },
+    {
+      "longitude": 11.8463516,
+      "latitude": 55.7360026
+    },
+    {
+      "longitude": 11.8501282,
+      "latitude": 55.8012810
+    },
+    {
+      "longitude": 11.8048096,
+      "latitude": 56.0052920
+    },
+    {
+      "longitude": 11.2788391,
+      "latitude": 56.1126387
+    },
+    {
+      "longitude": 10.7542419,
+      "latitude": 55.7758006
+    },
+    {
+      "longitude": 11.0646057,
+      "latitude": 55.2243237
+    },
+    {
+      "longitude": 10.8778381,
+      "latitude": 54.7143088
+    },
+    {
+      "longitude": 11.9956970,
+      "latitude": 54.4764216
+    },
+    {
+      "longitude": 12.8430176,
+      "latitude": 54.9736728
+    },
+    {
+      "longitude": 12.5779724,
+      "latitude": 55.3588193
+    },
+    {
+      "longitude": 12.3644257,
+      "latitude": 55.5927035
+    },
+    {
+      "longitude": 12.2731018,
+      "latitude": 55.6214053
+    },
+    {
+      "longitude": 12.1563721,
+      "latitude": 55.6140379
+    },
+    {
+      "longitude": 12.1522522,
+      "latitude": 55.6729382
+    }
+  ],
+  "fyn": [
+    {
+      "longitude": 10.7542419,
+      "latitude": 55.7758006
+    },
+    {
+      "longitude": 10.2159119,
+      "latitude": 55.6752614
+    },
+    {
+      "longitude": 9.7871017,
+      "latitude": 55.5544664
+    },
+    {
+      "longitude": 9.7434998,
+      "latitude": 55.5494171
+    },
+    {
+      "longitude": 9.7548294,
+      "latitude": 55.5321281
+    },
+    {
+      "longitude": 9.7397232,
+      "latitude": 55.5128876
+    },
+    {
+      "longitude": 9.6714020,
+      "latitude": 55.5245496
+    },
+    {
+      "longitude": 9.6638489,
+      "latitude": 55.4885805
+    },
+    {
+      "longitude": 9.7019577,
+      "latitude": 55.4675671
+    },
+    {
+      "longitude": 9.6981812,
+      "latitude": 55.4414794
+    },
+    {
+      "longitude": 9.8080444,
+      "latitude": 55.2446837
+    },
+    {
+      "longitude": 10.1321411,
+      "latitude": 54.9081986
+    },
+    {
+      "longitude": 10.6375122,
+      "latitude": 54.6801831
+    },
+    {
+      "longitude": 10.8778381,
+      "latitude": 54.7143088
+    },
+    {
+      "longitude": 11.0646057,
+      "latitude": 55.2243237
+    }
+  ],
+  "syd-soenderjylland": [
+    {
+      "longitude": 9.7871017,
+      "latitude": 55.5544664
+    },
+    {
+      "longitude": 9.9179077,
+      "latitude": 55.6423366
+    },
+    {
+      "longitude": 9.7091675,
+      "latitude": 55.6884235
+    },
+    {
+      "longitude": 9.2861938,
+      "latitude": 55.9553509
+    },
+    {
+      "longitude": 9.0499878,
+      "latitude": 55.8506499
+    },
+    {
+      "longitude": 8.1230164,
+      "latitude": 55.8236590
+    },
+    {
+      "longitude": 7.9898071,
+      "latitude": 55.5682516
+    },
+    {
+      "longitude": 8.4059143,
+      "latitude": 55.1066585
+    },
+    {
+      "longitude": 8.6022949,
+      "latitude": 54.9129352
+    },
+    {
+      "longitude": 8.7451172,
+      "latitude": 54.8939853
+    },
+    {
+      "longitude": 9.2243958,
+      "latitude": 54.8521059
+    },
+    {
+      "longitude": 9.2460251,
+      "latitude": 54.8097872
+    },
+    {
+      "longitude": 9.3400955,
+      "latitude": 54.8028617
+    },
+    {
+      "longitude": 9.3799210,
+      "latitude": 54.8382682
+    },
+    {
+      "longitude": 9.4149399,
+      "latitude": 54.8343137
+    },
+    {
+      "longitude": 9.4338226,
+      "latitude": 54.8240302
+    },
+    {
+      "longitude": 9.5354462,
+      "latitude": 54.8625798
+    },
+    {
+      "longitude": 9.5855713,
+      "latitude": 54.8878641
+    },
+    {
+      "longitude": 9.6250534,
+      "latitude": 54.8809520
+    },
+    {
+      "longitude": 9.6123505,
+      "latitude": 54.8639629
+    },
+    {
+      "longitude": 9.6336365,
+      "latitude": 54.8394545
+    },
+    {
+      "longitude": 9.9755859,
+      "latitude": 54.8093915
+    },
+    {
+      "longitude": 10.1321411,
+      "latitude": 54.9081986
+    },
+    {
+      "longitude": 9.8080444,
+      "latitude": 55.2446837
+    },
+    {
+      "longitude": 9.6981812,
+      "latitude": 55.4414794
+    },
+    {
+      "longitude": 9.7019577,
+      "latitude": 55.4675671
+    },
+    {
+      "longitude": 9.6638489,
+      "latitude": 55.4885805
+    },
+    {
+      "longitude": 9.6714020,
+      "latitude": 55.5245496
+    },
+    {
+      "longitude": 9.7397232,
+      "latitude": 55.5128876
+    },
+    {
+      "longitude": 9.7548294,
+      "latitude": 55.5321281
+    },
+    {
+      "longitude": 9.7434998,
+      "latitude": 55.5494171
+    }
+  ],
+  "oestjylland": [
+    {
+      "longitude": 9.9179077,
+      "latitude": 55.6423366
+    },
+    {
+      "longitude": 10.6127930,
+      "latitude": 55.7580318
+    },
+    {
+      "longitude": 11.7855835,
+      "latitude": 56.8023822
+    },
+    {
+      "longitude": 10.2062988,
+      "latitude": 56.6999821
+    },
+    {
+      "longitude": 9.7723389,
+      "latitude": 56.5534278
+    },
+    {
+      "longitude": 9.5169067,
+      "latitude": 56.6758474
+    },
+    {
+      "longitude": 9.2779541,
+      "latitude": 56.6728294
+    },
+    {
+      "longitude": 9.2861938,
+      "latitude": 55.9553509
+    },
+    {
+      "longitude": 9.7091675,
+      "latitude": 55.6884235
+    }
+  ],
+  "vestjylland": [
+    {
+      "longitude": 8.1230164,
+      "latitude": 55.8236590
+    },
+    {
+      "longitude": 9.0499878,
+      "latitude": 55.8506490
+    },
+    {
+      "longitude": 9.2861938,
+      "latitude": 55.9553509
+    },
+    {
+      "longitude": 9.2779541,
+      "latitude": 56.6728294
+    },
+    {
+      "longitude": 8.9511108,
+      "latitude": 57.2671636
+    },
+    {
+      "longitude": 8.0694580,
+      "latitude": 56.9883940
+    },
+    {
+      "longitude": 7.8936768,
+      "latitude": 56.1715521
+    }
+  ],
+  "nordjylland": [
+    {
+      "longitude": 11.7855835,
+      "latitude": 56.8023822
+    },
+    {
+      "longitude": 11.0797119,
+      "latitude": 58.0066426
+    },
+    {
+      "longitude": 8.9511108,
+      "latitude": 57.2671636
+    },
+    {
+      "longitude": 9.2779541,
+      "latitude": 56.6728294
+    },
+    {
+      "longitude": 9.2779541,
+      "latitude": 56.6728294
+    },
+    {
+      "longitude": 9.5169067,
+      "latitude": 56.6758474
+    },
+    {
+      "longitude": 9.7723389,
+      "latitude": 56.5534278
+    },
+    {
+      "longitude": 10.2062988,
+      "latitude": 56.6999821
+    }
+  ],
+  "bornholm": [
+    {
+      "longitude": 14.5870972,
+      "latitude": 55.4336886
+    },
+    {
+      "longitude": 14.4058228,
+      "latitude": 55.0185754
+    },
+    {
+      "longitude": 15.2462769,
+      "latitude": 54.8449899
+    },
+    {
+      "longitude": 15.4522705,
+      "latitude": 55.2650332
+    }
+  ]
+}

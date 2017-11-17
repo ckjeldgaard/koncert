@@ -9,7 +9,6 @@ export class Position implements Point {
     let i, j: number;
     let isInside: boolean = false;
 
-    // create an array of coordinates from the region boundary list
     const sides: number = region.boundary.length;
     for (i = 0, j = sides - 1; i < sides; j = i++) {
       if (
