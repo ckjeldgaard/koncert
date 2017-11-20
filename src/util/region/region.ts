@@ -1,5 +1,5 @@
-import {Position} from './position';
+import {UserPosition} from './user-position';
 
 export class Region {
-  constructor(readonly boundary: Position[]) {}
+  constructor(readonly boundary: UserPosition[]) {}
 }
