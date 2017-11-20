@@ -14,7 +14,6 @@ export class ProvincePreSelection implements PreSelection {
   }
 
   public getPreSelection(): string {
-    console.log('polygon', this.polygon);
     for (let region of this.polygon.regions) {
       if (
         this.point.inside(new Region(this.buildBoundaries(region.boundaries))) &&
