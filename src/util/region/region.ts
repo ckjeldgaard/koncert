@@ -1,5 +1,5 @@
-import {UserPosition} from './user-position';
+import {GeoPoint} from './geo-point';
 
 export class Region {
-  constructor(readonly boundary: UserPosition[]) {}
+  constructor(readonly boundary: GeoPoint[]) {}
 }

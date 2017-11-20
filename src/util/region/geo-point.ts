@@ -1,7 +1,7 @@
 import {Point} from './point';
 import {Region} from './region';
 
-export class UserPosition implements Point {
+export class GeoPoint implements Point {
 
   constructor(readonly latitude: number, readonly longitude: number) {}
 

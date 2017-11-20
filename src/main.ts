@@ -51,6 +51,7 @@ Vue.component('subscriptions', SubscriptionsComponent);
 
 const eventBus = new Vue();
 const push: PushNotification = new PushNotification(new HttpPushApi(), new PushSupportBrowser());
+const navigatorGeolocation: NavigatorGeolocation = navigator;
 
 let api: ServiceApi;
 switch (process.env.ENV) {
@@ -88,6 +89,7 @@ export let app = new Vue({
       serviceApi: api,
       bus: eventBus,
       pushNotification: push,
+      navigator: navigatorGeolocation
     };
   },
   created() {

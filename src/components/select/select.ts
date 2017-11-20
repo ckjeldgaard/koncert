@@ -21,40 +21,50 @@ export class SelectComponent extends Vue {
   public selected: SelectOption[] = [];
   public selectedOptionsText: string = '';
 
+  created() {
+    this.bus.$on('selectOption', (selectedOptionId) => {
+      this.selectOption(selectedOptionId);
+    });
+  }
+
   public close() {
     this.open = false;
     return false;
   }
 
   public selectToggle(event) {
-    if (event) {
-      if (this.$props['multiple']) {
-        this.selectMultiple(event);
-      } else {
-        this.selectSingle(event);
-      }
-      this.bus.$emit(this.$props['id'], this.selected);
+    if (event.target) {
+      this.selectOption(event.target.value);
     }
   }
 
-  private selectMultiple(event): void {
-    const searchOption = this.selected.findIndex(item => item.key === event.target.value);
+  private selectOption(optionId: string) {
+    if (this.$props['multiple']) {
+      this.selectMultiple(optionId);
+    } else {
+      this.selectSingle(optionId);
+    }
+    this.bus.$emit(this.$props['id'], this.selected);
+  }
+
+  private selectMultiple(optionId): void {
+    const searchOption = this.selected.findIndex(item => item.key === optionId);
     if (searchOption !== -1) {
       // Exists. Remove from selected
       this.selected.splice(searchOption, 1);
     } else {
       // Doesn't exist. Add to selected
       this.selected.push(
-        this.$props['options'].find(item => item.key === event.target.value)
+        this.$props['options'].find(item => item.key === optionId)
       );
     }
     this.updateSelectedText();
   }
 
-  private selectSingle(event): void {
+  private selectSingle(optionId): void {
     this.selected = [];
     this.selected.push(
-      this.$props['options'].find(item => item.key === event.target.value)
+      this.$props['options'].find(item => item.key === optionId)
     );
     this.updateSelectedText();
     this.close();

@@ -12,7 +12,7 @@ let config = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.ts', '.js', '.html'],
+    extensions: ['.ts', '.js', '.html', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
     }
@@ -33,7 +33,8 @@ let config = {
         test: /\.html$/,
         loader: 'raw-loader',
         exclude: ['./src/index.html']
-      }
+      },
+      { test: /\.json$/, loaders: ['json-loader'] }
     ],
   },
   plugins: [

@@ -29,7 +29,7 @@ describe('Select component', () => {
 
   it('correctly sets the placeholder text', () => {
     let placeholder = 'Select an option';
-    const wrapper: Wrapper<Vue> = mount(SelectComponent, {propsData: {placeholder} });
+    const wrapper: Wrapper<Vue> = mount(SelectComponent, {propsData: {placeholder}, provide: {bus: fakeBus} });
     expect(wrapper.vm.$props['placeholder']).toBe('Select an option');
     expect(wrapper.find('label > span').text()).toBe('Select an option');
   });
