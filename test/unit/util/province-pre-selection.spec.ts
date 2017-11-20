@@ -9,7 +9,7 @@ describe('Province Pre Selection', () => {
     let provinces = [];
     provinces.push(new Province('koebenhavn', 'København'));
     provinces.push(new Province('fyn', 'Fyn'));
-    provinces.push(new Province('oestjylland', 'Østjylland'));
+    provinces.push(new Province('midtjylland', 'Midtjylland'));
 
     expect(new ProvincePreSelection(
       pointInsideKoebenhavn,
@@ -22,7 +22,7 @@ describe('Province Pre Selection', () => {
     let provinces = [];
     provinces.push(new Province('koebenhavn', 'København'));
     provinces.push(new Province('fyn', 'Fyn'));
-    provinces.push(new Province('oestjylland', 'Østjylland'));
+    provinces.push(new Province('midtjylland', 'Midtjylland'));
 
     expect(new ProvincePreSelection(
       pointAbroad,
