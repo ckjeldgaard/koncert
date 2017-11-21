@@ -8,7 +8,7 @@
     <div class="collapsible-select-area">
       <ul>
         <li v-for="option in options">
-          <input type="checkbox" :id="id + '-' + option.key" :value="option.key" v-on:click="selectToggle">
+          <input type="checkbox" :id="id + '-' + option.key" :value="option.key" v-on:click="selectToggle" ref="options">
           <label :for="id + '-' + option.key">{{option.value}}</label>
         </li>
       </ul>

@@ -23,7 +23,10 @@ export class SelectComponent extends Vue {
 
   created() {
     this.bus.$on('selectOption', (selectedOptionId) => {
-      this.selectOption(selectedOptionId);
+      const searchIndex = (<Element[]>this.$refs.options).findIndex(item => item.id === this.id + '-' + selectedOptionId);
+      if (searchIndex !== -1) {
+        this.$refs.options[searchIndex].click();
+      }
     });
   }
 
@@ -33,21 +36,17 @@ export class SelectComponent extends Vue {
   }
 
   public selectToggle(event) {
-    if (event.target) {
-      this.selectOption(event.target.value);
+    if (event) {
+      if (this.$props['multiple']) {
+        this.selectMultiple(event.target.value);
+      } else {
+        this.selectSingle(event.target.value);
+      }
+      this.bus.$emit(this.$props['id'], this.selected);
     }
   }
 
-  private selectOption(optionId: string) {
-    if (this.$props['multiple']) {
-      this.selectMultiple(optionId);
-    } else {
-      this.selectSingle(optionId);
-    }
-    this.bus.$emit(this.$props['id'], this.selected);
-  }
-
-  private selectMultiple(optionId): void {
+  private selectMultiple(optionId: string): void {
     const searchOption = this.selected.findIndex(item => item.key === optionId);
     if (searchOption !== -1) {
       // Exists. Remove from selected
@@ -61,7 +60,7 @@ export class SelectComponent extends Vue {
     this.updateSelectedText();
   }
 
-  private selectSingle(optionId): void {
+  private selectSingle(optionId: string): void {
     this.selected = [];
     this.selected.push(
       this.$props['options'].find(item => item.key === optionId)
