@@ -41,7 +41,7 @@ export class ProvinceFilterComponent extends Vue {
 
   private getUserPosition() {
     if (this.navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.preSelectPosition);
+      this.navigator.geolocation.getCurrentPosition(this.preSelectPosition);
     }
   }
 

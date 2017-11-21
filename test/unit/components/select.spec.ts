@@ -99,4 +99,15 @@ describe('Select component', () => {
     expect(wrapper.findAll('label > span').at(1).text()).toBe('2 selected');
   });
 
+  it('should pre-select an option when event bus is invoked', () => {
+    defaultProps.multiple = false;
+    defaultProps.options = [
+      {key: 'option1', value: 'Option 1'},
+      {key: 'option2', value: 'Option 2'}
+    ];
+    const wrapper: Wrapper<Vue> = mount(SelectComponent, {propsData: defaultProps, provide: {bus: fakeBus} });
+    wrapper.vm['bus'].$emit('selectOption', 'option2');
+    expect(wrapper.vm.$data['selected'][0].key).toBe('option2');
+  });
+
 });
